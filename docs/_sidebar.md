@@ -1,0 +1,2 @@
+* [Home](/)
+* [Changelog](Changelog.md)
