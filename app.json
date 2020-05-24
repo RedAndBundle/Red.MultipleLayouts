@@ -2,38 +2,26 @@
   "id": "31e6154c-7bb5-4d51-a415-ccf39e06043f",
   "name": "Red Multiple Layouts",
   "publisher": "Red and Bundle",
-  "version": "1.0.0.2",
+  "version": "1.0.0.3",
   "brief": "Multiple layout selection for ForNAV reports",
   "description": "Multiple layout selection for ForNAV reports",
   "privacyStatement": "",
   "EULA": "",
-  "help": "https://renebrummel.github.io/RedMultipleLayouts/#/",
+  "help": "https://redandbundle.github.io/Red.MultipleLayouts.Doc",
   "url": "https://redandbundle.com",
   "logo": "images/RedBundleLogo.png",
   "dependencies": [
     {
-      "appId": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
+      "id": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
       "publisher": "Microsoft",
       "name": "System Application",
       "version": "1.0.0.0"
     },
     {
-      "appId": "437dbf0e-84ff-417a-965d-ed2bb9650972",
+      "id": "437dbf0e-84ff-417a-965d-ed2bb9650972",
       "publisher": "Microsoft",
       "name": "Base Application",
       "version": "15.0.0.0"
-    },
-    {
-      "appId": "6f0293d3-86fc-4ff8-9632-54a580be6546",
-      "name": "ForNAV Core",
-      "publisher": "ForNAV",
-      "version": "4.0.0.0"
-    },
-    {
-      "appId": "83326d6d-11f8-49fd-981a-6f266a7c8d81",
-      "name": "Customizable Report Pack",
-      "publisher": "ForNAV",
-      "version": "4.0.0.0"
     }
   ],
   "screenshots": [],
@@ -44,7 +32,7 @@
       "to": 80500
     }
   ],
-  "contextSensitiveHelpUrl": "https://renebrummel.github.io/RedMultipleLayouts/#/",
+  "contextSensitiveHelpUrl": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/README",
   "showMyCode": true,
-  "runtime": "4.0"
+  "runtime": "5.0"
 }
