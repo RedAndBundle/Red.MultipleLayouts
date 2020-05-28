@@ -1,38 +1,38 @@
 {
-  "id": "31e6154c-7bb5-4d51-a415-ccf39e06043f",
-  "name": "Red Multiple Layouts",
+  "id": "6d10b43b-3a51-4b72-8332-c1b2a4c753fd",
+  "name": "Red.MultipleLayouts.Dev",
   "publisher": "Red and Bundle",
-  "version": "1.0.0.4",
-  "brief": "Multiple layout selection for ForNAV reports",
-  "description": "Multiple layout selection for ForNAV reports",
+  "version": "1.0.0.0",
+  "brief": "Red Multiple Layouts development project",
+  "description": "",
   "privacyStatement": "",
   "EULA": "",
-  "help": "https://redandbundle.github.io/Red.MultipleLayouts.Doc",
-  "url": "https://redandbundle.com",
-  "logo": "images/RedBundleLogo.png",
+  "help": "",
+  "url": "",
+  "logo": "",
   "dependencies": [
     {
       "id": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
       "publisher": "Microsoft",
       "name": "System Application",
-      "version": "1.0.0.0"
+      "version": "16.0.0.0"
     },
     {
       "id": "437dbf0e-84ff-417a-965d-ed2bb9650972",
       "publisher": "Microsoft",
       "name": "Base Application",
-      "version": "15.0.0.0"
+      "version": "16.0.0.0"
     }
   ],
   "screenshots": [],
-  "platform": "15.0.0.0",
+  "platform": "16.0.0.0",
   "idRanges": [
     {
-      "from": 80000,
-      "to": 80500
+      "from": 50000,
+      "to": 90149
     }
   ],
-  "contextSensitiveHelpUrl": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/README",
+  "contextSensitiveHelpUrl": "https://Red.MultipleLayouts.com/help/",
   "showMyCode": true,
   "runtime": "5.0"
 }

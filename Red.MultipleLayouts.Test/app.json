@@ -1,0 +1,44 @@
+{
+  "id": "a59d7201-75b7-412c-9091-7be0576d2912",
+  "name": "Red.MultipleLayouts.Test",
+  "publisher": "Red and Bundle",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
+      "publisher": "Microsoft",
+      "name": "System Application",
+      "version": "16.0.0.0"
+    },
+    {
+      "id": "437dbf0e-84ff-417a-965d-ed2bb9650972",
+      "publisher": "Microsoft",
+      "name": "Base Application",
+      "version": "16.0.0.0"
+    },
+    {
+      "id": "31e6154c-7bb5-4d51-a415-ccf39e06043f",
+      "publisher": "Red and Bundle",
+      "name": "Red Multiple Layouts",
+      "version": "1.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "16.0.0.0",
+  "idRanges": [
+    {
+      "from": 50000,
+      "to": 90149
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://Red.MultipleLayouts.Test.com/help/",
+  "showMyCode": true,
+  "runtime": "5.0"
+}
