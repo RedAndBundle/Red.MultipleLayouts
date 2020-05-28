@@ -33,6 +33,6 @@
     }
   ],
   "contextSensitiveHelpUrl": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/README",
-  "showMyCode": true,
+  "showMyCode": false,
   "runtime": "5.0"
 }
