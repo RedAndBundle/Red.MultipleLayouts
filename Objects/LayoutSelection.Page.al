@@ -175,7 +175,6 @@ Page 80000 "Red Layout Selection"
         RecRef.Open("Table No.");
         FldRef := RecRef.Field("Field No.");
 
-
         case FldRef.Relation() of
             Database::Customer:
                 Value := LayoutValueSelection.SelectCustomer();

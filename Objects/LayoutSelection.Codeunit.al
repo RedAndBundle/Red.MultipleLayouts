@@ -44,10 +44,9 @@ codeunit 80001 "Red Layout Selection"
     var
         ReportLayoutSelection: Record "Report Layout Selection";
     begin
-        with ReportLayoutSelection do begin
-            Get(ReportId, CompanyName);
-            SelectedLayoutCode := "Custom Report Layout Code";
-        end;
+        with ReportLayoutSelection do
+            if Get(ReportId, CompanyName) then
+                SelectedLayoutCode := "Custom Report Layout Code";
     end;
 
     local procedure IsTheOnlyCustomLayoutSelected(var TempCustomReportLayout: Record "Custom Report Layout"; SelectedLayoutCode: code[20]): Boolean
@@ -72,7 +71,7 @@ codeunit 80001 "Red Layout Selection"
         end;
     end;
 
-    local procedure GetLayoutsFromLayoutSelection(var TempCustomReportLayout: Record "Custom Report Layout"; RecVarToPrint: Variant; ReportId: Integer): Boolean
+    local procedure GetLayoutsFromLayoutSelection(var TempCustomReportLayout: Record "Custom Report Layout"; RecVarToPrint: Variant; ReportId: Integer) Success: Boolean
     var
         RedLayoutSelection: Record "Red Layout Selection";
         RecRef: RecordRef;
@@ -86,14 +85,13 @@ codeunit 80001 "Red Layout Selection"
             if FindSet() then begin
                 repeat
                     if MatchRecordVariable(RecRef) then
-                        AddLayoutSelectionToTempCustomReportLayout(TempCustomReportLayout, "Custom Report Layout Code");
+                        Success := AddLayoutSelectionToTempCustomReportLayout(TempCustomReportLayout, "Custom Report Layout Code");
                 until Next() = 0;
-                exit(true);
             end;
         end;
     end;
 
-    local procedure AddLayoutSelectionToTempCustomReportLayout(var TempCustomReportLayout: Record "Custom Report Layout"; CustomReportLayoutCode: Code[20])
+    local procedure AddLayoutSelectionToTempCustomReportLayout(var TempCustomReportLayout: Record "Custom Report Layout"; CustomReportLayoutCode: Code[20]): Boolean
     var
         CustomReportLayout: Record "Custom Report Layout";
     begin
@@ -106,7 +104,7 @@ codeunit 80001 "Red Layout Selection"
             TempCustomReportLayout.Code := CustomReportLayout.Code;
             TempCustomReportLayout.Description := CustomReportLayout.Description;
             TempCustomReportLayout."Company Name" := CustomReportLayout."Company Name";
-            TempCustomReportLayout.Insert();
+            exit(TempCustomReportLayout.Insert());
         end;
     end;
 

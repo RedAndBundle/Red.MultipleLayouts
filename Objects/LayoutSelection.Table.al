@@ -59,7 +59,6 @@ table 80000 "Red Layout Selection"
         }
         field(7; "Field No."; Integer)
         {
-            // TableRelation = "ForNAV Translation Field"."No." where("Table No." = field("Table No."));
             TableRelation = Field."No." where(TableNo = field("Table No."));
             ValidateTableRelation = false;
             Caption = 'Field No.';
@@ -76,7 +75,11 @@ table 80000 "Red Layout Selection"
             CalcFormula = lookup (Field.FieldName where(TableNo = field("Table No."), "No." = field("Field No.")));
             Editable = false;
         }
-        field(9; "Value"; Code[50]) { Caption = 'Value'; DataClassification = CustomerContent; }
+        field(9; "Value"; Code[50])
+        {
+            Caption = 'Value';
+            DataClassification = CustomerContent;
+        }
 
     }
 

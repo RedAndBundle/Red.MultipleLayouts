@@ -3,129 +3,236 @@ codeunit 80400 "Red Layout Selection Test"
 {
     Subtype = Test;
 
-    trigger OnRun()
-    begin
-
-    end;
-
-    local procedure NoCustomLayoutForReport()
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    procedure NoCustomLayoutForReport()
     var
-        myInt: Integer;
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        TestResult: Boolean;
     begin
-        // Given
-        // No custom layouts in system
+        // [FEATURE] No custom layouts for the report to run
+        // [Given] No custom layouts in system
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 0);
+        // [GIVEN] No records in the Layout Selection Table
+        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(206);
+        // [Given] Get first Sales Invoice
+        SalesInvoiceHeader.FindFirst();
 
-        // When
-        // "Red Layout Selection".RunReportWithLayoutSelection is called 
+        // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
+        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
 
-        // Then
-        // Gets Exit false
+        // [THEN] Test Result is false
+        if TestResult then
+            Error(UnexpectedResultErr);
     end;
 
-    local procedure OneCustomLayoutSelected()
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    [HandlerFunctions('SalesInvoiceReportHandler')]
+    procedure OneCustomLayoutSelected()
     var
-        myInt: Integer;
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        TestResult: Boolean;
     begin
-        // Given
-        // One custom layouts in system
-        // Custom report is selected for the report
+        // [FEATURE] One selected custom layouts in system
+        // [Given] One custom layout in system
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 1);
+        // [Given] Custom layout is selected
+        RedLayoutSelectTestSetup.SelectFirstLayoutForReport(206);
+        // [GIVEN] No records in the Layout Selection Table
+        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(206);
+        // [Given] Get first Sales Invoice
+        SalesInvoiceHeader.FindFirst();
 
-        // When
-        // "Red Layout Selection".RunReportWithLayoutSelection is called 
+        // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
+        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
 
-        // Then
-        // Gets Exit false
-
+        // [THEN] Test Result is false
+        if not TestResult then
+            Error(UnexpectedResultErr);
     end;
 
-    local procedure OneCustomLayoutNotSelected()
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    [HandlerFunctions('CustomReportLayoutsSelectionPageHandlerDefault,SalesInvoiceReportHandler')]
+    procedure OneCustomLayoutNotSelected()
     var
-        myInt: Integer;
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        TestResult: Boolean;
     begin
-        // Given
-        // One custom layouts in system
-        // Custom report is not selected for the report
+        // [FEATURE] One selected custom layouts in system
+        // [Given] One custom layout in system
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 1);
+        // [Given] Custom layout is not selected
+        RedLayoutSelectTestSetup.DeSelectLayoutForReport(206);
+        // [GIVEN] No records in the Layout Selection Table
+        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(206);
+        // [Given] Get first Sales Invoice
+        SalesInvoiceHeader.FindFirst();
 
-        // When
-        // "Red Layout Selection".RunReportWithLayoutSelection is called 
+        // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
+        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
 
-        // Then
-        // 2 layouts in selection list
-        // Layout needs to be selected from selection page
-        // Report runs with selected layout
-        // Gets Exit true
-
+        // [THEN] Test Result is false
+        if not TestResult then
+            Error(UnexpectedResultErr);
     end;
 
-    local procedure TwoCustomLayoutSelected()
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    // [HandlerFunctions('HandleReportSelectionPage')]
+    [HandlerFunctions('CustomReportLayoutsSelectionPageHandler,SalesInvoiceReportHandler')]
+    procedure TwoCustomLayoutSelected()
     var
-        myInt: Integer;
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        TestResult: Boolean;
     begin
-        // Given
-        // Two custom layouts in system
-        // Custom report is selected for the report
+        // [FEATURE] One selected custom layouts in system
+        // [Given] Two custom layouts in system
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 2);
+        // [Given] Custom layout is selected
+        RedLayoutSelectTestSetup.SelectFirstLayoutForReport(206);
+        // [GIVEN] No records in the Layout Selection Table
+        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(206);
+        // [Given] Get first Sales Invoice
+        SalesInvoiceHeader.FindFirst();
 
-        // When
-        // "Red Layout Selection".RunReportWithLayoutSelection is called 
+        // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
+        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
 
-        // Then
-        // 2 layouts in selection list
-        // Layout needs to be selected from selection page
-        // Report runs with selected layout
-        // Gets Exit true
-
+        // [THEN] Test Result is false
+        if not TestResult then
+            Error(UnexpectedResultErr);
     end;
 
-    local procedure TwoCustomLayoutNotSelected()
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    // [HandlerFunctions('HandleReportSelectionPage')]
+    [HandlerFunctions('CustomReportLayoutsSelectionPageHandlerDefault,SalesInvoiceReportHandler')]
+    procedure TwoCustomLayoutNotSelected()
     var
-        myInt: Integer;
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        TestResult: Boolean;
     begin
-        // Given
-        // Two custom layouts in system
-        // no custom report is selected for the report
+        // [FEATURE] One selected custom layouts in system
+        // [Given] Two custom layouts in system
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 2);
+        // [Given] Custom layout is not selected
+        RedLayoutSelectTestSetup.DeSelectLayoutForReport(206);
+        // [GIVEN] No records in the Layout Selection Table
+        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(206);
+        // [Given] Get first Sales Invoice
+        SalesInvoiceHeader.FindFirst();
 
-        // When
-        // "Red Layout Selection".RunReportWithLayoutSelection is called 
+        // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
+        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
 
-        // Then
-        // 3 layouts in selection list
-        // Layout needs to be selected from selection page
-        // Report runs with selected layout
-        // Gets Exit true
-
+        // [THEN] Test Result is false
+        if not TestResult then
+            Error(UnexpectedResultErr);
     end;
 
-    local procedure OneLayoutInLayoutSelection()
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    // [HandlerFunctions('HandleReportSelectionPage')]
+    [HandlerFunctions('SalesInvoiceReportHandler')]
+    procedure TwoLayoutsOneLayoutInLayoutSelection()
     var
-        myInt: Integer;
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        TestResult: Boolean;
     begin
-        // Given
-        // Two custom layouts in system
-        // One is selected through the Layout Selection Table
+        // [FEATURE] One selected custom layouts in system
+        // [Given] Two custom layouts in system
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 2);
 
-        // When
-        // "Red Layout Selection".RunReportWithLayoutSelection is called 
+        // [Given] Get first Sales Invoice
+        SalesInvoiceHeader.FindFirst();
 
-        // Then
-        // Report runs with selected layout
-        // Gets Exit true
+        // [Given] Custom layout is selected in Selection Table
+        RedLayoutSelectTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, 206, '1', 'Shortcut Dimension 1 Code');
+
+        // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
+        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
+
+        // [THEN] Test Result is false
+        if not TestResult then
+            Error(UnexpectedResultErr);
     end;
 
-    local procedure TwoLayoutInLayoutSelection()
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    // [HandlerFunctions('HandleReportSelectionPage')]
+    [HandlerFunctions('CustomReportLayoutsSelectionPageHandler,SalesInvoiceReportHandler')]
+    procedure TwoLayoutsTwoLayoutsInLayoutSelection()
     var
-        myInt: Integer;
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        TestResult: Boolean;
     begin
-        // Given
-        // Two custom layouts in system
-        // Two are selected through the Layout Selection Table
+        // [FEATURE] One selected custom layouts in system
+        // [Given] One custom layout in system
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 2);
 
-        // When
-        // "Red Layout Selection".RunReportWithLayoutSelection is called 
+        // [Given] Get first Sales Invoice
+        SalesInvoiceHeader.FindFirst();
 
-        // Then
-        // 2 layouts in selection list
-        // Layout needs to be selected from selection page
-        // Report runs with selected layout
-        // Gets Exit true
+        // [Given] Custom layouts are selected in Selection Table
+        RedLayoutSelectTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, 206, '1', 'Shortcut Dimension 1 Code');
+        RedLayoutSelectTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, 206, '2', 'Shortcut Dimension 2 Code');
+
+        // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
+        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
+
+        // [THEN] Test Result is false
+        if not TestResult then
+            Error(UnexpectedResultErr);
     end;
+
+    local procedure RunReportWithLayoutSelection(ReportId: Integer; RecVarToPrint: Variant): Boolean
+    var
+        TempReportSelections: Record "Report Selections" temporary;
+        RedLayoutSelection: Codeunit "Red Layout Selection";
+        IsGUI: Boolean;
+    begin
+        TempReportSelections."Report ID" := ReportId;
+        TempReportSelections.Insert();
+        exit(RedLayoutSelection.RunReportWithLayoutSelection(TempReportSelections, false, RecVarToPrint));
+    end;
+
+    [RequestPageHandler]
+    procedure SalesInvoiceRequestPageHandler(var SalesInvoiceRequestPage: TestRequestPage "Sales - Invoice")
+    begin
+
+    end;
+
+    [ReportHandler]
+    procedure SalesInvoiceReportHandler(var SalesInvoice: Report "Sales - Invoice")
+    begin
+
+    end;
+
+    [ModalPageHandler]
+    procedure CustomReportLayoutsSelectionPageHandler(var CustomReportLayouts: TestPage "Custom Report Layouts")
+    begin
+        // ToDo test with cancel
+        CustomReportLayouts.GoToKey('1');
+        CustomReportLayouts.OK().Invoke();
+    end;
+
+    [ModalPageHandler]
+    procedure CustomReportLayoutsSelectionPageHandlerDefault(var CustomReportLayouts: TestPage "Custom Report Layouts")
+    begin
+        // ToDo test with cancel
+        CustomReportLayouts.GoToKey('');
+        CustomReportLayouts.OK().Invoke();
+    end;
+
+    var
+        UnexpectedResultErr: Label 'Unexpected result';
 }
