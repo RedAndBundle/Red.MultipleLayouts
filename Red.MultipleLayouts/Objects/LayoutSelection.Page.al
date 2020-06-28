@@ -1,5 +1,5 @@
 // Copyright [2020] [Red and Bundle]
-Page 80000 "Red Layout Selection"
+Page 11310862 "Red Layout Selection"
 {
     Caption = 'Red Layout Selection';
     PageType = List;

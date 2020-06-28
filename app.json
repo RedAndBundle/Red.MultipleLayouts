@@ -28,11 +28,15 @@
   "platform": "16.0.0.0",
   "idRanges": [
     {
-      "from": 50000,
-      "to": 90149
+      "from": 80400,
+      "to": 80450
+    },
+    {
+      "from": 11310862,
+      "to": 11310912
     }
   ],
-  "contextSensitiveHelpUrl": "https://Red.MultipleLayouts.com/help/",
+  "contextSensitiveHelpUrl": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/README",
   "showMyCode": true,
   "runtime": "5.0"
 }

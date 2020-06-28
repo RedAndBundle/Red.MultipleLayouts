@@ -1,12 +1,12 @@
 {
   "id": "31e6154c-7bb5-4d51-a415-ccf39e06043f",
-  "name": "Red Multiple Layouts",
+  "name": "Multiple Report Layout Selector",
   "publisher": "Red and Bundle",
   "version": "1.0.0.4",
   "brief": "Multiple layout selection for ForNAV reports",
-  "description": "Multiple layout selection for ForNAV reports",
-  "privacyStatement": "",
-  "EULA": "",
+  "description": "Multiple layout selection for ForNAV reports. Automatically select your report layouts based on dimensions, customer, or vendor.",
+  "privacyStatement": "https://redandbundle.com/privacy/",
+  "EULA": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/EULA",
   "help": "https://redandbundle.github.io/Red.MultipleLayouts.Doc",
   "url": "https://redandbundle.com",
   "logo": "images/RedBundleLogo.png",
@@ -22,17 +22,24 @@
       "publisher": "Microsoft",
       "name": "Base Application",
       "version": "15.0.0.0"
+    },
+    {
+      "id": "83326d6d-11f8-49fd-981a-6f266a7c8d81",
+      "publisher": "ForNAV",
+      "name": "Customizable Report Pack",
+      "version": "5.2.0.0"
     }
   ],
   "screenshots": [],
-  "platform": "15.0.0.0",
+  "platform": "16.0.0.0",
   "idRanges": [
     {
-      "from": 80000,
-      "to": 80500
+      "from": 11310862,
+      "to": 11310912
     }
   ],
   "contextSensitiveHelpUrl": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/README",
   "showMyCode": false,
-  "runtime": "5.0"
+  "runtime": "5.0",
+  "features": ["TranslationFile", "GenerateCaptions"]
 }

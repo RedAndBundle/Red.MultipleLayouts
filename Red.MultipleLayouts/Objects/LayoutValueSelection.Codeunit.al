@@ -1,5 +1,5 @@
 // Copyright [2020] [Red and Bundle]
-codeunit 80003 "Red Layout Value Selection"
+codeunit 11310863 "Red Layout Value Selection"
 {
     procedure SelectCustomer(): Code[20]
     var

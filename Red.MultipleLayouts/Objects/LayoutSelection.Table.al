@@ -1,5 +1,5 @@
 // Copyright [2020] [Red and Bundle]
-table 80000 "Red Layout Selection"
+table 11310862 "Red Layout Selection"
 {
     DataClassification = CustomerContent;
 
