@@ -4,12 +4,12 @@
   "publisher": "Red and Bundle",
   "version": "1.0.0.0",
   "brief": "Red Multiple Layouts development project",
-  "description": "",
-  "privacyStatement": "",
-  "EULA": "",
-  "help": "",
-  "url": "",
-  "logo": "",
+  "description": "Development project for Red.MultipleLayouts",
+  "privacyStatement": "https://redandbundle.com/privacy/",
+  "EULA": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/EULA",
+  "help": "https://redandbundle.github.io/Red.MultipleLayouts.Doc",
+  "url": "https://redandbundle.com",
+  "logo": "Red.MultipleLayouts/images/RedBundleLogo.png",
   "dependencies": [
     {
       "id": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
@@ -22,6 +22,12 @@
       "publisher": "Microsoft",
       "name": "Base Application",
       "version": "16.0.0.0"
+    },
+    {
+      "id": "83326d6d-11f8-49fd-981a-6f266a7c8d81",
+      "publisher": "ForNAV",
+      "name": "Customizable Report Pack",
+      "version": "5.2.0.0"
     }
   ],
   "screenshots": [],
@@ -38,5 +44,6 @@
   ],
   "contextSensitiveHelpUrl": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/README",
   "showMyCode": true,
-  "runtime": "5.0"
+  "runtime": "5.0",
+  "features": ["TranslationFile", "GenerateCaptions"]
 }

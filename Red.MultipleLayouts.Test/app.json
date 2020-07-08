@@ -28,6 +28,12 @@
       "publisher": "Red and Bundle",
       "name": "Red Multiple Layouts",
       "version": "1.0.0.0"
+    },
+    {
+      "id": "83326d6d-11f8-49fd-981a-6f266a7c8d81",
+      "publisher": "ForNAV",
+      "name": "Customizable Report Pack",
+      "version": "5.2.0.0"
     }
   ],
   "screenshots": [],

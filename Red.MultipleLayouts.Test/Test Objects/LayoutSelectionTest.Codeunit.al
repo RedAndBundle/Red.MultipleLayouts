@@ -9,18 +9,24 @@ codeunit 80400 "Red Layout Selection Test"
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        ReportId: Integer;
         TestResult: Boolean;
     begin
         // [FEATURE] No custom layouts for the report to run
+        // [Given] Report Id to test
+        ReportId := GetTestReportId();
+
         // [Given] No custom layouts in system
-        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 0);
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 0);
+
         // [GIVEN] No records in the Layout Selection Table
-        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(206);
+        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(ReportId);
+
         // [Given] Get first Sales Invoice
         SalesInvoiceHeader.FindFirst();
 
         // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
-        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
+        TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader);
 
         // [THEN] Test Result is false
         if TestResult then
@@ -34,20 +40,27 @@ codeunit 80400 "Red Layout Selection Test"
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        ReportId: Integer;
         TestResult: Boolean;
     begin
         // [FEATURE] One selected custom layouts in system
+        // [Given] Report Id to test
+        ReportId := GetTestReportId();
+
         // [Given] One custom layout in system
-        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 1);
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
+
         // [Given] Custom layout is selected
-        RedLayoutSelectTestSetup.SelectFirstLayoutForReport(206);
+        RedLayoutSelectTestSetup.SelectFirstLayoutForReport(ReportId);
+
         // [GIVEN] No records in the Layout Selection Table
-        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(206);
+        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(ReportId);
+
         // [Given] Get first Sales Invoice
         SalesInvoiceHeader.FindFirst();
 
         // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
-        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
+        TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader);
 
         // [THEN] Test Result is false
         if not TestResult then
@@ -61,20 +74,27 @@ codeunit 80400 "Red Layout Selection Test"
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        ReportId: Integer;
         TestResult: Boolean;
     begin
-        // [FEATURE] One selected custom layouts in system
+        // [FEATURE] One custom layouts in system not selected
+        // [Given] Report Id to test
+        ReportId := GetTestReportId();
+
         // [Given] One custom layout in system
-        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 1);
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
+
         // [Given] Custom layout is not selected
-        RedLayoutSelectTestSetup.DeSelectLayoutForReport(206);
+        RedLayoutSelectTestSetup.DeSelectLayoutForReport(ReportId);
+
         // [GIVEN] No records in the Layout Selection Table
-        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(206);
+        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(ReportId);
+
         // [Given] Get first Sales Invoice
         SalesInvoiceHeader.FindFirst();
 
         // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
-        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
+        TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader);
 
         // [THEN] Test Result is false
         if not TestResult then
@@ -89,20 +109,27 @@ codeunit 80400 "Red Layout Selection Test"
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        ReportId: Integer;
         TestResult: Boolean;
     begin
-        // [FEATURE] One selected custom layouts in system
+        // [FEATURE] Two custom layouts in system, one is selected
+        // [Given] Report Id to test
+        ReportId := GetTestReportId();
+
         // [Given] Two custom layouts in system
-        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 2);
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
+
         // [Given] Custom layout is selected
-        RedLayoutSelectTestSetup.SelectFirstLayoutForReport(206);
+        RedLayoutSelectTestSetup.SelectFirstLayoutForReport(ReportId);
+
         // [GIVEN] No records in the Layout Selection Table
-        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(206);
+        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(ReportId);
+
         // [Given] Get first Sales Invoice
         SalesInvoiceHeader.FindFirst();
 
         // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
-        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
+        TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader);
 
         // [THEN] Test Result is false
         if not TestResult then
@@ -117,20 +144,27 @@ codeunit 80400 "Red Layout Selection Test"
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        ReportId: Integer;
         TestResult: Boolean;
     begin
-        // [FEATURE] One selected custom layouts in system
+        // [FEATURE] Two custom layouts in system, none is selected
+        // [Given] Report Id to test
+        ReportId := GetTestReportId();
+
         // [Given] Two custom layouts in system
-        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 2);
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
+
         // [Given] Custom layout is not selected
-        RedLayoutSelectTestSetup.DeSelectLayoutForReport(206);
+        RedLayoutSelectTestSetup.DeSelectLayoutForReport(ReportId);
+
         // [GIVEN] No records in the Layout Selection Table
-        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(206);
+        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(ReportId);
+
         // [Given] Get first Sales Invoice
         SalesInvoiceHeader.FindFirst();
 
         // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
-        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
+        TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader);
 
         // [THEN] Test Result is false
         if not TestResult then
@@ -145,20 +179,24 @@ codeunit 80400 "Red Layout Selection Test"
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        ReportId: Integer;
         TestResult: Boolean;
     begin
-        // [FEATURE] One selected custom layouts in system
+        // [FEATURE] Two custom layouts in system, one is in layout selection
+        // [Given] Report Id to test
+        ReportId := GetTestReportId();
+
         // [Given] Two custom layouts in system
-        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 2);
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
 
         // [Given] Get first Sales Invoice
         SalesInvoiceHeader.FindFirst();
 
         // [Given] Custom layout is selected in Selection Table
-        RedLayoutSelectTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, 206, '1', 'Shortcut Dimension 1 Code');
+        RedLayoutSelectTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '1', 'Shortcut Dimension 1 Code');
 
         // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
-        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
+        TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader);
 
         // [THEN] Test Result is false
         if not TestResult then
@@ -173,32 +211,40 @@ codeunit 80400 "Red Layout Selection Test"
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        ReportId: Integer;
         TestResult: Boolean;
     begin
-        // [FEATURE] One selected custom layouts in system
+        // [FEATURE] Two custom layouts in system, two are in layout selection
+        // [Given] Report Id to test
+        ReportId := GetTestReportId();
+
         // [Given] One custom layout in system
-        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(206, 2);
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
 
         // [Given] Get first Sales Invoice
         SalesInvoiceHeader.FindFirst();
 
         // [Given] Custom layouts are selected in Selection Table
-        RedLayoutSelectTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, 206, '1', 'Shortcut Dimension 1 Code');
-        RedLayoutSelectTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, 206, '2', 'Shortcut Dimension 2 Code');
+        RedLayoutSelectTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '1', 'Shortcut Dimension 1 Code');
+        RedLayoutSelectTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '2', 'Shortcut Dimension 2 Code');
 
         // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
-        TestResult := RunReportWithLayoutSelection(206, SalesInvoiceHeader);
+        TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader);
 
         // [THEN] Test Result is false
         if not TestResult then
             Error(UnexpectedResultErr);
     end;
 
+    local procedure GetTestReportId(): Integer
+    begin
+        exit(Report::"Standard Sales - Invoice");
+    end;
+
     local procedure RunReportWithLayoutSelection(ReportId: Integer; RecVarToPrint: Variant): Boolean
     var
         TempReportSelections: Record "Report Selections" temporary;
         RedLayoutSelection: Codeunit "Red Layout Selection";
-        IsGUI: Boolean;
     begin
         TempReportSelections."Report ID" := ReportId;
         TempReportSelections.Insert();
@@ -206,13 +252,13 @@ codeunit 80400 "Red Layout Selection Test"
     end;
 
     [RequestPageHandler]
-    procedure SalesInvoiceRequestPageHandler(var SalesInvoiceRequestPage: TestRequestPage "Sales - Invoice")
+    procedure SalesInvoiceRequestPageHandler(var SalesInvoiceRequestPage: TestRequestPage "Standard Sales - Invoice")
     begin
 
     end;
 
     [ReportHandler]
-    procedure SalesInvoiceReportHandler(var SalesInvoice: Report "Sales - Invoice")
+    procedure SalesInvoiceReportHandler(var SalesInvoice: Report "Standard Sales - Invoice")
     begin
 
     end;

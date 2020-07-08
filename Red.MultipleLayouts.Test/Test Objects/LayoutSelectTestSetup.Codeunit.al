@@ -56,7 +56,6 @@ codeunit 80401 "Red Layout Select Test Setup"
     procedure EnsureNoLayoutInSelectionTable(ReportId: Integer)
     var
         RedLayoutSelection: Record "Red Layout Selection";
-        RecRef: RecordRef;
     begin
         with RedLayoutSelection do begin
             SetRange("Report ID", ReportId);
@@ -80,7 +79,7 @@ codeunit 80401 "Red Layout Select Test Setup"
         FldRef := RecRef.Field(Field."No.");
 
         with RedLayoutSelection do begin
-            Validate("Report ID", 206);
+            Validate("Report ID", ReportId);
             Validate("Table No.", RecRef.Number);
             Validate("Field No.", FldRef.Number);
             Validate(Value, FldRef.Value);

@@ -27,7 +27,6 @@ codeunit 11310865 "Red Layout Selection"
             SetRange("Report ID", ReportId);
             SetFilter("Company Name", '%1|%2', CompanyName, '');
             SetFilter(Description, '<>ForNAV BC preview*');
-
             if FindSet() then
                 repeat
                     TempCustomReportLayout."Report ID" := "Report ID";
@@ -82,12 +81,11 @@ codeunit 11310865 "Red Layout Selection"
             SetRange("Report ID", ReportId);
             SetRange("Table No.", RecRef.Number);
             SetFilter("Field No.", '>0');
-            if FindSet() then begin
+            if FindSet() then
                 repeat
                     if MatchRecordVariable(RecRef) then
                         Success := AddLayoutSelectionToTempCustomReportLayout(TempCustomReportLayout, "Custom Report Layout Code");
                 until Next() = 0;
-            end;
         end;
     end;
 
@@ -116,7 +114,7 @@ codeunit 11310865 "Red Layout Selection"
             if not (Page.RunModal(Page::"Custom Report Layouts", TempCustomReportLayout) = ACTION::LookupOK) then
                 Error(SelectLayoutErr);
 
-        if TempCustomReportLayout.Find then
+        if TempCustomReportLayout.Find() then
             exit(TempCustomReportLayout.Code);
     end;
 
