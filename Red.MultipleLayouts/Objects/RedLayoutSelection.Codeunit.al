@@ -22,19 +22,17 @@ codeunit 11310865 "Red Layout Selection"
     var
         CustomReportLayout: Record "Custom Report Layout";
     begin
-        with CustomReportLayout do begin
-            SetRange("Report ID", ReportId);
-            SetFilter("Company Name", '%1|%2', CompanyName, '');
-            SetFilter(Description, '<>ForNAV BC preview*');
-            if FindSet() then
-                repeat
-                    TempCustomReportLayout."Report ID" := "Report ID";
-                    TempCustomReportLayout.Code := Code;
-                    TempCustomReportLayout.Description := Description;
-                    TempCustomReportLayout."Company Name" := "Company Name";
-                    TempCustomReportLayout.Insert();
-                until CustomReportLayout.Next() = 0;
-        end;
+        CustomReportLayout.SetRange("Report ID", ReportId);
+        CustomReportLayout.SetFilter("Company Name", '%1|%2', CompanyName, '');
+        CustomReportLayout.SetFilter(Description, '<>ForNAV BC preview*');
+        if CustomReportLayout.FindSet() then
+            repeat
+                TempCustomReportLayout."Report ID" := CustomReportLayout."Report ID";
+                TempCustomReportLayout.Code := CustomReportLayout.Code;
+                TempCustomReportLayout.Description := CustomReportLayout.Description;
+                TempCustomReportLayout."Company Name" := CustomReportLayout."Company Name";
+                TempCustomReportLayout.Insert();
+            until CustomReportLayout.Next() = 0;
         exit(not TempCustomReportLayout.IsEmpty());
     end;
 
@@ -42,17 +40,8 @@ codeunit 11310865 "Red Layout Selection"
     var
         ReportLayoutSelection: Record "Report Layout Selection";
     begin
-        with ReportLayoutSelection do
-            if Get(ReportId, CompanyName) then
-                SelectedLayoutCode := "Custom Report Layout Code";
-    end;
-
-    local procedure IsTheOnlyCustomLayoutSelected(var TempCustomReportLayout: Record "Custom Report Layout"; SelectedLayoutCode: code[20]): Boolean
-    begin
-        if TempCustomReportLayout.Count > 1 then
-            exit(false);
-
-        exit(SelectedLayoutCode <> '');
+        if ReportLayoutSelection.Get(ReportId, CompanyName) then
+            SelectedLayoutCode := ReportLayoutSelection."Custom Report Layout Code";
     end;
 
     local procedure AddDefaultLayoutToList(var TempCustomReportLayout: Record "Custom Report Layout"; SelectedLayoutCode: code[20]; ReportId: Integer)
@@ -76,16 +65,14 @@ codeunit 11310865 "Red Layout Selection"
     begin
         RecRef.GetTable(RecVarToPrint);
 
-        with RedLayoutSelection do begin
-            SetRange("Report ID", ReportId);
-            SetRange("Table No.", RecRef.Number);
-            SetFilter("Field No.", '>0');
-            if FindSet() then
-                repeat
-                    if MatchRecordVariable(RecRef) then
-                        Success := AddLayoutSelectionToTempCustomReportLayout(TempCustomReportLayout, "Custom Report Layout Code");
-                until Next() = 0;
-        end;
+        RedLayoutSelection.SetRange(RedLayoutSelection."Report ID", ReportId);
+        RedLayoutSelection.SetRange(RedLayoutSelection."Table No.", RecRef.Number);
+        RedLayoutSelection.SetFilter(RedLayoutSelection."Field No.", '>0');
+        if RedLayoutSelection.FindSet() then
+            repeat
+                if RedLayoutSelection.MatchRecordVariable(RecRef) then
+                    Success := AddLayoutSelectionToTempCustomReportLayout(TempCustomReportLayout, RedLayoutSelection."Custom Report Layout Code");
+            until RedLayoutSelection.Next() = 0;
     end;
 
     local procedure AddLayoutSelectionToTempCustomReportLayout(var TempCustomReportLayout: Record "Custom Report Layout"; CustomReportLayoutCode: Code[20]): Boolean
@@ -96,13 +83,11 @@ codeunit 11310865 "Red Layout Selection"
         if not (CustomReportLayout."Company Name" in [CompanyName, '']) then
             exit;
 
-        with TempCustomReportLayout do begin
-            TempCustomReportLayout."Report ID" := CustomReportLayout."Report ID";
-            TempCustomReportLayout.Code := CustomReportLayout.Code;
-            TempCustomReportLayout.Description := CustomReportLayout.Description;
-            TempCustomReportLayout."Company Name" := CustomReportLayout."Company Name";
-            exit(TempCustomReportLayout.Insert());
-        end;
+        TempCustomReportLayout."Report ID" := CustomReportLayout."Report ID";
+        TempCustomReportLayout.Code := CustomReportLayout.Code;
+        TempCustomReportLayout.Description := CustomReportLayout.Description;
+        TempCustomReportLayout."Company Name" := CustomReportLayout."Company Name";
+        exit(TempCustomReportLayout.Insert());
     end;
 
     local procedure SelectLayout(var TempCustomReportLayout: Record "Custom Report Layout"): Code[20]

@@ -138,6 +138,11 @@
           <note from="Developer" annotates="general" priority="2">%1 = CustomLayoutDescription</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Method ValidateCustomLayout - NamedType CouldNotFindCustomReportLayoutErr</note>
         </trans-unit>
+        <trans-unit id="Page 3674677723 - Method 1803726697 - NamedType 4139432870" size-unit="char" translate="yes" xml:space="preserve">
+          <source>@*%1*</source>
+          <note from="Developer" annotates="general" priority="2">%1 = text to filter</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Method ValidateCustomLayout - NamedType FilterLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3027191850 - Method 1150274569" size-unit="char" translate="yes" xml:space="preserve">
           <source>MatchRecordVariable</source>
           <note from="Developer" annotates="general" priority="2"></note>

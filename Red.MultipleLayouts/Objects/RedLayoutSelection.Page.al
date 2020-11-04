@@ -13,27 +13,27 @@ Page 11310862 "Red Layout Selection"
         {
             repeater(List)
             {
-                field("Report ID"; "Report ID")
+                field("Report ID"; Rec."Report ID")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the report number from the full list of installed reports.';
                 }
-                field("Report Name"; "Report Name")
+                field("Report Name"; Rec."Report Name")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the name of the selected report.';
                 }
-                field("Table No."; "Table No.")
+                field("Table No."; Rec."Table No.")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the table the report is run from. For instance the Sales Invoice uses table 112, the Sales Order uses table 36 etc.';
                 }
-                field("Table Name"; "Table Name")
+                field("Table Name"; Rec."Table Name")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the name of the selected table.';
                 }
-                field("Field No."; "Field No.")
+                field("Field No."; Rec."Field No.")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the field that you want to use to determine wether or not to use the Custom Report Layout.';
@@ -43,12 +43,12 @@ Page 11310862 "Red Layout Selection"
                         LookupFieldNo();
                     end;
                 }
-                field("Field Name"; "Field Name")
+                field("Field Name"; Rec."Field Name")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the name of the selected field.';
                 }
-                field(Value; Value)
+                field(Value; Rec.Value)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the field that determines if the Custom Report Layout should be used.';
@@ -107,11 +107,11 @@ Page 11310862 "Red Layout Selection"
     var
         ReportLayoutSelection: Record "Report Layout Selection";
     begin
-        if "Report ID" = 0 then
+        if Rec."Report ID" = 0 then
             exit;
 
-        ReportLayoutSelection.SetTempLayoutSelected("Custom Report Layout Code");
-        REPORT.RunModal("Report ID");
+        ReportLayoutSelection.SetTempLayoutSelected(Rec."Custom Report Layout Code");
+        REPORT.RunModal(Rec."Report ID");
         ReportLayoutSelection.SetTempLayoutSelected('');
     end;
 
@@ -120,8 +120,8 @@ Page 11310862 "Red Layout Selection"
 
     trigger OnAfterGetRecord()
     begin
-        CalcFields("Report Layout Description");
-        CustomLayoutDescription := "Report Layout Description";
+        Rec.CalcFields(Rec."Report Layout Description");
+        CustomLayoutDescription := Rec."Report Layout Description";
     end;
 
     local procedure LookupCustomLayout()
@@ -130,16 +130,16 @@ Page 11310862 "Red Layout Selection"
         WrongCompanyErr: Label 'You cannot select a layout that is specific to another company.';
     begin
         CustomReportLayout.FilterGroup(4);
-        CustomReportLayout.SetRange("Report ID", "Report ID");
+        CustomReportLayout.SetRange("Report ID", Rec."Report ID");
         CustomReportLayout.FilterGroup(0);
         CustomReportLayout.SetFilter("Company Name", '%1|%2', CompanyName, '');
-        if Page.RunModal(Page::"Custom Report Layouts", CustomReportLayout) = ACTION::LookupOK then
-            if CustomReportLayout.Find() then begin
-                if not (CustomReportLayout."Company Name" in [CompanyName, '']) then
-                    Error(WrongCompanyErr);
-                "Custom Report Layout Code" := CustomReportLayout.Code;
-                CustomLayoutDescription := CustomReportLayout.Description;
-            end
+        if Page.RunModal(Page::"Custom Report Layouts", CustomReportLayout) = ACTION::LookupOK then begin
+            // if CustomReportLayout.Find('-') then begin
+            if not (CustomReportLayout."Company Name" in [CompanyName, '']) then
+                Error(WrongCompanyErr);
+            Rec."Custom Report Layout Code" := CustomReportLayout.Code;
+            CustomLayoutDescription := CustomReportLayout.Description;
+        end
 
     end;
 
@@ -147,27 +147,28 @@ Page 11310862 "Red Layout Selection"
     var
         CustomReportLayout: Record "Custom Report Layout";
         CouldNotFindCustomReportLayoutErr: Label 'There is no custom report layout with %1 in the description.', Comment = '%1 = CustomLayoutDescription';
+        FilterLbl: Label '@*%1*', Comment = '%1 = text to filter';
     begin
         CustomReportLayout.SetCurrentKey("Report ID", "Company Name", Type);
-        CustomReportLayout.SetRange("Report ID", "Report ID");
+        CustomReportLayout.SetRange("Report ID", Rec."Report ID");
         CustomReportLayout.SetFilter("Company Name", '%1|%2', '', CompanyName);
         CustomReportLayout.SetFilter(
-          Description, StrSubstNo('@*%1*', CustomLayoutDescription));
+          Description, StrSubstNo(FilterLbl, CustomLayoutDescription));
         if not CustomReportLayout.FindFirst() then
             Error(CouldNotFindCustomReportLayoutErr, CustomLayoutDescription);
 
-        if CustomReportLayout.Code <> "Custom Report Layout Code" then
-            Validate("Custom Report Layout Code", CustomReportLayout.Code);
+        if CustomReportLayout.Code <> Rec."Custom Report Layout Code" then
+            Rec.Validate(Rec."Custom Report Layout Code", CustomReportLayout.Code);
     end;
 
     local procedure LookupFieldNo();
     var
         Field: Record Field;
     begin
-        Field.SetRange(TableNo, "Table No.");
+        Field.SetRange(TableNo, Rec."Table No.");
 
         if Page.RunModal(Page::"Fields Lookup", Field) = Action::LookupOK then
-            Validate("Field No.", Field."No.");
+            Rec.Validate(Rec."Field No.", Field."No.");
     end;
 
     local procedure LookupFieldValue()
@@ -177,27 +178,27 @@ Page 11310862 "Red Layout Selection"
         FldRef: FieldRef;
     begin
         case 0 of
-            "Table No.",
-            "Field No.":
+            Rec."Table No.",
+            Rec."Field No.":
                 exit;
         end;
 
-        RecRef.Open("Table No.");
-        FldRef := RecRef.Field("Field No.");
+        RecRef.Open(Rec."Table No.");
+        FldRef := RecRef.Field(Rec."Field No.");
 
         case FldRef.Relation() of
             Database::Customer:
-                Value := LayoutValueSelection.SelectCustomer();
+                Rec.Value := LayoutValueSelection.SelectCustomer();
             Database::Vendor:
-                Value := LayoutValueSelection.SelectVendor();
+                Rec.Value := LayoutValueSelection.SelectVendor();
             Database::"Dimension Value":
-                Value := LayoutValueSelection.SelectDimension(FldRef.Name);
+                Rec.Value := LayoutValueSelection.SelectDimension(FldRef.Name);
             Database::Contact:
-                Value := LayoutValueSelection.SelectContact();
+                Rec.Value := LayoutValueSelection.SelectContact();
             Database::"Payment Terms":
-                Value := LayoutValueSelection.SelectPaymentTerms();
+                Rec.Value := LayoutValueSelection.SelectPaymentTerms();
             Database::Item:
-                Value := LayoutValueSelection.SelectItem();
+                Rec.Value := LayoutValueSelection.SelectItem();
         end;
     end;
 }

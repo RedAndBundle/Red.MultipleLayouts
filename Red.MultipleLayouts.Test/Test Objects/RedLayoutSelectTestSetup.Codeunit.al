@@ -5,16 +5,16 @@ codeunit 80401 "Red Layout Select Test Setup"
         CustomReportLayout: Record "Custom Report Layout";
         i: Integer;
     begin
-        with CustomReportLayout do begin
-            SetRange("Report ID", ReportId);
-            DeleteAll();
+        begin
+            CustomReportLayout.SetRange("Report ID", ReportId);
+            CustomReportLayout.DeleteAll();
             for i := 1 to NoOfLayouts do begin
-                Init();
-                Validate(Code, Format(i));
-                Validate("Report ID", ReportId);
-                Validate(Description, Format(i));
-                Validate(Type, Type::RDLC);
-                Insert();
+                CustomReportLayout.Init();
+                CustomReportLayout.Validate(Code, Format(i));
+                CustomReportLayout.Validate("Report ID", ReportId);
+                CustomReportLayout.Validate(Description, Format(i));
+                CustomReportLayout.Validate(Type, CustomReportLayout.Type::RDLC);
+                CustomReportLayout.Insert();
             end;
         end;
     end;
@@ -24,20 +24,20 @@ codeunit 80401 "Red Layout Select Test Setup"
         ReportLayoutSelection: Record "Report Layout Selection";
         CustomReportLayout: Record "Custom Report Layout";
     begin
-        with CustomReportLayout do begin
-            SetRange("Report ID", ReportId);
-            FindFirst();
+        begin
+            CustomReportLayout.SetRange("Report ID", ReportId);
+            CustomReportLayout.FindFirst();
         end;
 
-        with ReportLayoutSelection do begin
-            if not Get(ReportId, CompanyName) then begin
-                Validate("Report ID", ReportId);
-                Validate("Company Name", CompanyName);
-                Insert();
+        begin
+            if not ReportLayoutSelection.Get(ReportId, CompanyName) then begin
+                ReportLayoutSelection.Validate("Report ID", ReportId);
+                ReportLayoutSelection.Validate("Company Name", CompanyName);
+                ReportLayoutSelection.Insert();
             end;
-            Validate(Type, Type::"Custom Layout");
-            Validate("Custom Report Layout Code", CustomReportLayout.Code);
-            Modify();
+            ReportLayoutSelection.Validate(Type, ReportLayoutSelection.Type::"Custom Layout");
+            ReportLayoutSelection.Validate("Custom Report Layout Code", CustomReportLayout.Code);
+            ReportLayoutSelection.Modify();
         end;
     end;
 
@@ -45,20 +45,19 @@ codeunit 80401 "Red Layout Select Test Setup"
     var
         ReportLayoutSelection: Record "Report Layout Selection";
     begin
-        with ReportLayoutSelection do
-            if Get(ReportId, CompanyName) then begin
-                Validate(Type, Type::"RDLC (built-in)");
-                Modify();
-            end;
+        if ReportLayoutSelection.Get(ReportId, CompanyName) then begin
+            ReportLayoutSelection.Validate(Type, ReportLayoutSelection.Type::"RDLC (built-in)");
+            ReportLayoutSelection.Modify();
+        end;
     end;
 
     procedure EnsureNoLayoutInSelectionTable(ReportId: Integer)
     var
         RedLayoutSelection: Record "Red Layout Selection";
     begin
-        with RedLayoutSelection do begin
-            SetRange("Report ID", ReportId);
-            DeleteAll();
+        begin
+            RedLayoutSelection.SetRange(RedLayoutSelection."Report ID", ReportId);
+            RedLayoutSelection.DeleteAll();
         end;
     end;
 
@@ -77,13 +76,13 @@ codeunit 80401 "Red Layout Select Test Setup"
 
         FldRef := RecRef.Field(Field."No.");
 
-        with RedLayoutSelection do begin
-            Validate("Report ID", ReportId);
-            Validate("Table No.", RecRef.Number);
-            Validate("Field No.", FldRef.Number);
-            Validate(Value, FldRef.Value);
-            Validate("Custom Report Layout Code", CustomReportLayoutCode);
-            Insert();
+        begin
+            RedLayoutSelection.Validate(RedLayoutSelection."Report ID", ReportId);
+            RedLayoutSelection.Validate(RedLayoutSelection."Table No.", RecRef.Number);
+            RedLayoutSelection.Validate(RedLayoutSelection."Field No.", FldRef.Number);
+            RedLayoutSelection.Validate(RedLayoutSelection.Value, FldRef.Value);
+            RedLayoutSelection.Validate(RedLayoutSelection."Custom Report Layout Code", CustomReportLayoutCode);
+            RedLayoutSelection.Insert();
         end;
     end;
 }
