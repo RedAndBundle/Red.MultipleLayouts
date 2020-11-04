@@ -1,4 +1,3 @@
-// Copyright [2020] [Red and Bundle]
 Page 11310862 "Red Layout Selection"
 {
     Caption = 'Red Layout Selection';

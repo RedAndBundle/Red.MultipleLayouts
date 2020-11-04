@@ -1,4 +1,3 @@
-// Copyright [2020] [Red and Bundle]
 codeunit 80401 "Red Layout Select Test Setup"
 {
     procedure EnsureCustomLayoutsForReport(ReportId: Integer; NoOfLayouts: Integer)

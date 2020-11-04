@@ -1,4 +1,3 @@
-// Copyright [2020] [Red and Bundle]
 codeunit 11310865 "Red Layout Selection"
 {
     procedure RunReportWithLayoutSelection(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecVarToPrint: Variant): Boolean

@@ -1,4 +1,3 @@
-// Copyright [2020] [Red and Bundle]
 codeunit 11310864 "Red Layout Selection Match Rec"
 {
     procedure MatchRecordVariable(LayoutSelection: Record "Red Layout Selection"; RecRef: RecordRef): Boolean

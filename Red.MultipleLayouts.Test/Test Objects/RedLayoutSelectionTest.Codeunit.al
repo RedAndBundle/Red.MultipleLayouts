@@ -1,4 +1,3 @@
-// Copyright [2020] [Red and Bundle]
 codeunit 80400 "Red Layout Selection Test"
 {
     Subtype = Test;
