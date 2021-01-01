@@ -23,12 +23,12 @@
   "application": "17.0.0.0",
   "idRanges": [
     {
-      "from": 80400,
-      "to": 80450
-    },
-    {
       "from": 11310862,
       "to": 11310912
+    },
+    {
+      "from": 80400,
+      "to": 80450
     }
   ],
   "contextSensitiveHelpUrl": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/README",

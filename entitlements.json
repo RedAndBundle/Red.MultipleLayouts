@@ -1,0 +1,86 @@
+﻿{
+  "MembershipEntitlements": [
+    {
+      "Id": "999a0fb4-f34f-4ca3-a190-bd7321cf5d0f",
+      "SetId": "Red.MultipleLayouts.Dev",
+      "EntitlementType": 0
+    }
+  ],
+  "EntitlementSets": [
+    {
+      "SetId": "Red.MultipleLayouts.Dev",
+      "Entitlements": [
+        {
+          "ObjectType": 0,
+          "ObjectIdRangeStart": 11310862,
+          "ObjectIdRangeEnd": 11310862,
+          "Read": 1,
+          "Insert": 1,
+          "Modify": 1,
+          "Delete": 1,
+          "Execute": 0
+        },
+        {
+          "ObjectType": 1,
+          "ObjectIdRangeStart": 11310862,
+          "ObjectIdRangeEnd": 11310862,
+          "Read": 0,
+          "Insert": 0,
+          "Modify": 0,
+          "Delete": 0,
+          "Execute": 1
+        },
+        {
+          "ObjectType": 5,
+          "ObjectIdRangeStart": 80400,
+          "ObjectIdRangeEnd": 80401,
+          "Read": 0,
+          "Insert": 0,
+          "Modify": 0,
+          "Delete": 0,
+          "Execute": 1
+        },
+        {
+          "ObjectType": 5,
+          "ObjectIdRangeStart": 80401,
+          "ObjectIdRangeEnd": 80401,
+          "Read": 0,
+          "Insert": 0,
+          "Modify": 0,
+          "Delete": 0,
+          "Execute": 1
+        },
+        {
+          "ObjectType": 5,
+          "ObjectIdRangeStart": 11310862,
+          "ObjectIdRangeEnd": 11310864,
+          "Read": 0,
+          "Insert": 0,
+          "Modify": 0,
+          "Delete": 0,
+          "Execute": 1
+        },
+        {
+          "ObjectType": 5,
+          "ObjectIdRangeStart": 11310864,
+          "ObjectIdRangeEnd": 11310866,
+          "Read": 0,
+          "Insert": 0,
+          "Modify": 0,
+          "Delete": 0,
+          "Execute": 1
+        },
+        {
+          "ObjectType": 8,
+          "ObjectIdRangeStart": 11310862,
+          "ObjectIdRangeEnd": 11310862,
+          "Read": 0,
+          "Insert": 0,
+          "Modify": 0,
+          "Delete": 0,
+          "Execute": 1
+        }
+      ]
+    }
+  ]
+}

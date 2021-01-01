@@ -101,6 +101,39 @@ Page 11310862 "Red Layout Selection"
                 end;
             }
         }
+        area(Processing)
+        {
+            action(Export)
+            {
+                ApplicationArea = All;
+                Caption = 'Export';
+                Image = ExportFile;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Export the selected records to a json file.';
+
+                trigger OnAction()
+                begin
+                    ExportSelected();
+                end;
+            }
+            action(Import)
+            {
+                ApplicationArea = All;
+                Caption = 'Import';
+                Image = Import;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Import Layout Seelctions from a file.';
+
+                trigger OnAction()
+                begin
+                    Rec.ImportFromFile();
+                end;
+            }
+        }
     }
 
     procedure RunCustomReport()
@@ -113,6 +146,15 @@ Page 11310862 "Red Layout Selection"
         ReportLayoutSelection.SetTempLayoutSelected(Rec."Custom Report Layout Code");
         REPORT.RunModal(Rec."Report ID");
         ReportLayoutSelection.SetTempLayoutSelected('');
+    end;
+
+    local procedure ExportSelected()
+    var
+        RedLayoutSelection: Record "Red Layout Selection";
+        RedLayoutSelectionExport: Codeunit "Red Layout Selection Export";
+    begin
+        CurrPage.SetSelectionFilter(RedLayoutSelection);
+        RedLayoutSelectionExport.Run(RedLayoutSelection);
     end;
 
     var

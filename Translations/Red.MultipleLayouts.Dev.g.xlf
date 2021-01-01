@@ -128,6 +128,26 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action RunReport - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 3674677723 - Action 36190024 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action Export - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3674677723 - Action 36190024 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export the selected records to a json file.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action Export - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3674677723 - Action 3201496503 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action Import - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3674677723 - Action 3201496503 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import Layout Seelctions from a file.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action Import - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 3674677723 - Method 2291465069 - NamedType 2784494499" size-unit="char" translate="yes" xml:space="preserve">
           <source>You cannot select a layout that is specific to another company.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -142,6 +162,11 @@
           <source>@*%1*</source>
           <note from="Developer" annotates="general" priority="2">%1 = text to filter</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Method ValidateCustomLayout - NamedType FilterLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3070298800 - NamedType 3642932217" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Select a file to import</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - NamedType SelectFileMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 3027191850 - Method 1150274569" size-unit="char" translate="yes" xml:space="preserve">
           <source>MatchRecordVariable</source>

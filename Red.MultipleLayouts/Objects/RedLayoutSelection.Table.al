@@ -9,7 +9,6 @@ table 11310862 "Red Layout Selection"
         {
             Caption = 'Report ID';
             DataClassification = SystemMetadata;
-            // TableRelation = "ForNAV Translation Report";
             TableRelation = AllObjWithCaption."Object ID" where("Object Type" = const(Report));
             ValidateTableRelation = false;
             NotBlank = true;
@@ -23,7 +22,7 @@ table 11310862 "Red Layout Selection"
         {
             Caption = 'Report Name';
             FieldClass = FlowField;
-            CalcFormula = lookup (AllObj."Object Name" where("Object Type" = const(Report), "Object ID" = field("Report ID")));
+            CalcFormula = lookup(AllObj."Object Name" where("Object Type" = const(Report), "Object ID" = field("Report ID")));
             Editable = false;
         }
         field(3; "Custom Report Layout Code"; Code[20])
@@ -34,7 +33,7 @@ table 11310862 "Red Layout Selection"
         }
         field(4; "Report Layout Description"; Text[250])
         {
-            CalcFormula = Lookup ("Custom Report Layout".Description WHERE(Code = FIELD("Custom Report Layout Code")));
+            CalcFormula = Lookup("Custom Report Layout".Description WHERE(Code = FIELD("Custom Report Layout Code")));
             Caption = 'Report Layout Description';
             FieldClass = FlowField;
             NotBlank = true;
@@ -54,7 +53,7 @@ table 11310862 "Red Layout Selection"
         {
             Caption = 'Table Name';
             FieldClass = FlowField;
-            CalcFormula = lookup (AllObj."Object Name" where("Object Type" = const(Table), "Object ID" = field("Table No.")));
+            CalcFormula = lookup(AllObj."Object Name" where("Object Type" = const(Table), "Object ID" = field("Table No.")));
             Editable = false;
         }
         field(7; "Field No."; Integer)
@@ -72,7 +71,7 @@ table 11310862 "Red Layout Selection"
         field(8; "Field Name"; Text[50])
         {
             FieldClass = FlowField;
-            CalcFormula = lookup (Field.FieldName where(TableNo = field("Table No."), "No." = field("Field No.")));
+            CalcFormula = lookup(Field.FieldName where(TableNo = field("Table No."), "No." = field("Field No.")));
             Editable = false;
         }
         field(9; "Value"; Code[50])
@@ -90,5 +89,12 @@ table 11310862 "Red Layout Selection"
         RedLayoutSelectionMatchRec: Codeunit "Red Layout Selection Match Rec";
     begin
         exit(RedLayoutSelectionMatchRec.MatchRecordVariable(Rec, RecRef));
+    end;
+
+    procedure ImportFromFile()
+    var
+        RedLayoutSelectionImport: Codeunit "Red Layout Selection Import";
+    begin
+        RedLayoutSelectionImport.Run(Rec);
     end;
 }
