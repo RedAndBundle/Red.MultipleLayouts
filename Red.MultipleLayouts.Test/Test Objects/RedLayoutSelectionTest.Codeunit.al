@@ -13,7 +13,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] No custom layouts for the report to run
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
         // [Given] No custom layouts in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 0);
@@ -44,7 +44,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] One selected custom layouts in system
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
         // [Given] One custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
@@ -78,7 +78,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] One custom layouts in system not selected
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
         // [Given] One custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
@@ -113,7 +113,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, one is selected
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
         // [Given] Two custom layouts in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
@@ -148,7 +148,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, none is selected
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
         // [Given] Two custom layouts in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
@@ -183,7 +183,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, one is in layout selection
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
         // [Given] Two custom layouts in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
@@ -215,9 +215,9 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, two are in layout selection
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
-        // [Given] One custom layout in system
+        // [Given] Two custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
 
         // [Given] Get first Sales Invoice
@@ -233,11 +233,6 @@ codeunit 80400 "Red Layout Selection Test"
         // [THEN] Test Result is false
         if not TestResult then
             Error(UnexpectedResultErr);
-    end;
-
-    local procedure GetTestReportId(): Integer
-    begin
-        exit(Report::"Standard Sales - Invoice");
     end;
 
     local procedure RunReportWithLayoutSelection(ReportId: Integer; RecVarToPrint: Variant): Boolean

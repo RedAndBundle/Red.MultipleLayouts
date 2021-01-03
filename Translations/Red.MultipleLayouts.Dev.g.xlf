@@ -163,10 +163,45 @@
           <note from="Developer" annotates="general" priority="2">%1 = text to filter</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Method ValidateCustomLayout - NamedType FilterLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3161741663 - Method 1256906906" size-unit="char" translate="yes" xml:space="preserve">
+          <source>CreateJsonFromRecords</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Export - Method CreateJsonFromRecords</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3070298800 - Method 707837154" size-unit="char" translate="yes" xml:space="preserve">
+          <source>CreateRecordsFromJson</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - Method CreateRecordsFromJson</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3070298800 - Method 1727834843" size-unit="char" translate="yes" xml:space="preserve">
+          <source>CreateCustomReportLayouts</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - Method CreateCustomReportLayouts</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3070298800 - Method 2819509291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>InsertRedLayoutSelection</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - Method InsertRedLayoutSelection</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3070298800 - NamedType 3642932217" size-unit="char" translate="yes" xml:space="preserve">
           <source>Select a file to import</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - NamedType SelectFileMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3070298800 - NamedType 3366217384" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import completed, %1 new records were created</source>
+          <note from="Developer" annotates="general" priority="2">%1 = no of records created</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - NamedType CompletedMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3070298800 - NamedType 1288405046" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Blank layout, created from Red Layout Selection import</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - NamedType CreatedFromImportMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3070298800 - NamedType 638359500" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Custom Report Layout %1 has the Wrong report ID</source>
+          <note from="Developer" annotates="general" priority="2">%1 = the report layout for the new record</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - NamedType CustReportLayoutDoesNotMatchReportIdErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3027191850 - Method 1150274569" size-unit="char" translate="yes" xml:space="preserve">
           <source>MatchRecordVariable</source>
@@ -203,6 +238,26 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Value Selection - Method SelectItem</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2202900746 - Method 3718179897 - NamedType 638359500" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Custom Report Layout %1 has the Wrong report ID</source>
+          <note from="Developer" annotates="general" priority="2">%1 = the report layout for the new record</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Import Export Test - Method VerifyCustReportLayoutDoesNotMatchReportIdErr - NamedType CustReportLayoutDoesNotMatchReportIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2202900746 - NamedType 2718321126" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Imported value does not match original value</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Import Export Test - NamedType ValueMismatchErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2202900746 - NamedType 4144585871" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The CUstom Report Layout has the wrong report id</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Import Export Test - NamedType WrongReportIdErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2202900746 - NamedType 2958582617" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Then imported quantity does not match the expected quantity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Import Export Test - NamedType ImportQuantityMismatchErr</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3499821521 - NamedType 3247696755" size-unit="char" translate="yes" xml:space="preserve">
           <source>Unexpected result</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -232,6 +287,21 @@
           <source>AddLayoutToSelectionTable</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Select Test Setup - Method AddLayoutToSelectionTable</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1297320396 - Method 935415965" size-unit="char" translate="yes" xml:space="preserve">
+          <source>GetTestReportId</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Select Test Setup - Method GetTestReportId</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1297320396 - Method 1904097084" size-unit="char" translate="yes" xml:space="preserve">
+          <source>GetAltTestReportId</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Select Test Setup - Method GetAltTestReportId</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1297320396 - Method 3087929834" size-unit="char" translate="yes" xml:space="preserve">
+          <source>CreateTempRedLayoutSelection</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Select Test Setup - Method CreateTempRedLayoutSelection</note>
         </trans-unit>
       </group>
     </body>

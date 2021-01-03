@@ -6,11 +6,11 @@ codeunit 11310866 "Red Layout Selection Export"
     var
         jArray: JsonArray;
     begin
-        RecToJson(Rec, jArray, false, true);
+        CreateJsonFromRecords(Rec, jArray, false, true);
         ExportFile(jArray);
     end;
 
-    local procedure RecToJson(Rec: Variant; var jArray: JsonArray; ExportSystemFields: Boolean; ExportFlowFields: Boolean)
+    procedure CreateJsonFromRecords(Rec: Variant; var jArray: JsonArray; ExportSystemFields: Boolean; ExportFlowFields: Boolean)
     var
         Field: Record Field;
         RecRef: RecordRef;

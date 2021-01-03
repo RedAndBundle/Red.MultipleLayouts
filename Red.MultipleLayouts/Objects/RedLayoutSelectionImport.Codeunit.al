@@ -6,17 +6,20 @@ codeunit 11310867 "Red Layout Selection Import"
     var
         TempRedLayoutSelection: Record "Red Layout Selection" temporary;
         jArray: JsonArray;
+        QtyImported: Integer;
     begin
-        // What if exists, overwrite?
-        // Create Cust Rep Layout when it does not exist
         GetJsonFromFile(jArray);
-        // FillTempFileFromJson(TempRedLayoutSelection, jArray);
-        RecFromJson(TempRedLayoutSelection, jArray);
-        // Save Records
+        CreateRecordsFromJson(TempRedLayoutSelection, jArray);
+        CreateCustomReportLayouts(TempRedLayoutSelection);
+        InsertRedLayoutSelection(TempRedLayoutSelection, QtyImported);
+        DisplayResultsMessage(QtyImported);
     end;
 
     var
         SelectFileMsg: Label 'Select a file to import';
+        CompletedMsg: Label 'Import completed, %1 new records were created', Comment = '%1 = no of records created';
+        CreatedFromImportMsg: Label 'Blank layout, created from Red Layout Selection import';
+        CustReportLayoutDoesNotMatchReportIdErr: Label 'Custom Report Layout %1 has the Wrong report ID', Comment = '%1 = the report layout for the new record';
 
     local procedure GetJsonFromFile(var jArray: JsonArray)
     var
@@ -32,14 +35,7 @@ codeunit 11310867 "Red Layout Selection Import"
         jArray.ReadFrom(jText);
     end;
 
-    local procedure FillTempFileFromJson(var TempRedLayoutSelection: Record "Red Layout Selection"; jArray: JsonArray)
-    var
-        myInt: Integer;
-    begin
-
-    end;
-
-    local procedure RecFromJson(Rec: Variant; var jArray: JsonArray)
+    procedure CreateRecordsFromJson(Rec: Variant; var jArray: JsonArray)
     var
         Field: Record Field;
         RecRef: RecordRef;
@@ -55,7 +51,6 @@ codeunit 11310867 "Red Layout Selection Import"
             jArray.Get(i, jToken);
             if jToken.IsObject then begin
                 jObject := jToken.AsObject();
-                Message('%1', jObject);
                 Field.SetRange(TableNo, RecRef.Number);
                 Field.SetFilter(ObsoleteState, '<>%1', Field.ObsoleteState::Removed);
                 Field.SetRange(Class, Field.Class::Normal);
@@ -67,6 +62,47 @@ codeunit 11310867 "Red Layout Selection Import"
                 RecRef.Insert();
             end;
         end;
+    end;
+
+    procedure CreateCustomReportLayouts(var TempRedLayoutSelection: Record "Red Layout Selection")
+    var
+        CustomReportLayout: Record "Custom Report Layout";
+    begin
+        if TempRedLayoutSelection.FindSet() then
+            repeat
+                if CustomReportLayout.Get(TempRedLayoutSelection."Custom Report Layout Code") then begin
+                    if CustomReportLayout."Report ID" <> TempRedLayoutSelection."Report ID" then
+                        Error(CustReportLayoutDoesNotMatchReportIdErr, TempRedLayoutSelection."Custom Report Layout Code");
+                end else begin
+                    CustomReportLayout.Init();
+                    CustomReportLayout.Code := TempRedLayoutSelection."Custom Report Layout Code";
+                    CustomReportLayout.Validate("Report ID", TempRedLayoutSelection."Report ID");
+                    CustomReportLayout.Description := CreatedFromImportMsg;
+                    CustomReportLayout.Insert();
+                end;
+            until TempRedLayoutSelection.Next() = 0;
+    end;
+
+    procedure InsertRedLayoutSelection(var TempRedLayoutSelection: Record "Red Layout Selection"; var QtyImported: Integer)
+    var
+        RedLayoutSelection: Record "Red Layout Selection";
+    begin
+        if TempRedLayoutSelection.FindSet() then
+            repeat
+                RedLayoutSelection.Init();
+                RedLayoutSelection := TempRedLayoutSelection;
+                RedLayoutSelection.Validate("Report ID");
+                RedLayoutSelection.Validate("Custom Report Layout Code");
+                RedLayoutSelection.Validate("Table No.");
+                RedLayoutSelection.Validate("Field No.");
+                if RedLayoutSelection.Insert() then
+                    QtyImported += 1;
+            until TempRedLayoutSelection.Next() = 0;
+    end;
+
+    local procedure DisplayResultsMessage(QtyImported: Integer)
+    begin
+        Message(CompletedMsg, QtyImported);
     end;
 
     local procedure AddFieldFromJsonObject(Field: Record Field; var RecRef: RecordRef; var jObject: JsonObject)
@@ -97,45 +133,5 @@ codeunit 11310867 "Red Layout Selection Import"
             else
                 FldRef.Value := jToken.AsValue().AsText()
         end;
-
     end;
-
-    // local procedure ValidateData(FieldKey: Integer; Data: JsonArray)
-    // var
-    //     FieldValidationRED: Codeunit "Field Validation RED";
-    //     RecRef: RecordRef;
-    //     FldRef: FieldRef;
-    //     FieldList: JsonArray;
-    //     FieldObject: JsonObject;
-    //     JToken: JsonToken;
-    //     i: Integer;
-    //     LastError: Text;
-    // // StreamOut: OutStream;
-    // begin
-    //     FieldList := GetArrayFromMetadata('fieldlist');
-    //     GetRecRef(RecRef);
-    //     FieldObject := GetFieldObjectFromFieldList(FieldList, FieldKey);
-    //     FldRef := RecRef.Field(GetFieldNumberFromFieldObject(FieldObject));
-    //     Data.Get(FieldKey, JToken);
-    //     JToken.AsObject().Get('fieldvalue', JToken);
-    //     Evaluate(FldRef, JToken.AsValue().AsText());
-
-    //     FieldValidationRED.SetRecordRef(RecRef);
-    //     FieldValidationRED.SetFieldRef(FldRef);
-    //     if not FieldValidationRED.Run() then
-    //         LastError := GetLastErrorText();
-    //     RecRef.Find();
-
-    //     Clear(Data);
-
-    //     for i := 0 to FieldList.Count - 1 do begin
-    //         FieldObject := GetFieldObjectFromFieldList(FieldList, i);
-    //         Data.Add(AddFieldData(RecRef, GetFieldNumberFromFieldObject(FieldObject)));
-    //     end;
-
-    //     // Message('Field: %1, Data: %2', FieldNo, Data);
-    //     Sleep(1000);
-
-    //     CurrPage.ReactPageControlAddinRED.ValidationResult(FieldKey, Data, LastError);
-    // end;
 }
