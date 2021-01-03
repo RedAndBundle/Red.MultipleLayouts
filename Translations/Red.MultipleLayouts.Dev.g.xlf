@@ -163,6 +163,16 @@
           <note from="Developer" annotates="general" priority="2">%1 = text to filter</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Method ValidateCustomLayout - NamedType FilterLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2537148653 - Method 1617991136" size-unit="char" translate="yes" xml:space="preserve">
+          <source>OnDrillDown</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red ForNAV Layout Multiple - Method OnDrillDown</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2537148653 - Method 1566919929" size-unit="char" translate="yes" xml:space="preserve">
+          <source>GetStyle</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red ForNAV Layout Multiple - Method GetStyle</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3161741663 - Method 1256906906" size-unit="char" translate="yes" xml:space="preserve">
           <source>CreateJsonFromRecords</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -302,6 +312,11 @@
           <source>CreateTempRedLayoutSelection</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Select Test Setup - Method CreateTempRedLayoutSelection</note>
+        </trans-unit>
+        <trans-unit id="EnumExtension 3850172221 - EnumValue 2944108275 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Enum 3584343772">
+          <source>Multiple Layout</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">EnumExtension Red ForNAV Layout - EnumValue Red Multiple Layout - Property Caption</note>
         </trans-unit>
       </group>
     </body>
