@@ -168,7 +168,12 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Export - Method CreateJsonFromRecords</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3070298800 - Method 707837154" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 3070298800 - Method 2471285645" size-unit="char" translate="yes" xml:space="preserve">
+          <source>CreateTempRedLayoutSelectionFromJson</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - Method CreateTempRedLayoutSelectionFromJson</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3070298800 - Method 593103252" size-unit="char" translate="yes" xml:space="preserve">
           <source>CreateRecordsFromJson</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - Method CreateRecordsFromJson</note>

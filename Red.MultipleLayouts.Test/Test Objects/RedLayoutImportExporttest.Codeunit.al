@@ -172,7 +172,7 @@ codeunit 80402 "Red Layout Import Export Test"
         TempRedLayoutSelection: Record "Red Layout Selection" temporary;
         RedLayoutSelectionImport: Codeunit "Red Layout Selection Import";
     begin
-        RedLayoutSelectionImport.CreateRecordsFromJson(TempRedLayoutSelection, jArray);
+        RedLayoutSelectionImport.CreateTempRedLayoutSelectionFromJson(TempRedLayoutSelection, jArray);
         TempRedLayoutSelection.FindSet();
         repeat
             RedLayoutSelection.Get(TempRedLayoutSelection."Report ID", TempRedLayoutSelection."Custom Report Layout Code", TempRedLayoutSelection."Table No.", TempRedLayoutSelection."Field No.");

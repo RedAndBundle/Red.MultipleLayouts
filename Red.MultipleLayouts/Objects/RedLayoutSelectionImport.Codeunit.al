@@ -9,7 +9,7 @@ codeunit 11310867 "Red Layout Selection Import"
         QtyImported: Integer;
     begin
         GetJsonFromFile(jArray);
-        CreateRecordsFromJson(TempRedLayoutSelection, jArray);
+        CreateTempRedLayoutSelectionFromJson(TempRedLayoutSelection, jArray);
         CreateCustomReportLayouts(TempRedLayoutSelection);
         InsertRedLayoutSelection(TempRedLayoutSelection, QtyImported);
         DisplayResultsMessage(QtyImported);
@@ -35,18 +35,22 @@ codeunit 11310867 "Red Layout Selection Import"
         jArray.ReadFrom(jText);
     end;
 
-    procedure CreateRecordsFromJson(Rec: Variant; var jArray: JsonArray)
+    procedure CreateTempRedLayoutSelectionFromJson(var TempRedLayoutSelection: Record "Red Layout Selection"; var jArray: JsonArray)
+    var
+        RecRef: RecordRef;
+    begin
+        RecRef.GetTable(TempRedLayoutSelection);
+        CreateRecordsFromJson(RecRef, jArray);
+        RecRef.SetTable(TempRedLayoutSelection);
+    end;
+
+    procedure CreateRecordsFromJson(var RecRef: RecordRef; var jArray: JsonArray)
     var
         Field: Record Field;
-        RecRef: RecordRef;
         jObject: JsonObject;
         jToken: JsonToken;
         i: Integer;
     begin
-        if not rec.IsRecord then
-            exit;
-        RecRef.GetTable(Rec);
-
         for i := 0 to jArray.Count - 1 do begin
             jArray.Get(i, jToken);
             if jToken.IsObject then begin
