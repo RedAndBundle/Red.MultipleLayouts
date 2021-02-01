@@ -5,61 +5,61 @@
       <group id="body">
         <trans-unit id="Table 3674677723 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Red Layout Selection</source>
-          <target>Red Layout Selection</target>
+          <target>Red layout valg</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3674677723 - Field 1272245069 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report ID</source>
-          <target>Report ID</target>
+          <target>Rapport ID</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Field Report ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3674677723 - Field 4101026147 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report Name</source>
-          <target>Report Name</target>
+          <target>Rapport navn</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Field Report Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3674677723 - Field 2563105438 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Custom Report Layout Code</source>
-          <target>Custom Report Layout Code</target>
+          <target>Kundetilpasset layout kode</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Field Custom Report Layout Code - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3674677723 - Field 747460302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report Layout Description</source>
-          <target>Report Layout Description</target>
+          <target>Rapport layout beskrivelse</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Field Report Layout Description - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3674677723 - Field 3017471043 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Table No.</source>
-          <target>Table No.</target>
+          <target>Tabel nr.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Field Table No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3674677723 - Field 3808951907 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Table Name</source>
-          <target>Table Name</target>
+          <target>Tabel navn</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Field Table Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3674677723 - Field 3531868071 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Field No.</source>
-          <target>Field No.</target>
+          <target>Felt nr.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Field Field No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3674677723 - Field 3070320983 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Field Name</source>
-          <target>Field Name</target>
+          <target>Felt navn</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Field Field Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3674677723 - Field 1131619133 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Value</source>
-          <target>Value</target>
+          <target>Værdi</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Field Value - Property Caption</note>
         </trans-unit>
@@ -71,121 +71,121 @@
         </trans-unit>
         <trans-unit id="Codeunit 3674677723 - Method 3649802307 - NamedType 2239825996" size-unit="char" translate="yes" xml:space="preserve">
           <source>Default Layout</source>
-          <target>Default Layout</target>
+          <target>Standard layout</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection - Method AddDefaultLayoutToList - NamedType DefaultLayoutMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 3674677723 - Method 964458918 - NamedType 1107188737" size-unit="char" translate="yes" xml:space="preserve">
           <source>No report layout selected</source>
-          <target>No report layout selected</target>
+          <target>Intet rapport layout valgt</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection - Method SelectLayout - NamedType SelectLayoutErr</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Red Layout Selection</source>
-          <target>Red Layout Selection</target>
+          <target>Red layout valg</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Control 1272245069 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the report number from the full list of installed reports.</source>
-          <target>Specifies the report number from the full list of installed reports.</target>
+          <target>Angiver rapport nummeret fra den fulde liste af installerede rapporter.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control Report ID - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Control 4101026147 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the name of the selected report.</source>
-          <target>Specifies the name of the selected report.</target>
+          <target>Angiver navnet på den valgte rapport.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control Report Name - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Control 3017471043 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the table the report is run from. For instance the Sales Invoice uses table 112, the Sales Order uses table 36 etc.</source>
-          <target>Specifies the table the report is run from. For instance the Sales Invoice uses table 112, the Sales Order uses table 36 etc.</target>
+          <target>Angiver tabellen som rapporten er kørt fra. Fx salgsfaktura bruger tabel 112, salgsordre bruger tabel 36, etc.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control Table No. - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Control 3808951907 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the name of the selected table.</source>
-          <target>Specifies the name of the selected table.</target>
+          <target>Angiver navnet på den valgte tabel.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control Table Name - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Control 3531868071 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the field that you want to use to determine wether or not to use the Custom Report Layout.</source>
-          <target>Specifies the field that you want to use to determine wether or not to use the Custom Report Layout.</target>
+          <target>Angiver det felt der skal bruges til at bestemme om der skal bruges et kundetilpasset rapport layout.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control Field No. - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Control 3070320983 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the name of the selected field.</source>
-          <target>Specifies the name of the selected field.</target>
+          <target>Angiver navnet på det valgte felt.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control Field Name - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Control 1131619133 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the field that determines if the Custom Report Layout should be used.</source>
-          <target>Specifies the value of the field that determines if the Custom Report Layout should be used.</target>
+          <target>Angiver værdien på det felt der bestemmer om det kundetilpassede rapport layout skal bruges.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control Value - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Control 4223263513 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Custom Layout Description</source>
-          <target>Custom Layout Description</target>
+          <target>Kundetilpasset layout beskrivelse</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control CustomLayoutDescription - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Control 4223263513 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the Custom Report Layout to use.</source>
-          <target>Specifies the Custom Report Layout to use.</target>
+          <target>Angiver hvilket kundetilpasset rapport layout der skal bruges.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control CustomLayoutDescription - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Action 2746247081 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Run Report</source>
-          <target>Run Report</target>
+          <target>Kør rapport.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action RunReport - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Action 2746247081 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Run a test report.</source>
-          <target>Run a test report.</target>
+          <target>Kør en test rapport.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action RunReport - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Action 36190024 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Export</source>
-          <target>Export</target>
+          <target>Eksportér</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action Export - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Action 36190024 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Export the selected records to a json file.</source>
-          <target>Export the selected records to a json file.</target>
+          <target>Exportér de valgte poster til en json fil.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action Export - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Action 3201496503 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Import</source>
-          <target>Import</target>
+          <target>Importér</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action Import - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Action 3201496503 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Import Layout Seelctions from a file.</source>
-          <target>Import Layout Seelctions from a file.</target>
+          <target>Importér layout valg fra en fil.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action Import - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Method 2291465069 - NamedType 2784494499" size-unit="char" translate="yes" xml:space="preserve">
           <source>You cannot select a layout that is specific to another company.</source>
-          <target>You cannot select a layout that is specific to another company.</target>
+          <target>Man kan ikke vælge et layout der er angivet til et andet firma.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Method LookupCustomLayout - NamedType WrongCompanyErr</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Method 1803726697 - NamedType 163235925" size-unit="char" translate="yes" xml:space="preserve">
           <source>There is no custom report layout with %1 in the description.</source>
-          <target>There is no custom report layout with %1 in the description.</target>
+          <target>Der er ikke noget kundetilpasset rapport layout med %1 i beskrivelsen.</target>
           <note from="Developer" annotates="general" priority="2">%1 = CustomLayoutDescription</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Method ValidateCustomLayout - NamedType CouldNotFindCustomReportLayoutErr</note>
         </trans-unit>
@@ -195,25 +195,18 @@
           <note from="Developer" annotates="general" priority="2">%1 = text to filter</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Method ValidateCustomLayout - NamedType FilterLbl</note>
         </trans-unit>
-        <trans-unit id="Codeunit 2537148653 - Method 1617991136" size-unit="char" translate="yes" xml:space="preserve">
-          <source>OnDrillDown</source>
-          <target>OnDrillDown</target>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red ForNAV Layout Multiple - Method OnDrillDown</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 2537148653 - Method 1566919929" size-unit="char" translate="yes" xml:space="preserve">
-          <source>GetStyle</source>
-          <target>GetStyle</target>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red ForNAV Layout Multiple - Method GetStyle</note>
-        </trans-unit>
         <trans-unit id="Codeunit 3161741663 - Method 1256906906" size-unit="char" translate="yes" xml:space="preserve">
           <source>CreateJsonFromRecords</source>
           <target>CreateJsonFromRecords</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Export - Method CreateJsonFromRecords</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3070298800 - Method 707837154" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 3070298800 - Method 2471285645" size-unit="char" translate="yes" xml:space="preserve">
+          <source>CreateTempRedLayoutSelectionFromJson</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - Method CreateTempRedLayoutSelectionFromJson</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3070298800 - Method 593103252" size-unit="char" translate="yes" xml:space="preserve">
           <source>CreateRecordsFromJson</source>
           <target>CreateRecordsFromJson</target>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -233,25 +226,25 @@
         </trans-unit>
         <trans-unit id="Codeunit 3070298800 - NamedType 3642932217" size-unit="char" translate="yes" xml:space="preserve">
           <source>Select a file to import</source>
-          <target>Select a file to import</target>
+          <target>Vælg en fil til import</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - NamedType SelectFileMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 3070298800 - NamedType 3366217384" size-unit="char" translate="yes" xml:space="preserve">
           <source>Import completed, %1 new records were created</source>
-          <target>Import completed, %1 new records were created</target>
+          <target>Import fuldført, %1 nye poster blev oprettet</target>
           <note from="Developer" annotates="general" priority="2">%1 = no of records created</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - NamedType CompletedMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 3070298800 - NamedType 1288405046" size-unit="char" translate="yes" xml:space="preserve">
           <source>Blank layout, created from Red Layout Selection import</source>
-          <target>Blank layout, created from Red Layout Selection import</target>
+          <target>Tomt layout, oprettet fra Red layout valg import</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - NamedType CreatedFromImportMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 3070298800 - NamedType 638359500" size-unit="char" translate="yes" xml:space="preserve">
           <source>Custom Report Layout %1 has the Wrong report ID</source>
-          <target>Custom Report Layout %1 has the Wrong report ID</target>
+          <target>Kunde rapport layout %1 har den forkerte rapport ID</target>
           <note from="Developer" annotates="general" priority="2">%1 = the report layout for the new record</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - NamedType CustReportLayoutDoesNotMatchReportIdErr</note>
         </trans-unit>
@@ -296,12 +289,6 @@
           <target>SelectItem</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Value Selection - Method SelectItem</note>
-        </trans-unit>
-        <trans-unit id="EnumExtension 3850172221 - EnumValue 2944108275 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Enum 3584343772">
-          <source>Multiple Layout</source>
-          <target>Multiple Layout</target>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">EnumExtension Red ForNAV Layout - EnumValue Red Multiple Layout - Property Caption</note>
         </trans-unit>
       </group>
     </body>

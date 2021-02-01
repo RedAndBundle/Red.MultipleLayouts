@@ -78,11 +78,10 @@ codeunit 11310867 "Red Layout Selection Import"
                     if CustomReportLayout."Report ID" <> TempRedLayoutSelection."Report ID" then
                         Error(CustReportLayoutDoesNotMatchReportIdErr, TempRedLayoutSelection."Custom Report Layout Code");
                 end else begin
-                    CustomReportLayout.Init();
-                    CustomReportLayout.Code := TempRedLayoutSelection."Custom Report Layout Code";
-                    CustomReportLayout.Validate("Report ID", TempRedLayoutSelection."Report ID");
+                    CustomReportLayout.Get(CustomReportLayout.InitBuiltInLayout(TempRedLayoutSelection."Report ID", CustomReportLayout.Type::Word.AsInteger()));
+                    CustomReportLayout.Rename(TempRedLayoutSelection."Custom Report Layout Code");
                     CustomReportLayout.Description := CreatedFromImportMsg;
-                    CustomReportLayout.Insert();
+                    CustomReportLayout.Modify();
                 end;
             until TempRedLayoutSelection.Next() = 0;
     end;

@@ -40,8 +40,10 @@ codeunit 11310865 "Red Layout Selection"
     var
         ReportLayoutSelection: Record "Report Layout Selection";
     begin
+        ReportLayoutSelection.SetAutoCalcFields("Report Layout Description");
         if ReportLayoutSelection.Get(ReportId, CompanyName) then
-            SelectedLayoutCode := ReportLayoutSelection."Custom Report Layout Code";
+            if (ReportLayoutSelection.Type = ReportLayoutSelection.Type::"Custom Layout") and (ReportLayoutSelection."Report Layout Description" <> '') then
+                SelectedLayoutCode := ReportLayoutSelection."Custom Report Layout Code";
     end;
 
     local procedure AddDefaultLayoutToList(var TempCustomReportLayout: Record "Custom Report Layout"; SelectedLayoutCode: code[20]; ReportId: Integer)

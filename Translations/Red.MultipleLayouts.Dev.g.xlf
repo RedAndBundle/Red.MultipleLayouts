@@ -243,6 +243,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Value Selection - Method SelectItem</note>
         </trans-unit>
+        <trans-unit id="Codeunit 920391118 - Method 988617410" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SelectBankAccount</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Value Selection - Method SelectBankAccount</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2202900746 - Method 3718179897 - NamedType 638359500" size-unit="char" translate="yes" xml:space="preserve">
           <source>Custom Report Layout %1 has the Wrong report ID</source>
           <note from="Developer" annotates="general" priority="2">%1 = the report layout for the new record</note>

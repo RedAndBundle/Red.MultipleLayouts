@@ -241,6 +241,8 @@ Page 11310862 "Red Layout Selection"
                 Rec.Value := LayoutValueSelection.SelectPaymentTerms();
             Database::Item:
                 Rec.Value := LayoutValueSelection.SelectItem();
+            Database::"Bank Account":
+                Rec.Value := LayoutValueSelection.SelectBankAccount();
         end;
     end;
 }

@@ -195,25 +195,18 @@
           <note from="Developer" annotates="general" priority="2">%1 = text to filter</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Method ValidateCustomLayout - NamedType FilterLbl</note>
         </trans-unit>
-        <trans-unit id="Codeunit 2537148653 - Method 1617991136" size-unit="char" translate="yes" xml:space="preserve">
-          <source>OnDrillDown</source>
-          <target>OnDrillDown</target>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red ForNAV Layout Multiple - Method OnDrillDown</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 2537148653 - Method 1566919929" size-unit="char" translate="yes" xml:space="preserve">
-          <source>GetStyle</source>
-          <target>GetStyle</target>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red ForNAV Layout Multiple - Method GetStyle</note>
-        </trans-unit>
         <trans-unit id="Codeunit 3161741663 - Method 1256906906" size-unit="char" translate="yes" xml:space="preserve">
           <source>CreateJsonFromRecords</source>
           <target>CreateJsonFromRecords</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Export - Method CreateJsonFromRecords</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3070298800 - Method 707837154" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 3070298800 - Method 2471285645" size-unit="char" translate="yes" xml:space="preserve">
+          <source>CreateTempRedLayoutSelectionFromJson</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - Method CreateTempRedLayoutSelectionFromJson</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3070298800 - Method 593103252" size-unit="char" translate="yes" xml:space="preserve">
           <source>CreateRecordsFromJson</source>
           <target>CreateRecordsFromJson</target>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -296,12 +289,6 @@
           <target>SelectItem</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Value Selection - Method SelectItem</note>
-        </trans-unit>
-        <trans-unit id="EnumExtension 3850172221 - EnumValue 2944108275 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Enum 3584343772">
-          <source>Multiple Layout</source>
-          <target>Mehrfach-Layout</target>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">EnumExtension Red ForNAV Layout - EnumValue Red Multiple Layout - Property Caption</note>
         </trans-unit>
       </group>
     </body>
