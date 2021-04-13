@@ -1,6 +1,6 @@
 Import-Module 'C:\Program Files\Reports ForNAV\ForNav.Cmdlet.dll'
 
-Set-Location -Path $PSScriptRoot
+# Set-Location -Path $PSScriptRoot
 
 Invoke-ExportTranslationFromXlfToExcel `
     -FromXlf 'X:\Sync\Red and Bundle\Development\Source Code\Red.MultipleLayouts\Red.MultipleLayouts\Translations\Multiple Report Layout Selector.g.xlf'`

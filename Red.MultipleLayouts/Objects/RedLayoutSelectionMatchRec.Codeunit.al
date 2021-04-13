@@ -3,7 +3,7 @@ codeunit 11310864 "Red Layout Selection Match Rec"
     procedure MatchRecordVariable(RedLayoutSelection: Record "Red Layout Selection"; RecRef: RecordRef): Boolean
     var
         FldRef: FieldRef;
-        TestValue: Code[50];
+        TestValue: Code[256];
     begin
         begin
             FldRef := RecRef.Field(RedLayoutSelection."Field No.");

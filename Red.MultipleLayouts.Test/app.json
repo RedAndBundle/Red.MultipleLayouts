@@ -12,6 +12,12 @@
   "logo": "Images/RedBundleLogo.png",
   "dependencies": [
     {
+        "id":  "23de40a6-dfe8-4f80-80db-d70f83ce8caf",
+        "publisher":  "Microsoft",
+        "name":  "Test Runner",
+        "version":  "17.0.0.0"
+    },
+    {
       "id": "31e6154c-7bb5-4d51-a415-ccf39e06043f",
       "publisher": "Red and Bundle",
       "name": "Multiple Report Layout Selector",

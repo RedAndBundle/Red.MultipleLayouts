@@ -11,12 +11,6 @@
   "url": "https://redandbundle.com",
   "logo": "Red.MultipleLayouts/images/RedBundleLogo.png",
   "dependencies": [
-    {
-      "id": "d6978c22-4a2f-452a-8f12-efdcf158d7e4",
-      "publisher": "ForNAV",
-      "name": "ForNAV Core Development e4",
-      "version": "5.2.0.0"
-    }
   ],
   "screenshots": [],
   "platform": "17.0.0.0",
