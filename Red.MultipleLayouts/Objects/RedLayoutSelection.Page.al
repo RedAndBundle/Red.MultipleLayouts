@@ -145,8 +145,52 @@ Page 11310862 "Red Layout Selection"
                     Rec.ImportFromFile();
                 end;
             }
+            action(DoRecord)
+            {
+                ApplicationArea = All;
+                Caption = 'Record';
+                Image = Start;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Records the Report ID and Source Table No when runnign a report.';
+                Visible = not IsRecording;
+
+                trigger OnAction()
+                begin
+                    ToggleRecord();
+                    CurrPage.Update();
+                end;
+            }
+            action(UndoRecord)
+            {
+                ApplicationArea = All;
+                Caption = 'Stop Record';
+                Image = Stop;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Stops recording the Report ID and Source Table No when runnign a report.';
+                Visible = IsRecording;
+
+                trigger OnAction()
+                begin
+                    ToggleRecord();
+                    CurrPage.Update();
+                end;
+            }
         }
     }
+
+    var
+        IsRecording: Boolean;
+
+    trigger OnOpenPage()
+    var
+        RedLayoutRecorder: Codeunit "Red Layout Recorder";
+    begin
+        IsRecording := RedLayoutRecorder.IsRecording();
+    end;
 
     procedure RunCustomReport()
     var
@@ -256,5 +300,14 @@ Page 11310862 "Red Layout Selection"
             Database::"Bank Account":
                 Rec.Value := LayoutValueSelection.SelectBankAccount();
         end;
+    end;
+
+    local procedure ToggleRecord()
+    var
+        RedLayoutRecorder: Codeunit "Red Layout Recorder";
+    begin
+        IsRecording := RedLayoutRecorder.IsRecording();
+        IsRecording := not IsRecording;
+        RedLayoutRecorder.SetRecord(IsRecording);
     end;
 }

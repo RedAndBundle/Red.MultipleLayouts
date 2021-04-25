@@ -88,6 +88,31 @@
           <note from="Developer" annotates="general" priority="2">%1 = the report layout for the new record</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Import Export Test - Method VerifyCustReportLayoutDoesNotMatchReportIdErr - NamedType CustReportLayoutDoesNotMatchReportIdErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2161928461 - Method 458090991" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SetRecord</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Recorder - Method SetRecord</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2161928461 - Method 705940781" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IsRecording</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Recorder - Method IsRecording</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2161928461 - Method 2619204671" size-unit="char" translate="yes" xml:space="preserve">
+          <source>RecordReportToLayoutSelection</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Recorder - Method RecordReportToLayoutSelection</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2161928461 - NamedType 1705163359" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report %1 has already been added to the %2</source>
+          <note from="Developer" annotates="general" priority="2">%1 = report id, %2 = table caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Recorder - NamedType ReportAlreadyRecordedMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2161928461 - NamedType 3130595061" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report %1 has been added to the %2</source>
+          <note from="Developer" annotates="general" priority="2">%1 = report id, %2 = table caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Recorder - NamedType ReportRecordedMsg</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1297320396 - Method 4112480245" size-unit="char" translate="yes" xml:space="preserve">
           <source>EnsureCustomLayoutsForReport</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -308,6 +333,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control Value - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 3674677723 - Action 2583463706 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Records the Report ID and Source Table No when runnign a report.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action DoRecord - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3674677723 - Action 2583463706 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Record</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action DoRecord - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3674677723 - Action 36190024 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Export the selected records to a json file.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -327,6 +362,16 @@
           <source>Import</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action Import - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3674677723 - Action 10749743 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Stops recording the Report ID and Source Table No when runnign a report.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action UndoRecord - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3674677723 - Action 10749743 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Stop Record</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action UndoRecord - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Action 2746247081 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Run a test report.</source>
