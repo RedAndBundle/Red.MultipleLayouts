@@ -8,10 +8,25 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3674677723 - NamedType 2338373945" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 and %2 must be 0.</source>
+          <note from="Developer" annotates="general" priority="2">%1 is table no caption %2 = field no caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - NamedType MustBeZeroErr</note>
+        </trans-unit>
+        <trans-unit id="Table 3674677723 - NamedType 3024463106" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report %1 can only have one default layout</source>
+          <note from="Developer" annotates="general" priority="2">%1 = report name</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - NamedType OnlyOneDefaultErr</note>
+        </trans-unit>
         <trans-unit id="Table 3674677723 - Field 2563105438 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Custom Report Layout Code</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Field Custom Report Layout Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3674677723 - Field 1383905037 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Default</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Field Default - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3674677723 - Field 3070320983 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Field Name</source>
@@ -97,6 +112,11 @@
           <source>AddLayoutToSelectionTable</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Select Test Setup - Method AddLayoutToSelectionTable</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1297320396 - Method 287056503" size-unit="char" translate="yes" xml:space="preserve">
+          <source>AddDefaultLayoutToSelectionTable</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Select Test Setup - Method AddDefaultLayoutToSelectionTable</note>
         </trans-unit>
         <trans-unit id="Codeunit 1297320396 - Method 935415965" size-unit="char" translate="yes" xml:space="preserve">
           <source>GetTestReportId</source>
@@ -247,6 +267,11 @@
           <source>Custom Layout Description</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control CustomLayoutDescription - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3674677723 - Control 1383905037 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the layout is the default layout. No layout selection will pop up even if there are many in the system.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control Default - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Control 3070320983 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the name of the selected field.</source>

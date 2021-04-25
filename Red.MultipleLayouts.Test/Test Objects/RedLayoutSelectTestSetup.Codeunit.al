@@ -61,18 +61,26 @@ codeunit 80401 "Red Layout Select Test Setup"
         FldRef: FieldRef;
     begin
         RecRef.GetTable(RecVar);
-
         Field.SetRange(TableNo, RecRef.Number);
         Field.SetRange(FieldName, SourceFieldName);
         Field.FindFirst();
-
         FldRef := RecRef.Field(Field."No.");
 
-        RedLayoutSelection.Validate(RedLayoutSelection."Report ID", ReportId);
-        RedLayoutSelection.Validate(RedLayoutSelection."Table No.", RecRef.Number);
-        RedLayoutSelection.Validate(RedLayoutSelection."Field No.", FldRef.Number);
-        RedLayoutSelection.Validate(RedLayoutSelection.Value, FldRef.Value);
-        RedLayoutSelection.Validate(RedLayoutSelection."Custom Report Layout Code", CustomReportLayoutCode);
+        RedLayoutSelection.Validate("Report ID", ReportId);
+        RedLayoutSelection.Validate("Custom Report Layout Code", CustomReportLayoutCode);
+        RedLayoutSelection.Validate("Table No.", RecRef.Number);
+        RedLayoutSelection.Validate("Field No.", FldRef.Number);
+        RedLayoutSelection.Validate(Value, FldRef.Value);
+        RedLayoutSelection.Insert();
+    end;
+
+    procedure AddDefaultLayoutToSelectionTable(RecVar: Variant; ReportId: Integer; CustomReportLayoutCode: Code[20])
+    var
+        RedLayoutSelection: Record "Red Layout Selection";
+    begin
+        RedLayoutSelection.Validate("Report ID", ReportId);
+        RedLayoutSelection.Validate(Default, true);
+        RedLayoutSelection.Validate("Custom Report Layout Code", CustomReportLayoutCode);
         RedLayoutSelection.Insert();
     end;
 

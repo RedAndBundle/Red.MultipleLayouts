@@ -23,10 +23,21 @@ Page 11310862 "Red Layout Selection"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the name of the selected report.';
                 }
+                field(Default; Rec.Default)
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the layout is the default layout. No layout selection will pop up even if there are many in the system.';
+
+                    trigger OnValidate()
+                    begin
+                        CurrPage.Update();
+                    end;
+                }
                 field("Table No."; Rec."Table No.")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the table the report is run from. For instance the Sales Invoice uses table 112, the Sales Order uses table 36 etc.';
+                    Editable = not Rec.Default;
                 }
                 field("Table Name"; Rec."Table Name")
                 {
@@ -37,6 +48,7 @@ Page 11310862 "Red Layout Selection"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the field that you want to use to determine wether or not to use the Custom Report Layout.';
+                    Editable = not Rec.Default;
 
                     trigger OnLookup(var Text: Text): Boolean
                     begin
@@ -52,13 +64,13 @@ Page 11310862 "Red Layout Selection"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the field that determines if the Custom Report Layout should be used.';
+                    Editable = not Rec.Default;
 
                     trigger OnLookup(var Text: Text): Boolean
                     begin
                         LookupFieldValue();
                     end;
                 }
-                // field("Custom Report Layout Code"; "Custom Report Layout Code") { ApplicationArea = All; }
                 field(CustomLayoutDescription; CustomLayoutDescription)
                 {
                     ApplicationArea = Basic, Suite;

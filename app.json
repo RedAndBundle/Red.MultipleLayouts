@@ -11,6 +11,18 @@
   "url": "https://redandbundle.com",
   "logo": "Red.MultipleLayouts/images/RedBundleLogo.png",
   "dependencies": [
+    {
+        "id":  "23de40a6-dfe8-4f80-80db-d70f83ce8caf",
+        "publisher":  "Microsoft",
+        "name":  "Test Runner",
+        "version":  "17.0.0.0"
+    },
+    {
+      "id": "d6978c22-4a2f-452a-8f12-efdcf158d7e4",
+      "publisher": "ForNAV",
+      "name": "ForNAV Core Development e4",
+      "version": "5.4.0.1"
+    }
   ],
   "screenshots": [],
   "platform": "17.0.0.0",

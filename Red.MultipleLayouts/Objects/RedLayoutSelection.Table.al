@@ -79,10 +79,24 @@ table 11310862 "Red Layout Selection"
             Caption = 'Value';
             DataClassification = CustomerContent;
         }
+        field(10; "Default"; Boolean)
+        {
+            Caption = 'Default';
+            DataClassification = CustomerContent;
+
+            trigger OnValidate()
+            begin
+                ValidateDefault();
+            end;
+        }
 
     }
 
     keys { key(PK; "Report ID", "Custom Report Layout Code", "Table No.", "Field No.") { Clustered = true; } }
+
+    var
+        MustBeZeroErr: Label '%1 and %2 must be 0.', Comment = '%1 is table no caption %2 = field no caption';
+        OnlyOneDefaultErr: Label 'Report %1 can only have one default layout', Comment = '%1 = report name';
 
     procedure MatchRecordVariable(RecRef: RecordRef): Boolean
     var
@@ -96,5 +110,21 @@ table 11310862 "Red Layout Selection"
         RedLayoutSelectionImport: Codeunit "Red Layout Selection Import";
     begin
         RedLayoutSelectionImport.Run(Rec);
+    end;
+
+    local procedure ValidateDefault()
+    var
+        RedLayoutSelection: Record "Red Layout Selection";
+    begin
+        if not Default then
+            exit;
+
+        if ("Table No." <> 0) or ("Field No." <> 0) then
+            error(MustBeZeroErr, FieldCaption("Table No."), FieldCaption("Field No."));
+
+        RedLayoutSelection.SetRange("Report ID", "Report ID");
+        RedLayoutSelection.SetRange(Default, true);
+        if not RedLayoutSelection.IsEmpty() then
+            Error(OnlyOneDefaultErr, "Report Name");
     end;
 }
