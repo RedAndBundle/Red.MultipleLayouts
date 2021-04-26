@@ -334,7 +334,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control Value - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Action 2583463706 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Records the Report ID and Source Table No when runnign a report.</source>
+          <source>Records the Report ID and Source Table No when running a report.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action DoRecord - Property ToolTip</note>
         </trans-unit>
@@ -364,7 +364,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action Import - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Action 10749743 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Stops recording the Report ID and Source Table No when runnign a report.</source>
+          <source>Stops recording the Report ID and Source Table No when running a report.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action UndoRecord - Property ToolTip</note>
         </trans-unit>

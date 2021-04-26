@@ -7,10 +7,10 @@ $licenseFile = 'X:\Sync\Red and Bundle\Licenties\BC18 On Prem ForNAV + Own Objec
 
 Run-AlValidation `
     -licenseFile $licenseFile `
-    -installApps @("X:\Data\Report Pack Runtime\ForNAV Service_6.0.0.2057.app", "X:\Data\Report Pack Runtime\ForNAV Language Module_6.0.0.2057.app", "X:\Data\Report Pack Runtime\ForNAV Core_6.0.0.2057.app", "X:\Data\Report Pack Runtime\ForNAV_Customizable Report Pack_6.0.0.2057.app") `
+    -installApps @("X:\Sync\Red and Bundle\Klanten\ForNAV\Source Code\ForNav.ReportPack\_output\ForNAV_Language_Module_6.0.0.0.app", "X:\Sync\Red and Bundle\Klanten\ForNAV\Source Code\ForNav.ReportPack\_output\ForNAV_ForNAV Core_6.0.0.0.app", "X:\Sync\Red and Bundle\Klanten\ForNAV\Source Code\ForNav.ReportPack\_output\ForNAV_Customizable Report Pack_6.0.0.0.app") `
     -apps @("X:\Sync\Red and Bundle\Development\Source Code\Red.MultipleLayouts\_Build\Red and Bundle_Multiple Report Layout Selector_2.0.0.0.app") `
     -affixes "red" `
-    -countries "us"
+    -countries @("us", "nl", "de", "dk")
 
-    # -installApps @("X:\Sync\Red and Bundle\Development\Source Code\Red.MultipleLayouts\_Build\ForNAV_Language_Module_5.4.0.1.app", "X:\Sync\Red and Bundle\Development\Source Code\Red.MultipleLayouts\_Build\ForNAV_ForNAV Core_5.4.0.1.app", "X:\Sync\Red and Bundle\Development\Source Code\Red.MultipleLayouts\_Build\ForNAV_Customizable Report Pack_5.4.0.1.app") `
-    # -installApps @("X:\Sync\Red and Bundle\Development\Source Code\Red.MultipleLayouts\_Build\ForNAV_ForNAV Language Module_5.4.0.1.app", "X:\Sync\Red and Bundle\Development\Source Code\Red.MultipleLayouts\_Build\ForNAV_ForNAV Core_5.4.0.1.app", "X:\Sync\Red and Bundle\Development\Source Code\Red.MultipleLayouts\_Build\ForNAV_Customizable Report Pack_5.4.0.1.app") `
+    # -installApps @("X:\Sync\Red and Bundle\Klanten\ForNAV\Source Code\ForNav.ReportPack\_output\ForNAV_Language_Module_6.0.0.0.app", "X:\Sync\Red and Bundle\Klanten\ForNAV\Source Code\ForNav.ReportPack\_output\ForNAV_ForNAV Core_6.0.0.0.app", "X:\Sync\Red and Bundle\Klanten\ForNAV\Source Code\ForNav.ReportPack\_output\ForNAV_Customizable Report Pack_6.0.0.0.app") `
+    # -installApps @("X:\Sync\Red and Bundle\Klanten\ForNAV\Source Code\ForNav.ReportPack\_output\ForNAV_ForNAV Language Module_6.0.0.0.app", "X:\Sync\Red and Bundle\Klanten\ForNAV\Source Code\ForNav.ReportPack\_output\ForNAV_ForNAV Core_6.0.0.0.app", "X:\Sync\Red and Bundle\Klanten\ForNAV\Source Code\ForNav.ReportPack\_output\ForNAV_Customizable Report Pack_6.0.0.0.app") `

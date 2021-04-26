@@ -11,7 +11,7 @@ New-BcContainer `
     -Credential $credential `
     -auth UserPassword `
     -licenseFile $licenseFile `
-    # -includeTestToolkit `
+    -includeTestToolkit `
     -updateHosts `
     -EnableTaskScheduler false
 
@@ -22,4 +22,4 @@ Add-FontsToBCContainer -containerName $containerName -path c:\windows\fonts\*.tt
 .\InstallAppsOnDocker.ps1 -containerName $containerName -buildFolder ..\_Build -installFolder 'RedMultipleLayout'
 
 $xunitResultsFile = "c:\programdata\navcontainerhelper\results.xml"
-# Run-TestsInNavContainer -containerName $containerName -credential $credential -detailed -testSuite 'RED' 
+Run-TestsInNavContainer -containerName $containerName -credential $credential -detailed -testSuite 'REDMULTI' 

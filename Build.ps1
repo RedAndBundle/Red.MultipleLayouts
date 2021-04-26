@@ -3,4 +3,4 @@
 # Build Test app and move to _Build folder
 # Codesign
 # Move Install script to release folder
-# Install
+# Install + test

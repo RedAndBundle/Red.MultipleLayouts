@@ -47,7 +47,7 @@ Page 11310862 "Red Layout Selection"
                 field("Field No."; Rec."Field No.")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the field that you want to use to determine wether or not to use the Custom Report Layout.';
+                    ToolTip = 'Specifies the field that you want to use to determine whether or not to use the Custom Report Layout.';
                     Editable = not Rec.Default;
 
                     trigger OnLookup(var Text: Text): Boolean
@@ -153,7 +153,7 @@ Page 11310862 "Red Layout Selection"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                ToolTip = 'Records the Report ID and Source Table No when runnign a report.';
+                ToolTip = 'Records the Report ID and Source Table No when running a report.';
                 Visible = not IsRecording;
 
                 trigger OnAction()
@@ -170,7 +170,7 @@ Page 11310862 "Red Layout Selection"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                ToolTip = 'Stops recording the Report ID and Source Table No when runnign a report.';
+                ToolTip = 'Stops recording the Report ID and Source Table No when running a report.';
                 Visible = IsRecording;
 
                 trigger OnAction()
