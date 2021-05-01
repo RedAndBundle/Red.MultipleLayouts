@@ -29,6 +29,7 @@ codeunit 11310865 "Red Layout Selection"
         RedLayoutSelection.SetRange("Report ID", ReportId);
         RedLayoutSelection.SetRange("Table No.", RecRef.Number);
         RedLayoutSelection.SetFilter("Field No.", '>0');
+        RedLayoutSelection.SetFilter("Custom Report Layout Code", '<>%1', '');
         if RedLayoutSelection.FindSet() then
             repeat
                 if RedLayoutSelection.MatchRecordVariable(RecRef) then
@@ -42,6 +43,7 @@ codeunit 11310865 "Red Layout Selection"
     begin
         RedLayoutSelection.SetRange("Report ID", ReportId);
         RedLayoutSelection.SetRange(Default, true);
+        RedLayoutSelection.SetFilter("Custom Report Layout Code", '<>%1', '');
         if RedLayoutSelection.FindFirst() then
             exit(AddLayoutSelectionToTempCustomReportLayout(TempCustomReportLayout, RedLayoutSelection."Custom Report Layout Code"));
     end;

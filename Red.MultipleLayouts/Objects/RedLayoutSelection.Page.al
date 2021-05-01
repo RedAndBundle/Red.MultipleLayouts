@@ -192,6 +192,11 @@ Page 11310862 "Red Layout Selection"
         IsRecording := RedLayoutRecorder.IsRecording();
     end;
 
+    trigger OnNewRecord(BelowxRec: Boolean)
+    begin
+        CustomLayoutDescription := '';
+    end;
+
     procedure RunCustomReport()
     var
         ReportLayoutSelection: Record "Report Layout Selection";
@@ -200,7 +205,7 @@ Page 11310862 "Red Layout Selection"
             exit;
 
         ReportLayoutSelection.SetTempLayoutSelected(Rec."Custom Report Layout Code");
-        REPORT.RunModal(Rec."Report ID");
+        Report.RunModal(Rec."Report ID");
         ReportLayoutSelection.SetTempLayoutSelected('');
     end;
 

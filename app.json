@@ -1,5 +1,6 @@
 {
   "id": "6d10b43b-3a51-4b72-8332-c1b2a4c753fd",
+  "applicationInsightsKey": "daf58898-4ae6-4687-8adf-9f241dd9f5b4",
   "name": "Red.MultipleLayouts.Dev",
   "publisher": "Red and Bundle",
   "version": "1.0.0.0",

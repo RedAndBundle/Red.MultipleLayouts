@@ -1,4 +1,5 @@
-$artifactUrl = Get-BCArtifactUrl -country base # Docker sandbox does not currently work
+# $artifactUrl = Get-BCArtifactUrl -country base # Docker sandbox does not currently work
+$artifactUrl = Get-BCArtifactUrl  # Docker sandbox does not currently work
 # $artifactUrl = Get-BCArtifactUrl -version 18 -type OnPrem -country w1 -select Latest
 $containerName = 'red-multiplelay'
 $credential = New-Object pscredential 'admin', (ConvertTo-SecureString -String 'Admin!101' -AsPlainText -Force)
@@ -11,15 +12,15 @@ New-BcContainer `
     -Credential $credential `
     -auth UserPassword `
     -licenseFile $licenseFile `
-    -includeTestToolkit `
     -updateHosts `
     -EnableTaskScheduler false
+    # -includeTestToolkit `
 
 
-Add-FontsToBCContainer -containerName $containerName -path c:\windows\fonts\*.ttf
+# Add-FontsToBCContainer -containerName $containerName -path c:\windows\fonts\*.ttf
 
 .\InstallAppsOnDocker.ps1 -containerName $containerName -buildFolder 'X:\Data\Report Pack Runtime' -installFolder 'ForNAVRuntime'
-.\InstallAppsOnDocker.ps1 -containerName $containerName -buildFolder ..\_Build -installFolder 'RedMultipleLayout'
+# .\InstallAppsOnDocker.ps1 -containerName $containerName -buildFolder ..\_Build -installFolder 'RedMultipleLayout'
 
-$xunitResultsFile = "c:\programdata\navcontainerhelper\results.xml"
-Run-TestsInNavContainer -containerName $containerName -credential $credential -detailed -testSuite 'REDMULTI' 
+# $xunitResultsFile = "c:\programdata\navcontainerhelper\results.xml"
+# Run-TestsInNavContainer -containerName $containerName -credential $credential -detailed -testSuite 'REDMULTI' 
