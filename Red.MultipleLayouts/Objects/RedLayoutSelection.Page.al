@@ -237,7 +237,6 @@ Page 11310862 "Red Layout Selection"
         CustomReportLayout.FilterGroup(0);
         CustomReportLayout.SetFilter("Company Name", '%1|%2', CompanyName, '');
         if Page.RunModal(Page::"Custom Report Layouts", CustomReportLayout) = ACTION::LookupOK then begin
-            // if CustomReportLayout.Find('-') then begin
             if not (CustomReportLayout."Company Name" in [CompanyName, '']) then
                 Error(WrongCompanyErr);
             Rec."Custom Report Layout Code" := CustomReportLayout.Code;

@@ -13,6 +13,6 @@ codeunit 11310870 "Red Layout Telemetry"
         RedLayoutSelection: Record "Red Layout Selection";
         MessageTxt: Label 'Records of table %1: %2', Comment = '%1 = tablename %2 = No Of Records';
     begin
-        Session.LogMessage('Red002', StrSubstNo(MessageTxt, RedLayoutSelection."Table Name", RedLayoutSelection.Count), Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::ExtensionPublisher, 'RedTableSize', 'ISV Table Size');
+        Session.LogMessage('Red002', StrSubstNo(MessageTxt, RedLayoutSelection.TableName, RedLayoutSelection.Count), Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::ExtensionPublisher, 'RedTableSize', 'ISV Table Size');
     end;
 }
