@@ -23,10 +23,21 @@ Page 11310862 "Red Layout Selection"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the name of the selected report.';
                 }
+                field(Default; Rec.Default)
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the layout is the default layout. No layout selection will pop up even if there are many in the system.';
+
+                    trigger OnValidate()
+                    begin
+                        CurrPage.Update();
+                    end;
+                }
                 field("Table No."; Rec."Table No.")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the table the report is run from. For instance the Sales Invoice uses table 112, the Sales Order uses table 36 etc.';
+                    Editable = not Rec.Default;
                 }
                 field("Table Name"; Rec."Table Name")
                 {
@@ -36,7 +47,8 @@ Page 11310862 "Red Layout Selection"
                 field("Field No."; Rec."Field No.")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the field that you want to use to determine wether or not to use the Custom Report Layout.';
+                    ToolTip = 'Specifies the field that you want to use to determine whether or not to use the Custom Report Layout.';
+                    Editable = not Rec.Default;
 
                     trigger OnLookup(var Text: Text): Boolean
                     begin
@@ -52,13 +64,13 @@ Page 11310862 "Red Layout Selection"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the field that determines if the Custom Report Layout should be used.';
+                    Editable = not Rec.Default;
 
                     trigger OnLookup(var Text: Text): Boolean
                     begin
                         LookupFieldValue();
                     end;
                 }
-                // field("Custom Report Layout Code"; "Custom Report Layout Code") { ApplicationArea = All; }
                 field(CustomLayoutDescription; CustomLayoutDescription)
                 {
                     ApplicationArea = Basic, Suite;
@@ -101,7 +113,89 @@ Page 11310862 "Red Layout Selection"
                 end;
             }
         }
+        area(Processing)
+        {
+            action(Export)
+            {
+                ApplicationArea = All;
+                Caption = 'Export';
+                Image = ExportFile;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Export the selected records to a json file.';
+
+                trigger OnAction()
+                begin
+                    ExportSelected();
+                end;
+            }
+            action(Import)
+            {
+                ApplicationArea = All;
+                Caption = 'Import';
+                Image = Import;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Import Layout Seelctions from a file.';
+
+                trigger OnAction()
+                begin
+                    Rec.ImportFromFile();
+                end;
+            }
+            action(DoRecord)
+            {
+                ApplicationArea = All;
+                Caption = 'Record';
+                Image = Start;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Records the Report ID and Source Table No when running a report.';
+                Visible = not IsRecording;
+
+                trigger OnAction()
+                begin
+                    ToggleRecord();
+                    CurrPage.Update();
+                end;
+            }
+            action(UndoRecord)
+            {
+                ApplicationArea = All;
+                Caption = 'Stop Record';
+                Image = Stop;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Stops recording the Report ID and Source Table No when running a report.';
+                Visible = IsRecording;
+
+                trigger OnAction()
+                begin
+                    ToggleRecord();
+                    CurrPage.Update();
+                end;
+            }
+        }
     }
+
+    var
+        IsRecording: Boolean;
+
+    trigger OnOpenPage()
+    var
+        RedLayoutRecorder: Codeunit "Red Layout Recorder";
+    begin
+        IsRecording := RedLayoutRecorder.IsRecording();
+    end;
+
+    trigger OnNewRecord(BelowxRec: Boolean)
+    begin
+        CustomLayoutDescription := '';
+    end;
 
     procedure RunCustomReport()
     var
@@ -111,8 +205,17 @@ Page 11310862 "Red Layout Selection"
             exit;
 
         ReportLayoutSelection.SetTempLayoutSelected(Rec."Custom Report Layout Code");
-        REPORT.RunModal(Rec."Report ID");
+        Report.RunModal(Rec."Report ID");
         ReportLayoutSelection.SetTempLayoutSelected('');
+    end;
+
+    local procedure ExportSelected()
+    var
+        RedLayoutSelection: Record "Red Layout Selection";
+        RedLayoutSelectionExport: Codeunit "Red Layout Selection Export";
+    begin
+        CurrPage.SetSelectionFilter(RedLayoutSelection);
+        RedLayoutSelectionExport.Run(RedLayoutSelection);
     end;
 
     var
@@ -134,7 +237,6 @@ Page 11310862 "Red Layout Selection"
         CustomReportLayout.FilterGroup(0);
         CustomReportLayout.SetFilter("Company Name", '%1|%2', CompanyName, '');
         if Page.RunModal(Page::"Custom Report Layouts", CustomReportLayout) = ACTION::LookupOK then begin
-            // if CustomReportLayout.Find('-') then begin
             if not (CustomReportLayout."Company Name" in [CompanyName, '']) then
                 Error(WrongCompanyErr);
             Rec."Custom Report Layout Code" := CustomReportLayout.Code;
@@ -199,6 +301,17 @@ Page 11310862 "Red Layout Selection"
                 Rec.Value := LayoutValueSelection.SelectPaymentTerms();
             Database::Item:
                 Rec.Value := LayoutValueSelection.SelectItem();
+            Database::"Bank Account":
+                Rec.Value := LayoutValueSelection.SelectBankAccount();
         end;
+    end;
+
+    local procedure ToggleRecord()
+    var
+        RedLayoutRecorder: Codeunit "Red Layout Recorder";
+    begin
+        IsRecording := RedLayoutRecorder.IsRecording();
+        IsRecording := not IsRecording;
+        RedLayoutRecorder.SetRecord(IsRecording);
     end;
 }

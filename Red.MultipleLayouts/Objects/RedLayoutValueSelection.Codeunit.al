@@ -56,4 +56,12 @@ codeunit 11310863 "Red Layout Value Selection"
         if Page.RunModal(Page::"Item List", Item) = ACTION::LookupOK then
             exit(Item."No.");
     end;
+
+    procedure SelectBankAccount(): Code[20]
+    var
+        BankAccount: Record "Bank Account";
+    begin
+        if Page.RunModal(Page::"Bank Account List", BankAccount) = ACTION::LookupOK then
+            exit(BankAccount."No.");
+    end;
 }

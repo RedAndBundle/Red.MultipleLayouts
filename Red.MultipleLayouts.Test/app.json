@@ -2,42 +2,37 @@
   "id": "a59d7201-75b7-412c-9091-7be0576d2912",
   "name": "Red.MultipleLayouts.Test",
   "publisher": "Red and Bundle",
-  "version": "1.0.0.0",
+  "version": "2.0.0.0",
   "brief": "",
-  "description": "Dev project for Multiple Layout Selector",
+  "description": "Tests for Multiple Layout Selector",
   "privacyStatement": "https://redandbundle.com/privacy/",
   "EULA": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/EULA",
   "help": "https://redandbundle.github.io/Red.MultipleLayouts.Doc",
   "url": "https://redandbundle.com",
-  "logo": "/Red.MultipleLayouts/images/RedBundleLogo.png",
+  "logo": "Images/RedBundleLogo.png",
   "dependencies": [
     {
-      "id": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
-      "publisher": "Microsoft",
-      "name": "System Application",
-      "version": "16.0.0.0"
-    },
-    {
-      "id": "437dbf0e-84ff-417a-965d-ed2bb9650972",
-      "publisher": "Microsoft",
-      "name": "Base Application",
-      "version": "16.0.0.0"
+        "id":  "23de40a6-dfe8-4f80-80db-d70f83ce8caf",
+        "publisher":  "Microsoft",
+        "name":  "Test Runner",
+        "version":  "17.0.0.0"
     },
     {
       "id": "31e6154c-7bb5-4d51-a415-ccf39e06043f",
       "publisher": "Red and Bundle",
-      "name": "Red Multiple Layouts",
-      "version": "1.0.0.0"
+      "name": "Multiple Report Layout Selector",
+      "version": "2.0.0.0"
     },
     {
       "id": "83326d6d-11f8-49fd-981a-6f266a7c8d81",
       "publisher": "ForNAV",
       "name": "Customizable Report Pack",
-      "version": "5.2.0.0"
+      "version": "5.4.0.1"
     }
   ],
   "screenshots": [],
-  "platform": "16.0.0.0",
+  "platform": "17.0.0.0",
+  "application": "17.0.0.0",
   "idRanges": [
     {
       "from": 80400,
@@ -46,5 +41,5 @@
   ],
   "contextSensitiveHelpUrl": "https://Red.MultipleLayouts.Test.com/help/",
   "showMyCode": true,
-  "runtime": "5.0"
+  "runtime": "6.0"
 }

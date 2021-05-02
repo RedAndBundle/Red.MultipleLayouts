@@ -1,8 +1,9 @@
 {
   "id": "31e6154c-7bb5-4d51-a415-ccf39e06043f",
+  "applicationInsightsKey": "daf58898-4ae6-4687-8adf-9f241dd9f5b4",
   "name": "Multiple Report Layout Selector",
   "publisher": "Red and Bundle",
-  "version": "1.0.0.5",
+  "version": "2.0.0.0",
   "brief": "Multiple layout selection for ForNAV reports",
   "description": "Multiple layout selection for ForNAV reports. Automatically select your report layouts based on dimensions, customer, or vendor.",
   "privacyStatement": "https://redandbundle.com/privacy/",
@@ -12,26 +13,15 @@
   "logo": "images/RedBundleLogo.png",
   "dependencies": [
     {
-      "id": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
-      "publisher": "Microsoft",
-      "name": "System Application",
-      "version": "1.0.0.0"
-    },
-    {
-      "id": "437dbf0e-84ff-417a-965d-ed2bb9650972",
-      "publisher": "Microsoft",
-      "name": "Base Application",
-      "version": "15.0.0.0"
-    },
-    {
       "id": "83326d6d-11f8-49fd-981a-6f266a7c8d81",
       "publisher": "ForNAV",
       "name": "Customizable Report Pack",
-      "version": "5.2.0.0"
+      "version": "5.4.0.1"
     }
   ],
   "screenshots": [],
-  "platform": "16.0.0.0",
+  "platform": "17.0.0.0",
+  "application": "17.0.0.0",
   "idRanges": [
     {
       "from": 11310862,
@@ -40,6 +30,6 @@
   ],
   "contextSensitiveHelpUrl": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/README",
   "showMyCode": false,
-  "runtime": "5.0",
+  "runtime": "6.0",
   "features": ["TranslationFile", "GenerateCaptions"]
 }

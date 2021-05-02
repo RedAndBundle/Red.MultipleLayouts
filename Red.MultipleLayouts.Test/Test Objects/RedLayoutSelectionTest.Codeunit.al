@@ -13,7 +13,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] No custom layouts for the report to run
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
         // [Given] No custom layouts in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 0);
@@ -44,7 +44,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] One selected custom layouts in system
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
         // [Given] One custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
@@ -78,7 +78,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] One custom layouts in system not selected
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
         // [Given] One custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
@@ -113,7 +113,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, one is selected
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
         // [Given] Two custom layouts in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
@@ -148,7 +148,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, none is selected
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
         // [Given] Two custom layouts in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
@@ -183,7 +183,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, one is in layout selection
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
         // [Given] Two custom layouts in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
@@ -215,9 +215,9 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, two are in layout selection
         // [Given] Report Id to test
-        ReportId := GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
 
-        // [Given] One custom layout in system
+        // [Given] Two custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
 
         // [Given] Get first Sales Invoice
@@ -235,9 +235,72 @@ codeunit 80400 "Red Layout Selection Test"
             Error(UnexpectedResultErr);
     end;
 
-    local procedure GetTestReportId(): Integer
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    // [HandlerFunctions('HandleReportSelectionPage')]
+    [HandlerFunctions('SalesInvoiceReportHandler')]
+    procedure TwoLayoutsOneSetAsDefault()
+    var
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        ReportId: Integer;
+        TestResult: Boolean;
     begin
-        exit(Report::"Standard Sales - Invoice");
+        // [FEATURE] Two custom layouts in system, two are in layout selection
+        // [Given] Report Id to test
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+
+        // [Given] Two custom layout in system
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
+
+        // [Given] Get first Sales Invoice
+        SalesInvoiceHeader.FindFirst();
+
+        // [Given] One Custom layout is selected as default in Selection Table
+        RedLayoutSelectTestSetup.AddDefaultLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '2');
+
+        // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
+        TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader);
+
+        // [THEN] Report should run with default layout.
+        if not TestResult then
+            Error(UnexpectedResultErr);
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    // [HandlerFunctions('HandleReportSelectionPage')]
+    [HandlerFunctions('CustomReportLayoutsSelectionPageHandler,SalesInvoiceReportHandler')]
+    procedure TwoLayoutsTwoLayoutsInLayoutSelectionOneSetAsDefault()
+    var
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        ReportId: Integer;
+        TestResult: Boolean;
+    begin
+        // [FEATURE] Two custom layouts in system, two are in layout selection
+        // [Given] Report Id to test
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+
+        // [Given] Two custom layout in system
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 3);
+
+        // [Given] Get first Sales Invoice
+        SalesInvoiceHeader.FindFirst();
+
+        // [Given] One Custom layout is selected in Selection Table
+        RedLayoutSelectTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '1', 'Shortcut Dimension 1 Code');
+        RedLayoutSelectTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '2', 'Shortcut Dimension 2 Code');
+
+        // [Given] One Custom layout is selected as default in Selection Table
+        RedLayoutSelectTestSetup.AddDefaultLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '3');
+
+        // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
+        TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader);
+
+        // [THEN] Report should run with selected layout, not the default.
+        if not TestResult then
+            Error(UnexpectedResultErr);
     end;
 
     local procedure RunReportWithLayoutSelection(ReportId: Integer; RecVarToPrint: Variant): Boolean
