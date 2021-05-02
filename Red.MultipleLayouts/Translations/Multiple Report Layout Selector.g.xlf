@@ -158,6 +158,21 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Match Rec - Method MatchRecordVariable</note>
         </trans-unit>
+        <trans-unit id="Codeunit 704599402 - Method 2865221847" size-unit="char" translate="yes" xml:space="preserve">
+          <source>LogInstall</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Telemetry - Method LogInstall</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 704599402 - Method 608278112" size-unit="char" translate="yes" xml:space="preserve">
+          <source>EmitExtensionTableTraceTags</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Telemetry - Method EmitExtensionTableTraceTags</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 704599402 - Method 2116505606 - NamedType 1916287837" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Records of table %1: %2</source>
+          <note from="Developer" annotates="general" priority="2">%1 = tablename %2 = No Of Records</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Telemetry - Method EmitExtensionTableTraceTags - NamedType MessageTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 920391118 - Method 2282337773" size-unit="char" translate="yes" xml:space="preserve">
           <source>SelectCustomer</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -234,7 +249,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control Field Name - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Control 3531868071 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the field that you want to use to determine wether or not to use the Custom Report Layout.</source>
+          <source>Specifies the field that you want to use to determine whether or not to use the Custom Report Layout.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control Field No. - Property ToolTip</note>
         </trans-unit>
