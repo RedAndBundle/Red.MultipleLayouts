@@ -3,6 +3,7 @@
 # Set-Location $PSScriptRoot
 # $BuildFolder = Resolve-Path "X:\Sync\Red and Bundle\Development\Source Code\Red.MultipleLayouts\_Build"
 $BuildFolder = "X:\Sync\Red and Bundle\Development\Source Code\Red.MultipleLayouts\_Build"
+# $BuildFolder = "X:\Sync\Red and Bundle\Klanten\ForNAV\Source Code\ForNav.ReportPack\_output"
 $files = Get-ChildItem $BuildFolder -Filter *.app
 
 Set-Location "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin"

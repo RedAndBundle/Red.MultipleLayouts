@@ -78,7 +78,7 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Recorder - Method IsRecording</note>
         </trans-unit>
-        <trans-unit id="Codeunit 2161928461 - Method 2619204671" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 2161928461 - Method 3619383129" size-unit="char" translate="yes" xml:space="preserve">
           <source>RecordReportToLayoutSelection</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Recorder - Method RecordReportToLayoutSelection</note>
@@ -93,7 +93,7 @@
           <note from="Developer" annotates="general" priority="2">%1 = report id, %2 = table caption</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Recorder - NamedType ReportRecordedMsg</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3674677723 - Method 1248480802" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 3674677723 - Method 1023156724" size-unit="char" translate="yes" xml:space="preserve">
           <source>RunReportWithLayoutSelection</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection - Method RunReportWithLayoutSelection</note>
@@ -113,7 +113,7 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Export - Method CreateJsonFromRecords</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3070298800 - Method 2471285645" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 3070298800 - Method 3597585073" size-unit="char" translate="yes" xml:space="preserve">
           <source>CreateTempRedLayoutSelectionFromJson</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - Method CreateTempRedLayoutSelectionFromJson</note>
@@ -123,12 +123,12 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - Method CreateRecordsFromJson</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3070298800 - Method 1727834843" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 3070298800 - Method 2296876320" size-unit="char" translate="yes" xml:space="preserve">
           <source>CreateCustomReportLayouts</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - Method CreateCustomReportLayouts</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3070298800 - Method 2819509291" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 3070298800 - Method 3118361251" size-unit="char" translate="yes" xml:space="preserve">
           <source>InsertRedLayoutSelection</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - Method InsertRedLayoutSelection</note>
@@ -153,7 +153,7 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Import - NamedType SelectFileMsg</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3027191850 - Method 1150274569" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 3027191850 - Method 2377403098" size-unit="char" translate="yes" xml:space="preserve">
           <source>MatchRecordVariable</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Selection Match Rec - Method MatchRecordVariable</note>
@@ -327,6 +327,11 @@
           <source>Run Report</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action RunReport - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 1627455022 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Multiple Report Layout Administrator</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet Red Layout Administr - Property Caption</note>
         </trans-unit>
       </group>
     </body>
