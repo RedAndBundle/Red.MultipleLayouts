@@ -5,7 +5,6 @@ Page 11310862 "Red Layout Selection"
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = "Red Layout Selection";
-    DelayedInsert = true;
 
     layout
     {

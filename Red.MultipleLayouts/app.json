@@ -20,8 +20,8 @@
     }
   ],
   "screenshots": [],
-  "platform": "17.0.0.0",
-  "application": "17.0.0.0",
+  "platform": "18.0.0.0",
+  "application": "18.0.0.0",
   "idRanges": [
     {
       "from": 11310862,
@@ -30,6 +30,6 @@
   ],
   "contextSensitiveHelpUrl": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/README",
   "showMyCode": false,
-  "runtime": "6.0",
+  "runtime": "7.0",
   "features": ["TranslationFile", "GenerateCaptions"]
 }

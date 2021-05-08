@@ -3,7 +3,7 @@
   "applicationInsightsKey": "daf58898-4ae6-4687-8adf-9f241dd9f5b4",
   "name": "Red.MultipleLayouts.Dev",
   "publisher": "Red and Bundle",
-  "version": "1.0.0.0",
+  "version": "2.0.0.0",
   "brief": "Red Multiple Layouts development project",
   "description": "Development project for Red.MultipleLayouts",
   "privacyStatement": "https://redandbundle.com/privacy/",
@@ -26,8 +26,8 @@
     }
   ],
   "screenshots": [],
-  "platform": "17.0.0.0",
-  "application": "17.0.0.0",
+  "platform": "18.0.0.0",
+  "application": "18.0.0.0",
   "idRanges": [
     {
       "from": 11310862,
@@ -40,6 +40,6 @@
   ],
   "contextSensitiveHelpUrl": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/README",
   "showMyCode": true,
-  "runtime": "6.0",
+  "runtime": "7.0",
   "features": ["TranslationFile", "GenerateCaptions"]
 }
