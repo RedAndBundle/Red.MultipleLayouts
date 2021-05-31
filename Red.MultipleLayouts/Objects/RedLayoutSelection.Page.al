@@ -183,6 +183,7 @@ Page 11310862 "Red Layout Selection"
 
     var
         IsRecording: Boolean;
+        CustomLayoutDescription: Text;
 
     trigger OnOpenPage()
     var
@@ -194,6 +195,12 @@ Page 11310862 "Red Layout Selection"
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         CustomLayoutDescription := '';
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        Rec.CalcFields(Rec."Report Layout Description");
+        CustomLayoutDescription := Rec."Report Layout Description";
     end;
 
     procedure RunCustomReport()
@@ -215,15 +222,6 @@ Page 11310862 "Red Layout Selection"
     begin
         CurrPage.SetSelectionFilter(RedLayoutSelection);
         RedLayoutSelectionExport.Run(RedLayoutSelection);
-    end;
-
-    var
-        CustomLayoutDescription: Text;
-
-    trigger OnAfterGetRecord()
-    begin
-        Rec.CalcFields(Rec."Report Layout Description");
-        CustomLayoutDescription := Rec."Report Layout Description";
     end;
 
     local procedure LookupCustomLayout()
