@@ -12,7 +12,7 @@ codeunit 11310868 "Red Layout Recorder"
         exit(DoRecord);
     end;
 
-    procedure RecordReportToLayoutSelection(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecVarToPrint: Variant): Boolean
+    procedure RecordReportToLayoutSelection(ReportID: Integer; IsGUI: Boolean; RecordVariant: Variant): Boolean
     var
         RedLayoutSelection: Record "Red Layout Selection";
         RecRef: RecordRef;
@@ -22,14 +22,14 @@ codeunit 11310868 "Red Layout Recorder"
         if not DoRecord then
             exit;
 
-        RecRef.GetTable(RecVarToPrint);
+        RecRef.GetTable(RecordVariant);
         RedLayoutSelection.Init();
-        RedLayoutSelection.Validate("Report ID", TempReportSelections."Report ID");
+        RedLayoutSelection.Validate("Report ID", ReportID);
         RedLayoutSelection.Validate("Table No.", RecRef.Number);
         if not RedLayoutSelection.Insert() then
             Message(ReportAlreadyRecordedMsg)
         else
-            Message(ReportRecordedMsg, TempReportSelections."Report ID", RedLayoutSelection.TableCaption);
+            Message(ReportRecordedMsg, ReportID, RedLayoutSelection.TableCaption);
         exit(true);
     end;
 
