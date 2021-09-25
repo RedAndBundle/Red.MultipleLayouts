@@ -128,17 +128,8 @@ codeunit 11310865 "Red Layout Selection"
     end;
 
     local procedure AddEmptyLayoutToTempCustomReportLayout(var TempCustomReportLayout: Record "Custom Report Layout"; ReportID: Integer): Boolean
-    var
-    // CustomReportLayout: Record "Custom Report Layout";
     begin
-        // CustomReportLayout.Get(CustomReportLayoutCode);
-        // if not (CustomReportLayout."Company Name" in [CompanyName, '']) then
-        //     exit;
-
         TempCustomReportLayout."Report ID" := ReportID;
-        // TempCustomReportLayout.Code := CustomReportLayout.Code;
-        // TempCustomReportLayout.Description := CustomReportLayout.Description;
-        // TempCustomReportLayout."Company Name" := CustomReportLayout."Company Name";
         exit(TempCustomReportLayout.Insert());
     end;
 

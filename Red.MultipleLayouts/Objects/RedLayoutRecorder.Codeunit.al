@@ -12,6 +12,11 @@ codeunit 11310868 "Red Layout Recorder"
         exit(DoRecord);
     end;
 
+    procedure RecordReportToLayoutSelection(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecVarToPrint: Variant): Boolean
+    begin
+        exit(RecordReportToLayoutSelection(TempReportSelections."Report ID", IsGUI, RecVarToPrint));
+    end;
+
     procedure RecordReportToLayoutSelection(ReportID: Integer; IsGUI: Boolean; RecordVariant: Variant): Boolean
     var
         RedLayoutSelection: Record "Red Layout Selection";

@@ -27,7 +27,7 @@ codeunit 11310862 "Red Report Selections Events"
         if IsHandled then
             exit;
 
-        IsHandled := RedLayoutRecorder.RecordReportToLayoutSelection(TempReportSelections."Report ID", IsGUI, RecVarToPrint);
+        IsHandled := RedLayoutRecorder.RecordReportToLayoutSelection(TempReportSelections, IsGUI, RecVarToPrint);
 
         if IsHandled then
             exit;
