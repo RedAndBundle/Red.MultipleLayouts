@@ -1,11 +1,29 @@
 codeunit 11310865 "Red Layout Selection"
 {
-    procedure RunReportWithLayoutSelection(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecVarToPrint: Variant): Boolean
+    procedure SetReportLayoutSelection(RecordVariant: Variant; ReportID: Integer)
     var
         TempCustomReportLayout: Record "Custom Report Layout" temporary;
         SelectedLayoutCode: code[20];
     begin
-        if not GetLayoutsFromLayoutSelection(TempCustomReportLayout, RecVarToPrint, TempReportSelections."Report ID") then
+        if not GetLayoutsFromLayoutSelection(TempCustomReportLayout, RecordVariant, ReportID) then
+            if not GetDefaultLayoutForReport(TempCustomReportLayout, ReportID) then begin
+                if not GetTempCustomReportLayout(TempCustomReportLayout, ReportID) then
+                    exit;
+
+                GetSelectedLayoutCode(ReportID, SelectedLayoutCode);
+
+                AddDefaultLayoutToList(TempCustomReportLayout, SelectedLayoutCode, ReportID);
+            end;
+
+        SetTempLayoutSelected(SelectLayout(TempCustomReportLayout));
+    end;
+
+    procedure RunReportWithLayoutSelection(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecordVariant: Variant): Boolean
+    var
+        TempCustomReportLayout: Record "Custom Report Layout" temporary;
+        SelectedLayoutCode: code[20];
+    begin
+        if not GetLayoutsFromLayoutSelection(TempCustomReportLayout, RecordVariant, TempReportSelections."Report ID") then
             if not GetDefaultLayoutForReport(TempCustomReportLayout, TempReportSelections."Report ID") then begin
                 if not GetTempCustomReportLayout(TempCustomReportLayout, TempReportSelections."Report ID") then
                     exit(false);
@@ -15,16 +33,16 @@ codeunit 11310865 "Red Layout Selection"
                 AddDefaultLayoutToList(TempCustomReportLayout, SelectedLayoutCode, TempReportSelections."Report ID");
             end;
 
-        RunReportWithSelectedLayout(TempReportSelections, IsGUI, RecVarToPrint, SelectLayout(TempCustomReportLayout));
+        RunReportWithSelectedLayout(TempReportSelections, IsGUI, RecordVariant, SelectLayout(TempCustomReportLayout));
         exit(true);
     end;
 
-    local procedure GetLayoutsFromLayoutSelection(var TempCustomReportLayout: Record "Custom Report Layout"; RecVarToPrint: Variant; ReportId: Integer) Success: Boolean
+    local procedure GetLayoutsFromLayoutSelection(var TempCustomReportLayout: Record "Custom Report Layout"; RecordVariant: Variant; ReportId: Integer) Success: Boolean
     var
         RedLayoutSelection: Record "Red Layout Selection";
         RecRef: RecordRef;
     begin
-        RecRef.GetTable(RecVarToPrint);
+        RecRef.GetTable(RecordVariant);
 
         RedLayoutSelection.SetRange("Report ID", ReportId);
         RedLayoutSelection.SetRange("Table No.", RecRef.Number);
@@ -46,6 +64,10 @@ codeunit 11310865 "Red Layout Selection"
         RedLayoutSelection.SetFilter("Custom Report Layout Code", '<>%1', '');
         if RedLayoutSelection.FindFirst() then
             exit(AddLayoutSelectionToTempCustomReportLayout(TempCustomReportLayout, RedLayoutSelection."Custom Report Layout Code"));
+
+        RedLayoutSelection.SetRange("Custom Report Layout Code");
+        if not RedLayoutSelection.IsEmpty then
+            exit(AddEmptyLayoutToTempCustomReportLayout(TempCustomReportLayout, ReportId));
     end;
 
     local procedure GetTempCustomReportLayout(var TempCustomReportLayout: Record "Custom Report Layout"; ReportId: Integer): Boolean
@@ -105,6 +127,12 @@ codeunit 11310865 "Red Layout Selection"
         exit(TempCustomReportLayout.Insert());
     end;
 
+    local procedure AddEmptyLayoutToTempCustomReportLayout(var TempCustomReportLayout: Record "Custom Report Layout"; ReportID: Integer): Boolean
+    begin
+        TempCustomReportLayout."Report ID" := ReportID;
+        exit(TempCustomReportLayout.Insert());
+    end;
+
     local procedure SelectLayout(var TempCustomReportLayout: Record "Custom Report Layout"): Code[20]
     var
         SelectLayoutErr: Label 'No report layout selected';
@@ -117,12 +145,19 @@ codeunit 11310865 "Red Layout Selection"
             exit(TempCustomReportLayout.Code);
     end;
 
-    local procedure RunReportWithSelectedLayout(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecVarToPrint: Variant; CustomLayoutCode: Code[20])
+    local procedure RunReportWithSelectedLayout(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecordVariant: Variant; CustomLayoutCode: Code[20])
     var
         ReportLayoutSelection: Record "Report Layout Selection";
     begin
         ReportLayoutSelection.SetTempLayoutSelected(CustomLayoutCode);
-        Report.RunModal(TempReportSelections."Report ID", IsGUI, false, RecVarToPrint);
+        Report.RunModal(TempReportSelections."Report ID", IsGUI, false, RecordVariant);
         ReportLayoutSelection.SetTempLayoutSelected('');
+    end;
+
+    procedure SetTempLayoutSelected(NewTempSelectedLayoutCode: Code[20])
+    var
+        DesignTimeReportSelection: Codeunit "Design-time Report Selection";
+    begin
+        DesignTimeReportSelection.SetSelectedCustomLayout(NewTempSelectedLayoutCode);
     end;
 }

@@ -183,6 +183,7 @@ Page 11310862 "Red Layout Selection"
 
     var
         IsRecording: Boolean;
+        CustomLayoutDescription: Text;
 
     trigger OnOpenPage()
     var
@@ -194,6 +195,12 @@ Page 11310862 "Red Layout Selection"
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         CustomLayoutDescription := '';
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        Rec.CalcFields(Rec."Report Layout Description");
+        CustomLayoutDescription := Rec."Report Layout Description";
     end;
 
     procedure RunCustomReport()
@@ -215,15 +222,6 @@ Page 11310862 "Red Layout Selection"
     begin
         CurrPage.SetSelectionFilter(RedLayoutSelection);
         RedLayoutSelectionExport.Run(RedLayoutSelection);
-    end;
-
-    var
-        CustomLayoutDescription: Text;
-
-    trigger OnAfterGetRecord()
-    begin
-        Rec.CalcFields(Rec."Report Layout Description");
-        CustomLayoutDescription := Rec."Report Layout Description";
     end;
 
     local procedure LookupCustomLayout()
@@ -250,6 +248,10 @@ Page 11310862 "Red Layout Selection"
         CouldNotFindCustomReportLayoutErr: Label 'There is no custom report layout with %1 in the description.', Comment = '%1 = CustomLayoutDescription';
         FilterLbl: Label '@*%1*', Comment = '%1 = text to filter';
     begin
+        if CustomLayoutDescription = '' then begin
+            Rec."Custom Report Layout Code" := '';
+            exit;
+        end;
         CustomReportLayout.SetCurrentKey("Report ID", "Company Name", Type);
         CustomReportLayout.SetRange("Report ID", Rec."Report ID");
         CustomReportLayout.SetFilter("Company Name", '%1|%2', '', CompanyName);

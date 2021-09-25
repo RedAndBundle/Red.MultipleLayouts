@@ -270,6 +270,38 @@ codeunit 80400 "Red Layout Selection Test"
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
     // [HandlerFunctions('HandleReportSelectionPage')]
+    [HandlerFunctions('SalesInvoiceReportHandler')]
+    procedure TwoLayoutsOneSetAsDefaultWithoutLayoutCode()
+    var
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        ReportId: Integer;
+        TestResult: Boolean;
+    begin
+        // [FEATURE] Two custom layouts in system, two are in layout selection
+        // [Given] Report Id to test
+        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+
+        // [Given] Two custom layout in system
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
+
+        // [Given] Get first Sales Invoice
+        SalesInvoiceHeader.FindFirst();
+
+        // [Given] One Custom layout is selected as default in Selection Table but without a selected custom layout
+        RedLayoutSelectTestSetup.AddDefaultLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '');
+
+        // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
+        TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader);
+
+        // [THEN] Report should run with default layout.
+        if not TestResult then
+            Error(UnexpectedResultErr);
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    // [HandlerFunctions('HandleReportSelectionPage')]
     [HandlerFunctions('CustomReportLayoutsSelectionPageHandler,SalesInvoiceReportHandler')]
     procedure TwoLayoutsTwoLayoutsInLayoutSelectionOneSetAsDefault()
     var

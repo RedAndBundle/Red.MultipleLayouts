@@ -80,7 +80,8 @@ codeunit 80401 "Red Layout Select Test Setup"
     begin
         RedLayoutSelection.Validate("Report ID", ReportId);
         RedLayoutSelection.Validate(Default, true);
-        RedLayoutSelection.Validate("Custom Report Layout Code", CustomReportLayoutCode);
+        if CustomReportLayoutCode <> '' then
+            RedLayoutSelection.Validate("Custom Report Layout Code", CustomReportLayoutCode);
         RedLayoutSelection.Insert();
     end;
 
