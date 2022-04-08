@@ -35,8 +35,8 @@ codeunit 11310862 "Red Report Selections Events"
         IsHandled := RedLayoutSelection.RunReportWithLayoutSelection(TempReportSelections, IsGUI, RecVarToPrint);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Generate Activity Telemetry", 'OnActivityTelemetry', '', false, false)]
-    local procedure EmitExtensionTableTraceTags()
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Telemetry Management", 'OnSendDailyTelemetry', '', true, true)]
+    local procedure OnSendDailyTelemetry()
     var
         RedLayoutTelemetry: Codeunit "Red Layout Telemetry";
     begin

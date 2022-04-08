@@ -1,7 +1,7 @@
 $artifactUrl = Get-BCArtifactUrl -country base # Docker sandbox does not currently work
 $containerName = 'red-multiplelay'
 $credential = New-Object pscredential 'admin', (ConvertTo-SecureString -String 'Admin!101' -AsPlainText -Force)
-$licenseFile = 'X:\Sync\Red and Bundle\Licenties\BC18 On Prem ForNAV + Own Objects.flf'
+$licenseFile = 'X:\Sync\Red and Bundle\Licenties\BC20 On Prem ForNAV + Own Objects.flf'
 
 New-BcContainer `
     -accept_eula `
