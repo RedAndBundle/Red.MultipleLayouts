@@ -77,6 +77,7 @@ codeunit 11310865 "Red Layout Selection"
         CustomReportLayout.SetRange("Report ID", ReportId);
         CustomReportLayout.SetFilter("Company Name", '%1|%2', CompanyName, '');
         CustomReportLayout.SetFilter(Description, '<>ForNAV BC preview*');
+        CustomReportLayout.SetFilter(Code, '<>@*email*');
         if CustomReportLayout.FindSet() then
             repeat
                 TempCustomReportLayout."Report ID" := CustomReportLayout."Report ID";
@@ -137,6 +138,12 @@ codeunit 11310865 "Red Layout Selection"
     var
         SelectLayoutErr: Label 'No report layout selected';
     begin
+        if not GuiAllowed() then begin
+            if TempCustomReportLayout.FindFirst() then
+                exit(TempCustomReportLayout.Code);
+            exit;
+        end;
+
         if TempCustomReportLayout.Count > 1 then
             if not (Page.RunModal(Page::"Custom Report Layouts", TempCustomReportLayout) = ACTION::LookupOK) then
                 Error(SelectLayoutErr);

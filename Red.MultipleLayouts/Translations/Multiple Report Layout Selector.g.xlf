@@ -68,6 +68,21 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Selection - Field Value - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3721070666 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Multiple Layout Setup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3721070666 - Field 232545996 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commit on Post</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Setup - Field Commit on Post - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3721070666 - Field 1663593181 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Primary Key</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Red Layout Setup - Field Primary Key - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2161928461 - NamedType 1705163359" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report %1 has already been added to the %2</source>
           <note from="Developer" annotates="general" priority="2">%1 = report id, %2 = table caption</note>
@@ -232,6 +247,26 @@
           <source>Run Report</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Action RunReport - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3721070666 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Multiple Layout Setup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3721070666 - Control 232545996 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies if a commit is called when running the report selection after posting. This is only needed when an extension enables the CommitIsSuppressed option in a posting CodeUnit.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Setup - Control Commit on Post - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3721070666 - Action 2821221294 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Opens the Layout Selection page whenre you can setup which report layout is used in which circumstance.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Setup - Action LayoutSelection - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3721070666 - Action 2821221294 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Red Layout Selection</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Setup - Action LayoutSelection - Property Caption</note>
         </trans-unit>
         <trans-unit id="PermissionSet 1627455022 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Multiple Report Layout Administrator</source>

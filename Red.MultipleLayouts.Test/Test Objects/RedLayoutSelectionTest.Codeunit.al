@@ -13,7 +13,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] No custom layouts for the report to run
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] No custom layouts in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 0);
@@ -44,7 +44,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] One selected custom layouts in system
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] One custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
@@ -78,7 +78,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] One custom layouts in system not selected
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] One custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
@@ -113,7 +113,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, one is selected
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] Two custom layouts in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
@@ -148,7 +148,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, none is selected
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] Two custom layouts in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
@@ -183,7 +183,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, one is in layout selection
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] Two custom layouts in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
@@ -215,7 +215,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, two are in layout selection
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] Two custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
@@ -248,7 +248,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, two are in layout selection
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] Two custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
@@ -280,7 +280,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, two are in layout selection
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] Two custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
@@ -312,7 +312,7 @@ codeunit 80400 "Red Layout Selection Test"
     begin
         // [FEATURE] Two custom layouts in system, two are in layout selection
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] Two custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 3);
@@ -335,6 +335,55 @@ codeunit 80400 "Red Layout Selection Test"
             Error(UnexpectedResultErr);
     end;
 
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoCommit)]
+    [HandlerFunctions('CustomReportLayoutsSelectionPageHandlerDefault,PurchaseInvoiceReportHandler')]
+    procedure PurchasePostOneCustomLayoutNotSelected()
+    var
+        PurchaseHeader: Record "Purchase Header";
+        PurchInvHeader: Record "Purch. Inv. Header";
+        RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        RedLayoutSuppressCommit: Codeunit "Red Layout Suppress Commit";
+        ReportId: Integer;
+        TestResult: Boolean;
+    begin
+        // [FEATURE] Run Sales Post with one custom layouts in system not selected
+        // [Given] Report Id to test
+        ReportId := RedLayoutSelectTestSetup.GetTestPurchaseReportId();
+
+        // [Given] One custom layout in system
+        RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
+
+        // [Given] Custom layout is not selected
+        RedLayoutSelectTestSetup.DeSelectLayoutForReport(ReportId);
+
+        // [GIVEN] No records in the Layout Selection Table
+        RedLayoutSelectTestSetup.EnsureNoLayoutInSelectionTable(ReportId);
+
+        // [Given] Create Sales Invoice
+        RedLayoutSelectTestSetup.CreateUnpostedInvoice(PurchaseHeader);
+
+        // [Given] Suppress Commit
+        Session.BindSubscription(RedLayoutSuppressCommit);
+
+        // [Given] Post Sales Invoice
+        RedLayoutSuppressCommit.RunPurchasePost(PurchaseHeader);
+
+        // [Given] Commit on Post activated
+        RedLayoutSelectTestSetup.ActivateCommitonPost();
+
+        // [Given] Get sales invoice header
+        GetPurchaseInvoiceHeader(PurchaseHeader, PurchInvHeader);
+
+        // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
+        TestResult := RunReportWithLayoutSelection(ReportId, PurchInvHeader);
+
+        // [THEN] Test Result is false
+        if not TestResult then
+            Error(UnexpectedResultErr);
+    end;
+
     local procedure RunReportWithLayoutSelection(ReportId: Integer; RecVarToPrint: Variant): Boolean
     var
         TempReportSelections: Record "Report Selections" temporary;
@@ -345,6 +394,25 @@ codeunit 80400 "Red Layout Selection Test"
         exit(RedLayoutSelection.RunReportWithLayoutSelection(TempReportSelections, false, RecVarToPrint));
     end;
 
+    procedure GetSalesInvoiceHeader(SalesHeader: Record "Sales Header"; var SalesInvoiceHeader: Record "Sales Invoice Header")
+    begin
+        if SalesHeader."Last Posting No." = '' then
+            SalesInvoiceHeader."No." := SalesHeader."No."
+        else
+            SalesInvoiceHeader."No." := SalesHeader."Last Posting No.";
+        SalesInvoiceHeader.Find();
+        SalesInvoiceHeader.SetRecFilter();
+    end;
+
+    local procedure GetPurchaseInvoiceHeader(PurchaseHeader: Record "Purchase Header"; var PurchInvHeader: Record "Purch. Inv. Header")
+    begin
+        if PurchaseHeader."Last Posting No." = '' then
+            PurchInvHeader."No." := PurchaseHeader."No."
+        else
+            PurchInvHeader."No." := PurchaseHeader."Last Posting No.";
+        PurchInvHeader.SetRecFilter();
+    end;
+
     [RequestPageHandler]
     procedure SalesInvoiceRequestPageHandler(var SalesInvoiceRequestPage: TestRequestPage "Standard Sales - Invoice")
     begin
@@ -353,6 +421,12 @@ codeunit 80400 "Red Layout Selection Test"
 
     [ReportHandler]
     procedure SalesInvoiceReportHandler(var SalesInvoice: Report "Standard Sales - Invoice")
+    begin
+
+    end;
+
+    [ReportHandler]
+    procedure PurchaseInvoiceReportHandler(var PurchaseInvoice: Report "Purchase - Invoice")
     begin
 
     end;
