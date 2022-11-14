@@ -1,6 +1,8 @@
 // Copyright [2020] [Red and Bundle]
 codeunit 11310862 "Red Report Selections Events"
 {
+    Permissions = tabledata "Red Layout Setup" = R;
+
     [EventSubscriber(ObjectType::Table, Database::"Report Selections", 'OnBeforeSaveReportAsPDF', '', false, false)]
     local procedure OnBeforeEmailDocument(FilePath: Text[250]; RecordVariant: Variant; ReportUsage: Enum "Report Selection Usage"; SaveToBlob: Boolean; var IsHandled: Boolean; var LayoutCode: Code[20]; var ReportID: Integer; var TempBlob: Codeunit "Temp Blob")
     var
@@ -41,5 +43,25 @@ codeunit 11310862 "Red Report Selections Events"
         RedLayoutTelemetry: Codeunit "Red Layout Telemetry";
     begin
         RedLayoutTelemetry.EmitExtensionTableTraceTags();
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Purch.-Post + Print", 'OnBeforeGetReport', '', false, false)]
+    local procedure OnBeforePurchaseGetReport()
+    var
+        RedLayoutSetup: Record "Red Layout Setup";
+    begin
+        RedLayoutSetup.InitSetup();
+        if RedLayoutSetup."Commit on Post" then
+            Commit();
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post + Print", 'OnBeforeGetReport', '', false, false)]
+    local procedure OnBeforeSalesGetReport()
+    var
+        RedLayoutSetup: Record "Red Layout Setup";
+    begin
+        RedLayoutSetup.InitSetup();
+        if RedLayoutSetup."Commit on Post" then
+            Commit();
     end;
 }

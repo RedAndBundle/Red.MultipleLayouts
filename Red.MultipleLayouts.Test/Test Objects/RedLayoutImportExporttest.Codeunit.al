@@ -15,7 +15,7 @@ codeunit 80402 "Red Layout Import Export Test"
     begin
         // [FEATURE] Multiple records in the Red Layout Selection table to export
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] Two custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
@@ -45,7 +45,7 @@ codeunit 80402 "Red Layout Import Export Test"
     begin
         // [FEATURE] Imported custom layout exists in the system
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] One custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
@@ -71,7 +71,7 @@ codeunit 80402 "Red Layout Import Export Test"
     begin
         // [FEATURE] Imported custom layout exists in the system
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] Custom layout exists in import
         RedLayoutSelectTestSetup.CreateTempRedLayoutSelection(TempRedLayoutSelection, ReportId, Database::"Sales Invoice Header", 'Shortcut Dimension 1 Code', 1);
@@ -94,7 +94,7 @@ codeunit 80402 "Red Layout Import Export Test"
     begin
         // [FEATURE] Imported custom layout exists in the system with the wrong report id
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] One custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
@@ -121,7 +121,7 @@ codeunit 80402 "Red Layout Import Export Test"
     begin
         // [FEATURE] Imported Red Layout Selection does not exist
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] One custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
@@ -149,7 +149,7 @@ codeunit 80402 "Red Layout Import Export Test"
     begin
         // [FEATURE] Imported Red Layout Selection does exist
         // [Given] Report Id to test
-        ReportId := RedLayoutSelectTestSetup.GetTestReportId();
+        ReportId := RedLayoutSelectTestSetup.GetTestSalesReportId();
 
         // [Given] One custom layout in system
         RedLayoutSelectTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);

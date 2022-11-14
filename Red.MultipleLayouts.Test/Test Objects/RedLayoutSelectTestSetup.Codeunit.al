@@ -1,5 +1,44 @@
 codeunit 80401 "Red Layout Select Test Setup"
 {
+    Permissions =
+        tabledata "Red Layout Setup" = RIMD,
+        tabledata "Red Layout Selection" = RIMD;
+    procedure CreateUnpostedInvoice(var PurchaseHeader: Record "Purchase Header")
+    var
+        Vendor: Record Vendor;
+        Item: Record Item;
+        PurchaseLine: Record "Purchase Line";
+    begin
+        Vendor.FindFirst();
+        Item.SetRange("Item Tracking Code", '');
+        Item.FindFirst();
+
+        PurchaseHeader.Init();
+        PurchaseHeader."Document Type" := PurchaseHeader."Document Type"::Invoice;
+        PurchaseHeader.Validate("Buy-from Vendor No.", Vendor."No.");
+        PurchaseHeader.Insert(true);
+        PurchaseHeader."Vendor Invoice No." := PurchaseHeader."No.";
+        PurchaseHeader.Modify(true);
+
+        PurchaseLine.Init();
+        PurchaseLine."Document No." := PurchaseHeader."No.";
+        PurchaseLine."Document Type" := PurchaseHeader."Document Type";
+        PurchaseLine."Line No." := 10000;
+        PurchaseLine.Type := PurchaseLine.Type::Item;
+        PurchaseLine.Validate("No.", Item."No.");
+        PurchaseLine.Validate(Quantity, 1);
+        PurchaseLine.Insert(true);
+    end;
+
+    procedure ActivateCommitonPost()
+    var
+        RedLayoutSetup: Record "Red Layout Setup";
+    begin
+        RedLayoutSetup.InitSetup();
+        RedLayoutSetup."Commit on Post" := true;
+        RedLayoutSetup.Modify();
+    end;
+
     procedure EnsureCustomLayoutsForReport(ReportId: Integer; NoOfLayouts: Integer)
     var
         CustomReportLayout: Record "Custom Report Layout";
@@ -85,9 +124,14 @@ codeunit 80401 "Red Layout Select Test Setup"
         RedLayoutSelection.Insert();
     end;
 
-    procedure GetTestReportId(): Integer
+    procedure GetTestSalesReportId(): Integer
     begin
         exit(Report::"Standard Sales - Invoice");
+    end;
+
+    procedure GetTestPurchaseReportId(): Integer
+    begin
+        exit(Report::"Purchase - Invoice");
     end;
 
     procedure GetAltTestReportId(): Integer
