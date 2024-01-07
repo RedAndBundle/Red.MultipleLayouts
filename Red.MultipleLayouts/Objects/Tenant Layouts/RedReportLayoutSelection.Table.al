@@ -161,6 +161,8 @@ table 11310864 "Red Report Layout Selection"
     end;
 
     internal procedure CopyFromRedLayoutSelection(RedLayoutSelection: Record "Red Layout Selection")
+    var
+        RedTenantReportLayout: Codeunit "Red Tenant Report Layout";
     begin
         Init();
         "Report ID" := RedLayoutSelection."Report ID";
@@ -169,7 +171,7 @@ table 11310864 "Red Report Layout Selection"
         "Field No." := RedLayoutSelection."Field No.";
         "Value" := RedLayoutSelection."Value";
         Default := RedLayoutSelection.Default;
-        Validate("Layout Name", RedLayoutSelection."Custom Report Layout Code");
+        Validate("Layout Name", RedTenantReportLayout.GetLayoutNameFromCustomLayoutCode(RedLayoutSelection."Custom Report Layout Code"));
         if Insert() then;
     end;
 }

@@ -31,6 +31,13 @@ codeunit 11310871 "Red Tenant Report Layout"
         ReportLayoutList.Layout.ExportStream(os);
     end;
 
+    procedure GetLayoutNameFromCustomLayoutCode(CustomLayoutCode: Code[50]): Text
+    var
+        CustomReportLayoutTokLbl: Label 'CRL';
+    begin
+        exit(CustomLayoutCode + '-' + CustomReportLayoutTokLbl);
+    end;
+
     //     procedure GetDefaultCode(ReportID: Integer): Code[20]
     //     var
     //         CustomReportLayout: Record "Custom Report Layout";

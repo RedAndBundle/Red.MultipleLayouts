@@ -42,6 +42,9 @@ codeunit 80501 "Red Layout Select Test Setup"
     procedure EnsureCustomLayoutsForReport(ReportId: Integer; NoOfLayouts: Integer)
     var
         CustomReportLayout: Record "Custom Report Layout";
+        TempBlob: Codeunit "Temp Blob";
+        is: InStream;
+        os: OutStream;
         i: Integer;
     begin
         CustomReportLayout.SetRange("Report ID", ReportId);
@@ -53,6 +56,11 @@ codeunit 80501 "Red Layout Select Test Setup"
             CustomReportLayout.Validate(Description, Format(i));
             CustomReportLayout.Validate(Type, CustomReportLayout.Type::RDLC);
             CustomReportLayout.Insert();
+            if Report.RdlcLayout(ReportID, is) then begin
+                TempBlob.CreateOutStream(os);
+                CopyStream(os, is);
+                CustomReportLayout.SetLayoutBlob(TempBlob);
+            end;
         end;
     end;
 

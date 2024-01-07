@@ -228,6 +228,16 @@
           <note from="Developer" annotates="general" priority="2">%1 = tablename %2 = No Of Records</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Telemetry - Method EmitExtensionTableTraceTags - NamedType MessageTxt</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1088382467 - Method 1882553015 - NamedType 3394335049" size-unit="char" translate="yes" xml:space="preserve">
+          <source>CRL</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Upgrade - Method MigrateCustomReportLayouts - NamedType CustomReportLayoutTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1088382467 - Method 2882528701 - NamedType 1762618708" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Red Layout 3.0.0.0</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Upgrade - Method Upgrade3000 - NamedType UpgradeTagLbl</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3423794232 - NamedType 3366217384" size-unit="char" translate="yes" xml:space="preserve">
           <source>Import completed, %1 new records were created</source>
           <note from="Developer" annotates="general" priority="2">%1 = no of records created</note>
@@ -287,6 +297,11 @@
           <source>No report layout selected</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Report Layout Selection - Method SelectLayout - NamedType SelectLayoutErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2418862269 - Method 2089311491 - NamedType 1940572951" size-unit="char" translate="yes" xml:space="preserve">
+          <source>CRL</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Tenant Report Layout - Method GetLayoutNameFromCustomLayoutCode - NamedType CustomReportLayoutTokLbl</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Red Layout Selection</source>

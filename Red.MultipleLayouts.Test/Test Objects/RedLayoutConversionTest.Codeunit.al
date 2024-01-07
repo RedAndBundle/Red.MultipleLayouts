@@ -5,11 +5,12 @@ codeunit 80505 "Red Layout Conversion Test"
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    [HandlerFunctions('SalesInvoiceReportHandler')]
+    // [HandlerFunctions('SalesInvoiceReportHandler')]
     procedure RedLayoutSelectionWithConvertedLayout()
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
+        RedLayoutUpgrade: Codeunit "Red Layout Upgrade";
         ReportId: Integer;
         TestResult: Boolean;
     begin
@@ -27,7 +28,7 @@ codeunit 80505 "Red Layout Conversion Test"
         RedLayoutSelectTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '1', 'Shortcut Dimension 1 Code');
 
         // [Given] Convert Custom Layout To Tenant Layout
-        // TODO
+        RedLayoutUpgrade.MigrateCustomReportLayouts(ReportId);
 
         // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
         TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader);
@@ -52,7 +53,10 @@ codeunit 80505 "Red Layout Conversion Test"
         RedLayoutSelection: Record "Red Layout Selection";
         RedReportLayoutSelection: Record "Red Report Layout Selection";
         Field: Record Field;
+        RedTenantReportLayout: Codeunit "Red Tenant Report Layout";
         RecRef: RecordRef;
+        RedLayoutSelectionIsEmpty: Boolean;
+        RedReportLayoutSelectionIsEmpty: Boolean;
     begin
         RecRef.GetTable(RecVar);
         Field.SetRange(TableNo, RecRef.Number);
@@ -63,12 +67,14 @@ codeunit 80505 "Red Layout Conversion Test"
         RedLayoutSelection.SetRange("Custom Report Layout Code", ReportLayout);
         RedLayoutSelection.SetRange("Table No.", RecRef.Number);
         RedLayoutSelection.SetRange("Field No.", Field."No.");
+        RedLayoutSelectionIsEmpty := RedLayoutSelection.IsEmpty();
 
         RedReportLayoutSelection.SetRange("Report ID", ReportId);
-        RedReportLayoutSelection.SetRange("Layout Name", ReportLayout);
+        RedReportLayoutSelection.SetRange("Layout Name", RedTenantReportLayout.GetLayoutNameFromCustomLayoutCode(ReportLayout));
         RedReportLayoutSelection.SetRange("Table No.", RecRef.Number);
         RedReportLayoutSelection.SetRange("Field No.", Field."No.");
-        exit(RedLayoutSelection.IsEmpty() and not (RedReportLayoutSelection.IsEmpty()));
+        RedReportLayoutSelectionIsEmpty := RedReportLayoutSelection.IsEmpty();
+        exit(RedLayoutSelectionIsEmpty and (not RedReportLayoutSelectionIsEmpty));
     end;
 
     [ReportHandler]
