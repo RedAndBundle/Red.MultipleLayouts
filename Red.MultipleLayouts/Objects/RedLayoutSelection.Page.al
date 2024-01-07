@@ -178,6 +178,25 @@ Page 11310862 "Red Layout Selection"
                     CurrPage.Update();
                 end;
             }
+            action(Convert)
+            {
+                ApplicationArea = All;
+                Caption = 'Convert to Tenant Layout';
+                Image = ChangeTo;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'This function will convert all records with custom layouts that have been converted to tenant layouts to the Red Report Layout Selection table.';
+                Visible = IsRecording;
+
+                trigger OnAction()
+                var
+                    RedLayoutSelection: Codeunit "Red Layout Selection";
+                begin
+                    RedLayoutSelection.MoveToTenantLayout();
+                    CurrPage.Update();
+                end;
+            }
         }
     }
 
@@ -188,8 +207,16 @@ Page 11310862 "Red Layout Selection"
     trigger OnOpenPage()
     var
         RedLayoutRecorder: Codeunit "Red Layout Recorder";
+        NotificationIDs: Codeunit "Red Layout Notification IDs";
+        ObsoleteNotification: Notification;
+        ObsoleteMsg: Label 'This page will obsoleted. All custom report layouts will be converted to tenant report layouts. After this happens affected records will automtaically be converted to the Report Layout Selection table.';
+        LeanrMoreMsg: Label 'Learn more.';
     begin
         IsRecording := RedLayoutRecorder.IsRecording();
+        ObsoleteNotification.ID := NotificationIDs.ObsoleteCustomLayout();
+        ObsoleteNotification.Message := ObsoleteMsg;
+        ObsoleteNotification.AddAction(LeanrMoreMsg, Codeunit::"Red Layout Notification Action", 'ObsoleteCustomLayout');
+        ObsoleteNotification.Send();
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)

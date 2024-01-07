@@ -3,14 +3,14 @@
   "applicationInsightsConnectionString": "daf58898-4ae6-4687-8adf-9f241dd9f5b4",
   "name": "Red.MultipleLayouts.Dev",
   "publisher": "Red and Bundle",
-  "version": "2.0.0.0",
+  "version": "3.0.0.0",
   "brief": "Red Multiple Layouts development project",
   "description": "Development project for Red.MultipleLayouts",
   "privacyStatement": "https://redandbundle.com/privacy/",
   "EULA": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/EULA",
   "help": "https://redandbundle.github.io/Red.MultipleLayouts.Doc",
   "url": "https://redandbundle.com",
-  "logo": "Red.MultipleLayouts/images/RedBundleLogo.png",
+  "logo": "Red.MultipleLayouts/images/Appsource_logo_large_text.png",
   "dependencies": [
     {
       "id": "23de40a6-dfe8-4f80-80db-d70f83ce8caf",
@@ -19,23 +19,23 @@
       "version": "17.0.0.0"
     },
     {
-      "id": "d6978c22-4a2f-452a-8f12-efdcf158d7e4",
+      "id": "83326d6d-11f8-49fd-981a-6f266a7c8d81",
       "publisher": "ForNAV",
-      "name": "ForNAV Core Development e4",
-      "version": "5.4.0.1"
+      "name": "Customizable Report Pack",
+      "version": "7.2.0.0"
     }
   ],
   "screenshots": [],
-  "platform": "21.0.0.0",
-  "application": "21.0.0.0",
+  "platform": "23.0.0.0",
+  "application": "23.0.0.0",
   "idRanges": [
     {
       "from": 11310862,
       "to": 11310912
     },
     {
-      "from": 80400,
-      "to": 80450
+      "from": 80500,
+      "to": 80550
     }
   ],
   "contextSensitiveHelpUrl": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/README",
@@ -44,9 +44,10 @@
     "allowDownloadingSource": false,
     "includeSourceInSymbolFile": true
   },
-  "runtime": "10.0",
+  "runtime": "12.0",
   "features": [
     "TranslationFile",
-    "GenerateCaptions"
+    "GenerateCaptions",
+    "NoImplicitWith"
   ]
 }

@@ -1,4 +1,4 @@
-codeunit 80402 "Red Layout Import Export Test"
+codeunit 80502 "Red Layout Import Export Test"
 {
     Subtype = Test;
 

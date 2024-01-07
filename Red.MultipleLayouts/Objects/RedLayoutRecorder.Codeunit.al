@@ -12,6 +12,7 @@ codeunit 11310868 "Red Layout Recorder"
         exit(DoRecord);
     end;
 
+    // TODO add new function for Tenant layout selection
     procedure RecordReportToLayoutSelection(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecVarToPrint: Variant): Boolean
     begin
         exit(RecordReportToLayoutSelection(TempReportSelections."Report ID", IsGUI, RecVarToPrint));

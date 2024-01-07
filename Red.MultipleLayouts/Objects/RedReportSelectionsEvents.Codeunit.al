@@ -7,6 +7,7 @@ codeunit 11310862 "Red Report Selections Events"
     local procedure OnBeforeEmailDocument(FilePath: Text[250]; RecordVariant: Variant; ReportUsage: Enum "Report Selection Usage"; SaveToBlob: Boolean; var IsHandled: Boolean; var LayoutCode: Code[20]; var ReportID: Integer; var TempBlob: Codeunit "Temp Blob")
     var
         RedLayoutSelection: Codeunit "Red Layout Selection";
+        RedReportLayoutSelection: Codeunit "Red Report Layout Selection";
         RedLayoutRecorder: Codeunit "Red Layout Recorder";
     begin
         if IsHandled then
@@ -17,24 +18,33 @@ codeunit 11310862 "Red Report Selections Events"
         if IsHandled then
             exit;
 
-        RedLayoutSelection.SetReportLayoutSelection(RecordVariant, ReportID);
+        if RedLayoutSelection.SetReportLayoutSelection(RecordVariant, ReportID) then
+            exit;
+
+        RedReportLayoutSelection.SetTenantReportLayoutSelection(RecordVariant, ReportID, ReportUsage);
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Report Selections", 'OnBeforePrintDocument', '', false, false)]
     local procedure OnBeforePrintDocument(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecVarToPrint: Variant; var IsHandled: Boolean)
     var
         RedLayoutSelection: Codeunit "Red Layout Selection";
+        RedReportLayoutSelection: Codeunit "Red Report Layout Selection";
         RedLayoutRecorder: Codeunit "Red Layout Recorder";
+        UsedLayout: Text;
     begin
         if IsHandled then
             exit;
 
         IsHandled := RedLayoutRecorder.RecordReportToLayoutSelection(TempReportSelections, IsGUI, RecVarToPrint);
-
         if IsHandled then
             exit;
 
         IsHandled := RedLayoutSelection.RunReportWithLayoutSelection(TempReportSelections, IsGUI, RecVarToPrint);
+        if IsHandled then
+            exit;
+
+        RedReportLayoutSelection.RunReportWithTenantLayoutSelection(TempReportSelections, IsGUI, RecVarToPrint, UsedLayout);
+        IsHandled := UsedLayout <> '';
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Telemetry Management", 'OnSendDailyTelemetry', '', true, true)]

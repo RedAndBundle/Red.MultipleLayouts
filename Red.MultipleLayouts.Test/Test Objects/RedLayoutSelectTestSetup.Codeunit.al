@@ -1,4 +1,4 @@
-codeunit 80401 "Red Layout Select Test Setup"
+codeunit 80501 "Red Layout Select Test Setup"
 {
     Permissions =
         tabledata "Red Layout Setup" = RIMD,

@@ -2,14 +2,14 @@
   "id": "a59d7201-75b7-412c-9091-7be0576d2912",
   "name": "Red.MultipleLayouts.Test",
   "publisher": "Red and Bundle",
-  "version": "2.1.0.1",
+  "version": "3.0.0.0",
   "brief": "",
   "description": "Tests for Multiple Layout Selector",
   "privacyStatement": "https://redandbundle.com/privacy/",
   "EULA": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/EULA",
   "help": "https://redandbundle.github.io/Red.MultipleLayouts.Doc",
   "url": "https://redandbundle.com",
-  "logo": "Images/RedBundleLogo.png",
+  "logo": "Images/Appsource_logo_large_text.png",
   "dependencies": [
     {
         "id":  "23de40a6-dfe8-4f80-80db-d70f83ce8caf",
@@ -31,8 +31,8 @@
     }
   ],
   "screenshots": [],
-  "platform": "21.0.0.0",
-  "application": "21.0.0.0",
+  "platform": "23.0.0.0",
+  "application": "23.0.0.0",
   "idRanges": [
     {
       "from": 80400,
@@ -45,5 +45,5 @@
     "allowDownloadingSource": false,
     "includeSourceInSymbolFile": false
   },
-  "runtime": "10.0"
+  "runtime": "12.0"
 }

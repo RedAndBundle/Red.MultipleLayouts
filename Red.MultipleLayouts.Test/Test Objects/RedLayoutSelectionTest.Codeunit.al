@@ -1,4 +1,4 @@
-codeunit 80400 "Red Layout Selection Test"
+codeunit 80500 "Red Layout Selection Test"
 {
     Subtype = Test;
 

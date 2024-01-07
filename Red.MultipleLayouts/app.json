@@ -3,25 +3,32 @@
   "applicationInsightsConnectionString": "daf58898-4ae6-4687-8adf-9f241dd9f5b4",
   "name": "Multiple Report Layout Selector",
   "publisher": "Red and Bundle",
-  "version": "2.1.0.1",
+  "version": "3.0.0.0",
   "brief": "Multiple layout selection for ForNAV reports",
-  "description": "Multiple layout selection for ForNAV reports. Automatically select your report layouts based on dimensions, customer, or vendor.",
+  "description": "Multiple layout selection for ForNAV reports. Automatically select your report layouts based on usage, dimensions, customer, or vendor.",
   "privacyStatement": "https://redandbundle.com/privacy/",
   "EULA": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/EULA",
   "help": "https://redandbundle.github.io/Red.MultipleLayouts.Doc",
   "url": "https://redandbundle.com",
-  "logo": "images/RedBundleLogo.png",
+  "logo": "images/Appsource_logo_large_text.png",
   "dependencies": [
     {
       "id": "83326d6d-11f8-49fd-981a-6f266a7c8d81",
       "publisher": "ForNAV",
       "name": "Customizable Report Pack",
-      "version": "5.4.0.1"
+      "version": "7.2.0.0"
+    }
+  ],
+  "internalsVisibleTo": [
+    {
+      "id": "a59d7201-75b7-412c-9091-7be0576d2912",
+      "publisher": "Red and Bundle",
+      "name": "Red.MultipleLayouts.Test"
     }
   ],
   "screenshots": [],
-  "platform": "21.0.0.0",
-  "application": "21.0.0.0",
+  "platform": "23.0.0.0",
+  "application": "23.0.0.0",
   "idRanges": [
     {
       "from": 11310862,
@@ -34,6 +41,6 @@
     "allowDownloadingSource": false,
     "includeSourceInSymbolFile": false
   },
-  "runtime": "10.0",
+  "runtime": "12.0",
   "features": ["TranslationFile", "GenerateCaptions", "NoImplicitWith"]
 }

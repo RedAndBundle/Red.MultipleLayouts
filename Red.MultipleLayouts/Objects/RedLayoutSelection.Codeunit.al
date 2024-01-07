@@ -1,14 +1,17 @@
 codeunit 11310865 "Red Layout Selection"
 {
-    procedure SetReportLayoutSelection(RecordVariant: Variant; ReportID: Integer)
+    procedure SetReportLayoutSelection(RecordVariant: Variant; ReportID: Integer): Boolean
     var
         TempCustomReportLayout: Record "Custom Report Layout" temporary;
         SelectedLayoutCode: code[20];
     begin
+        if MoveToTenantLayout(ReportID) then
+            exit(false);
+
         if not GetLayoutsFromLayoutSelection(TempCustomReportLayout, RecordVariant, ReportID) then
             if not GetDefaultLayoutForReport(TempCustomReportLayout, ReportID) then begin
                 if not GetTempCustomReportLayout(TempCustomReportLayout, ReportID) then
-                    exit;
+                    exit(false);
 
                 GetSelectedLayoutCode(ReportID, SelectedLayoutCode);
 
@@ -16,6 +19,7 @@ codeunit 11310865 "Red Layout Selection"
             end;
 
         SetTempLayoutSelected(SelectLayout(TempCustomReportLayout));
+        exit(true)
     end;
 
     procedure RunReportWithLayoutSelection(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecordVariant: Variant): Boolean
@@ -23,6 +27,9 @@ codeunit 11310865 "Red Layout Selection"
         TempCustomReportLayout: Record "Custom Report Layout" temporary;
         SelectedLayoutCode: code[20];
     begin
+        if MoveToTenantLayout(TempReportSelections."Report ID") then
+            exit(false);
+
         if not GetLayoutsFromLayoutSelection(TempCustomReportLayout, RecordVariant, TempReportSelections."Report ID") then
             if not GetDefaultLayoutForReport(TempCustomReportLayout, TempReportSelections."Report ID") then begin
                 if not GetTempCustomReportLayout(TempCustomReportLayout, TempReportSelections."Report ID") then
@@ -166,5 +173,45 @@ codeunit 11310865 "Red Layout Selection"
         DesignTimeReportSelection: Codeunit "Design-time Report Selection";
     begin
         DesignTimeReportSelection.SetSelectedCustomLayout(NewTempSelectedLayoutCode);
+    end;
+
+    internal procedure MoveToTenantLayout(): Boolean
+    var
+        CustomReportLayout: Record "Custom Report Layout";
+        RedLayoutSelection: Record "Red Layout Selection";
+        RedReportLayoutSelection: Record "Red Report Layout Selection";
+    begin
+        if RedLayoutSelection.FindSet() then
+            repeat
+                if not CustomReportLayout.Get(RedLayoutSelection."Custom Report Layout Code") then begin
+                    RedReportLayoutSelection.CopyFromRedLayoutSelection(RedLayoutSelection);
+                    RedLayoutSelection.Delete();
+                end;
+            until RedLayoutSelection.Next() = 0;
+
+        exit(true);
+    end;
+
+    internal procedure MoveToTenantLayout(ReportId: Integer): Boolean
+    var
+        CustomReportLayout: Record "Custom Report Layout";
+        RedLayoutSelection: Record "Red Layout Selection";
+        RedReportLayoutSelection: Record "Red Report Layout Selection";
+    begin
+        CustomReportLayout.SetRange("Report ID", ReportId);
+        if not CustomReportLayout.IsEmpty() then
+            exit(false);
+
+        RedLayoutSelection.SetRange("Report ID", ReportId);
+        if RedLayoutSelection.IsEmpty() then
+            exit(true);
+
+        if RedLayoutSelection.FindSet() then
+            repeat
+                RedReportLayoutSelection.CopyFromRedLayoutSelection(RedLayoutSelection);
+                RedLayoutSelection.Delete();
+            until RedLayoutSelection.Next() = 0;
+
+        exit(true);
     end;
 }
