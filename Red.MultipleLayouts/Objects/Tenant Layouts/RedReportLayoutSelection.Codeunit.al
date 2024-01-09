@@ -180,15 +180,6 @@ codeunit 11310873 "Red Report Layout Selection"
         SetTempTenantLayoutSelected('');
     end;
 
-
-    [Obsolete('SetTempLayoutSelected: Code replaced by Text', '3.0.0.0')]
-    procedure SetTempLayoutSelected(NewTempSelectedLayoutCode: Code[20])
-    var
-        DesignTimeReportSelection: Codeunit "Design-time Report Selection";
-    begin
-        DesignTimeReportSelection.SetSelectedCustomLayout(NewTempSelectedLayoutCode);
-    end;
-
     internal procedure SetTempTenantLayoutSelected(NewTempSelectedLayoutCode: Text)
     var
         DesignTimeReportSelection: Codeunit "Design-time Report Selection";

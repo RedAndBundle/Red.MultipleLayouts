@@ -80,15 +80,6 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
         end;
         TenantReportLayoutSelection."Layout Name" := TenantReportLayout.Name;
         TenantReportLayoutSelection.Modify();
-
-        // if not TenantReportLayoutSelection.Get(ReportId, CompanyName) then begin
-        //     TenantReportLayoutSelection.Validate("Report ID", ReportId);
-        //     TenantReportLayoutSelection.Validate("Company Name", CompanyName);
-        //     TenantReportLayoutSelection.Insert();
-        // end;
-        // TenantReportLayoutSelection.Validate(Type, TenantReportLayoutSelection.Type::"Custom Layout");
-        // TenantReportLayoutSelection.Validate("Custom Report Layout Code", TenantReportLayout.Code);
-        // TenantReportLayoutSelection.Modify();
     end;
 
     procedure DeSelectLayoutForReport(ReportId: Integer)
