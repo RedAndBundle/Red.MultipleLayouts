@@ -25,8 +25,8 @@ codeunit 80508 "Red Rep. Layout Imp. Exp. Test"
         SalesInvoiceHeader.FindFirst();
 
         // [Given] Custom layouts are selected in Selection Table
-        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '1', 'Shortcut Dimension 1 Code');
-        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '2', 'Shortcut Dimension 2 Code');
+        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, 1, 'Shortcut Dimension 1 Code', Enum::"Report Selection Usage"::RedBlank, false);
+        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, 2, 'Shortcut Dimension 2 Code', Enum::"Report Selection Usage"::RedBlank, false);
 
         // [WHEN] Codeunit 11310866 "Red Layout Selection Export" is run
         RedRepLayoutSelectionExp.CreateJsonFromRecords(RedReportLayoutSelection, jArray, false, false);
@@ -153,7 +153,7 @@ codeunit 80508 "Red Rep. Layout Imp. Exp. Test"
         RedRepLayoutSelTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
 
         // [Given] Red layout selection exists
-        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '1', 'Shortcut Dimension 1 Code');
+        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, 1, 'Shortcut Dimension 1 Code', Enum::"Report Selection Usage"::RedBlank, false);
 
         // [Given] Imported red layout selection in Temp table
         RedRepLayoutSelTestSetup.CreateTempRedReportLayoutSelection(TempRedReportLayoutSelection, ReportId, Database::"Sales Invoice Header", 'Shortcut Dimension 1 Code', 1);
@@ -173,7 +173,7 @@ codeunit 80508 "Red Rep. Layout Imp. Exp. Test"
         RedRepLayoutSelectionImp.CreateTempRedReportLayoutSelectionFromJson(TempRedReportLayoutSelection, jArray);
         TempRedReportLayoutSelection.FindSet();
         repeat
-            RedReportLayoutSelection.Get(TempRedReportLayoutSelection."Report ID", TempRedReportLayoutSelection."Report Selection Usage", TempRedReportLayoutSelection."Table No.", TempRedReportLayoutSelection."Field No.");
+            RedReportLayoutSelection.Get(TempRedReportLayoutSelection."Report ID", TempRedReportLayoutSelection."Line No.");
             if RedReportLayoutSelection.Value <> TempRedReportLayoutSelection.Value then
                 Error(ValueMismatchErr);
 

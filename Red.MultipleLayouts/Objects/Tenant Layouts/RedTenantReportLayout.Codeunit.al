@@ -38,20 +38,14 @@ codeunit 11310871 "Red Tenant Report Layout"
         exit(CustomLayoutCode + '-' + CustomReportLayoutTokLbl);
     end;
 
-    //     procedure GetDefaultCode(ReportID: Integer): Code[20]
-    //     var
-    //         CustomReportLayout: Record "Custom Report Layout";
-    //         NewCode: Code[20];
-    //     begin
-    // #pragma warning disable AA0217
-    //         CustomReportLayout.SetRange("Report ID", ReportID);
-    //         CustomReportLayout.SetFilter(Code, StrSubstNo('%1-*', ReportID));
-    //         if CustomReportLayout.FindLast() then
-    //             NewCode := IncStr(CustomReportLayout.Code)
-    //         else
-    //             NewCode := StrSubstNo('%1-000001', ReportID);
-
-    //         exit(NewCode);
-    // #pragma warning restore AA0217
-    //     end;
+    procedure GetDefaultTableForReport(ReportId: Integer) TableNo: Integer
+    var
+        ReportDataItems: Record "Report Data Items";
+    begin
+        ReportDataItems.SetRange("Report ID", ReportId);
+        ReportDataItems.SetRange("Indentation Level", 0);
+        ReportDataItems.SetFilter(Name, '<>@*args*');
+        if ReportDataItems.FindFirst() then
+            exit(ReportDataItems."Related Table ID");
+    end;
 }

@@ -88,11 +88,6 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Report Layout Selection - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 1263699329 - NamedType 2338373945" size-unit="char" translate="yes" xml:space="preserve">
-          <source>%1 and %2 must be 0.</source>
-          <note from="Developer" annotates="general" priority="2">%1 is table no caption %2 = field no caption</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Red Report Layout Selection - NamedType MustBeZeroErr</note>
-        </trans-unit>
         <trans-unit id="Table 1263699329 - NamedType 3024463106" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report %1 can only have one default layout</source>
           <note from="Developer" annotates="general" priority="2">%1 = report name</note>
@@ -122,6 +117,11 @@
           <source>Custom Report Layout</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Report Layout Selection - Field Layout Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1263699329 - Field 3320823955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Red Report Layout Selection - Field Line No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1263699329 - Field 1272245069 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Report ID</source>
@@ -157,6 +157,21 @@
           <source>Value</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Report Layout Selection - Field Value - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1498198193 - Method 2931133703 - NamedType 749485616" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reset table and field number fields.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Actionable Error - Method SetDefaultTableFieldNotEmpty - NamedType ActionTitleLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1498198193 - Method 2931133703 - NamedType 3287593712" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 and %2 must be 0.</source>
+          <note from="Developer" annotates="general" priority="2">%1 is table no caption %2 = field no caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Actionable Error - Method SetDefaultTableFieldNotEmpty - NamedType MessageErrLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1498198193 - Method 2931133703 - NamedType 339285366" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cannot set record to default.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Actionable Error - Method SetDefaultTableFieldNotEmpty - NamedType ErrorTitleLbl</note>
         </trans-unit>
         <trans-unit id="Codeunit 2202900746 - NamedType 2958582617" size-unit="char" translate="yes" xml:space="preserve">
           <source>Then imported quantity does not match the expected quantity</source>

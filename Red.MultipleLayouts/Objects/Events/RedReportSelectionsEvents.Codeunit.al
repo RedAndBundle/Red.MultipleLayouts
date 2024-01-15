@@ -13,7 +13,7 @@ codeunit 11310862 "Red Report Selections Events"
         if IsHandled then
             exit;
 
-        IsHandled := RedLayoutRecorder.RecordReportToLayoutSelection(ReportID, true, RecordVariant);
+        IsHandled := RedLayoutRecorder.RecordReportToLayoutSelection(ReportID, true, RecordVariant, ReportUsage);
 
         if IsHandled then
             exit;
@@ -35,7 +35,7 @@ codeunit 11310862 "Red Report Selections Events"
         if IsHandled then
             exit;
 
-        IsHandled := RedLayoutRecorder.RecordReportToLayoutSelection(TempReportSelections, IsGUI, RecVarToPrint);
+        IsHandled := RedLayoutRecorder.RecordReportToLayoutSelection(TempReportSelections."Report ID", IsGUI, RecVarToPrint, TempReportSelections.Usage);
         if IsHandled then
             exit;
 

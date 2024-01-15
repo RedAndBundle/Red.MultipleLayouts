@@ -2,6 +2,11 @@ codeunit 11310868 "Red Layout Recorder"
 {
     SingleInstance = true;
 
+    var
+        DoRecord: Boolean;
+        ReportRecordedMsg: Label 'Report %1 has been added to the %2', Comment = '%1 = report id, %2 = table caption';
+        ReportAlreadyRecordedMsg: Label 'Report %1 has already been added to the %2', Comment = '%1 = report id, %2 = table caption';
+
     procedure SetRecord(NewValue: Boolean)
     begin
         DoRecord := NewValue;
@@ -12,12 +17,13 @@ codeunit 11310868 "Red Layout Recorder"
         exit(DoRecord);
     end;
 
-    // TODO add new function for Tenant layout selection
+    [Obsolete('Use with ReportUsage', '3.0.0.0')]
     procedure RecordReportToLayoutSelection(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecVarToPrint: Variant): Boolean
     begin
-        exit(RecordReportToLayoutSelection(TempReportSelections."Report ID", IsGUI, RecVarToPrint));
+        exit(RecordReportToLayoutSelection(TempReportSelections."Report ID", IsGUI, RecVarToPrint, TempReportSelections.Usage));
     end;
 
+    [Obsolete('Use with ReportUsage', '3.0.0.0')]
     procedure RecordReportToLayoutSelection(ReportID: Integer; IsGUI: Boolean; RecordVariant: Variant): Boolean
     var
         RedLayoutSelection: Record "Red Layout Selection";
@@ -25,6 +31,7 @@ codeunit 11310868 "Red Layout Recorder"
     begin
         if not IsGUI then
             exit;
+
         if not DoRecord then
             exit;
 
@@ -39,8 +46,25 @@ codeunit 11310868 "Red Layout Recorder"
         exit(true);
     end;
 
+    procedure RecordReportToLayoutSelection(ReportID: Integer; IsGUI: Boolean; RecordVariant: Variant; ReportUsage: Enum "Report Selection Usage"): Boolean
     var
-        DoRecord: Boolean;
-        ReportRecordedMsg: Label 'Report %1 has been added to the %2', Comment = '%1 = report id, %2 = table caption';
-        ReportAlreadyRecordedMsg: Label 'Report %1 has already been added to the %2', Comment = '%1 = report id, %2 = table caption';
+        RedReportLayoutSelection: Record "Red Report Layout Selection";
+        RecRef: RecordRef;
+    begin
+        if not IsGUI then
+            exit;
+
+        if not DoRecord then
+            exit;
+
+        RecRef.GetTable(RecordVariant);
+        RedReportLayoutSelection.Init();
+        RedReportLayoutSelection.Validate("Report ID", ReportID);
+        RedReportLayoutSelection.Validate("Table No.", RecRef.Number);
+        if not RedReportLayoutSelection.Insert() then
+            Message(ReportAlreadyRecordedMsg)
+        else
+            Message(ReportRecordedMsg, ReportID, RedReportLayoutSelection.TableCaption);
+        exit(true);
+    end;
 }

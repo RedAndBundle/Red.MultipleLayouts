@@ -5,26 +5,26 @@ codeunit 11310864 "Red Layout Selection Match Rec"
         FldRef: FieldRef;
         TestValue: Code[256];
     begin
-        begin
-            FldRef := RecRef.Field(RedLayoutSelection."Field No.");
-            if FldRef.Class = FldRef.Class::FlowField then
-                FldRef.CalcField();
-            Evaluate(TestValue, Format(FldRef.Value));
-            exit(RedLayoutSelection.Value = TestValue);
-        end;
+        FldRef := RecRef.Field(RedLayoutSelection."Field No.");
+        if FldRef.Class = FldRef.Class::FlowField then
+            FldRef.CalcField();
+        Evaluate(TestValue, Format(FldRef.Value));
+        exit(RedLayoutSelection.Value = TestValue);
     end;
 
-    internal procedure MatchRecordVariable(FieldNo: Integer; Value: Code[50]; RecRef: RecordRef): Boolean
+    internal procedure MatchRecordVariable(RedReportLayoutSelection: Record "Red Report Layout Selection"; RecRef: RecordRef): Boolean
     var
-        FldRef: FieldRef;
-        TestValue: Code[256];
+    // FldRef: FieldRef;
+    // TestValue: Code[256];
     begin
-        begin
-            FldRef := RecRef.Field(FieldNo);
-            if FldRef.Class = FldRef.Class::FlowField then
-                FldRef.CalcField();
-            Evaluate(TestValue, Format(FldRef.Value));
-            exit(Value = TestValue);
-        end;
+        RecRef.SetRecFilter();
+        RecRef.Field(RedReportLayoutSelection."Field No.").SetFilter(RedReportLayoutSelection.Value);
+        exit(not RecRef.IsEmpty());
+
+        // FldRef := RecRef.Field(RedReportLayoutSelection."Field No.");
+        // if FldRef.Class = FldRef.Class::FlowField then
+        //     FldRef.CalcField();
+        // Evaluate(TestValue, Format(FldRef.Value));
+        // exit(RedReportLayoutSelection.Value = TestValue);
     end;
 }

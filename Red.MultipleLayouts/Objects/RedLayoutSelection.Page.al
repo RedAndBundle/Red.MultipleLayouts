@@ -16,6 +16,11 @@ Page 11310862 "Red Layout Selection"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the report number from the full list of installed reports.';
+
+                    trigger OnValidate()
+                    begin
+                        CurrPage.Update();
+                    end;
                 }
                 field("Report Name"; Rec."Report Name")
                 {
@@ -153,7 +158,7 @@ Page 11310862 "Red Layout Selection"
                 PromotedCategory = Process;
                 PromotedIsBig = true;
                 ToolTip = 'Records the Report ID and Source Table No when running a report.';
-                Visible = not IsRecording;
+                Visible = IsRecording;
 
                 trigger OnAction()
                 begin
@@ -187,7 +192,6 @@ Page 11310862 "Red Layout Selection"
                 PromotedCategory = Process;
                 PromotedIsBig = true;
                 ToolTip = 'This function will convert all records with custom layouts that have been converted to tenant layouts to the Red Report Layout Selection table.';
-                Visible = IsRecording;
 
                 trigger OnAction()
                 var
@@ -206,13 +210,11 @@ Page 11310862 "Red Layout Selection"
 
     trigger OnOpenPage()
     var
-        RedLayoutRecorder: Codeunit "Red Layout Recorder";
         NotificationIDs: Codeunit "Red Layout Notification IDs";
         ObsoleteNotification: Notification;
         ObsoleteMsg: Label 'This page will obsoleted. All custom report layouts will be converted to tenant report layouts. After this happens affected records will automtaically be converted to the Report Layout Selection table.';
         LeanrMoreMsg: Label 'Learn more.';
     begin
-        IsRecording := RedLayoutRecorder.IsRecording();
         ObsoleteNotification.ID := NotificationIDs.ObsoleteCustomLayout();
         ObsoleteNotification.Message := ObsoleteMsg;
         ObsoleteNotification.AddAction(LeanrMoreMsg, Codeunit::"Red Layout Notification Action", 'ObsoleteCustomLayout');
@@ -335,11 +337,6 @@ Page 11310862 "Red Layout Selection"
     end;
 
     local procedure ToggleRecord()
-    var
-        RedLayoutRecorder: Codeunit "Red Layout Recorder";
     begin
-        IsRecording := RedLayoutRecorder.IsRecording();
-        IsRecording := not IsRecording;
-        RedLayoutRecorder.SetRecord(IsRecording);
     end;
 }

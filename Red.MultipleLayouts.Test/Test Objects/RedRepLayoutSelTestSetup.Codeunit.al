@@ -74,12 +74,13 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
         TenantReportLayout.SetRange("Report ID", ReportId);
         TenantReportLayout.FindFirst();
 
-        if not TenantReportLayoutSelection.Get(TenantReportLayout."Report ID", CompanyName, NullGuid) then begin
-            TenantReportLayoutSelection."Report ID" := TenantReportLayout."Report ID";
-            TenantReportLayoutSelection.Insert(true);
-        end;
+        if TenantReportLayoutSelection.Get(TenantReportLayout."Report ID", CompanyName, NullGuid) then
+            TenantReportLayoutSelection.Delete();
+
+        TenantReportLayoutSelection."Report ID" := TenantReportLayout."Report ID";
         TenantReportLayoutSelection."Layout Name" := TenantReportLayout.Name;
-        TenantReportLayoutSelection.Modify();
+        TenantReportLayoutSelection."Company Name" := CompanyName;
+        TenantReportLayoutSelection.Insert(true);
     end;
 
     procedure DeSelectLayoutForReport(ReportId: Integer)
@@ -98,18 +99,14 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
         RedReportLayoutSelection.DeleteAll();
     end;
 
-    procedure AddLayoutToSelectionTable(RecVar: Variant; ReportId: Integer; TenantReportLayout: Text; SourceFieldName: Text)
-    begin
-        AddLayoutToSelectionTable(RecVar, ReportId, TenantReportLayout, SourceFieldName, "Report Selection Usage"::RedBlank);
-    end;
-
-    procedure AddLayoutToSelectionTable(RecVar: Variant; ReportId: Integer; TenantReportLayout: Text; SourceFieldName: Text; Usage: Enum "Report Selection Usage")
+    procedure AddLayoutToSelectionTable(RecVar: Variant; ReportId: Integer; LineNo: Integer; SourceFieldName: Text; Usage: Enum "Report Selection Usage"; UseFilter: Boolean)
     var
         RedReportLayoutSelection: Record "Red Report Layout Selection";
         Field: Record Field;
         RecRef: RecordRef;
         FldRef: FieldRef;
     begin
+#pragma warning disable AA0217
         RecRef.GetTable(RecVar);
         Field.SetRange(TableNo, RecRef.Number);
         Field.SetRange(FieldName, SourceFieldName);
@@ -117,12 +114,17 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
         FldRef := RecRef.Field(Field."No.");
 
         RedReportLayoutSelection.Validate("Report ID", ReportId);
-        RedReportLayoutSelection."Layout Name" := TenantReportLayout;
+        RedReportLayoutSelection."Line No." := LineNo;
+        RedReportLayoutSelection."Layout Name" := Format(LineNo);
         RedReportLayoutSelection.Validate("Report Selection Usage", Usage);
         RedReportLayoutSelection.Validate("Table No.", RecRef.Number);
         RedReportLayoutSelection.Validate("Field No.", FldRef.Number);
-        RedReportLayoutSelection.Validate(Value, FldRef.Value);
+        if UseFilter then
+            RedReportLayoutSelection.Validate(Value, StrSubstNo('@*%1*', Format(FldRef.Value).Remove(4).ToLower()))
+        else
+            RedReportLayoutSelection.Validate(Value, FldRef.Value);
         RedReportLayoutSelection.Insert();
+#pragma warning restore AA0217
     end;
 
     procedure AddDefaultLayoutToSelectionTable(RecVar: Variant; ReportId: Integer; TenantReportLayout: Text)
@@ -185,6 +187,7 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
         for i := 1 to NoOfLayouts do begin
             TempRedReportLayoutSelection.Init();
             TempRedReportLayoutSelection.Validate("Report ID", ReportId);
+            TempRedReportLayoutSelection."Line No." := i;
             TempRedReportLayoutSelection."Layout Name" := Format(i);
             TempRedReportLayoutSelection.Validate("Table No.", TableId);
             TempRedReportLayoutSelection.Validate("Field No.", Field."No.");

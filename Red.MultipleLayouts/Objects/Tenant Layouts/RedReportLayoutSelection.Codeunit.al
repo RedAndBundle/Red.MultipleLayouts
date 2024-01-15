@@ -4,21 +4,21 @@ codeunit 11310873 "Red Report Layout Selection"
 
     procedure SetTenantReportLayoutSelection(RecordVariant: Variant; ReportID: Integer; Usage: Enum "Report Selection Usage")
     var
-        TempCustomReportLayout: Record "Tenant Report Layout" temporary;
+        TempTenantReportLayout: Record "Tenant Report Layout" temporary;
         SelectedLayoutCode: Text;
     begin
-        if not GetLayoutsFromLayoutSelection(TempCustomReportLayout, RecordVariant, ReportID, Usage) then
-            if not GetDefaultLayoutForReport(TempCustomReportLayout, ReportID, Usage) then begin
-                if not GetTempCustomReportLayout(TempCustomReportLayout, ReportID) then
+        if not GetLayoutsFromLayoutSelection(TempTenantReportLayout, RecordVariant, ReportID, Usage) then
+            if not GetDefaultLayoutForReport(TempTenantReportLayout, ReportID, Usage) then begin
+                if not GetTempCustomReportLayout(TempTenantReportLayout, ReportID) then
                     exit;
 
                 GetSelectedLayoutCode(ReportID, SelectedLayoutCode);
 
                 if SelectedLayoutCode = '' then
-                    AddDefaultLayoutToList(TempCustomReportLayout, ReportID);
+                    AddDefaultLayoutToList(TempTenantReportLayout, ReportID);
             end;
 
-        SetTempTenantLayoutSelected(SelectLayout(TempCustomReportLayout));
+        SetTempTenantLayoutSelected(SelectLayout(TempTenantReportLayout));
     end;
 
     [Obsolete('Use with var UsedLayoutCode', '3.0.0.0')]
@@ -32,25 +32,25 @@ codeunit 11310873 "Red Report Layout Selection"
 
     procedure RunReportWithTenantLayoutSelection(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecordVariant: Variant; var UsedLayoutCode: Text)
     var
-        TempCustomReportLayout: Record "Tenant Report Layout" temporary;
+        TempTenantReportLayout: Record "Tenant Report Layout" temporary;
         SelectedLayoutCode: Text;
     begin
-        if not GetLayoutsFromLayoutSelection(TempCustomReportLayout, RecordVariant, TempReportSelections."Report ID", TempReportSelections.Usage) then
-            if not GetDefaultLayoutForReport(TempCustomReportLayout, TempReportSelections."Report ID", TempReportSelections.Usage) then begin
-                if not GetTempCustomReportLayout(TempCustomReportLayout, TempReportSelections."Report ID") then
+        if not GetLayoutsFromLayoutSelection(TempTenantReportLayout, RecordVariant, TempReportSelections."Report ID", TempReportSelections.Usage) then
+            if not GetDefaultLayoutForReport(TempTenantReportLayout, TempReportSelections."Report ID", TempReportSelections.Usage) then begin
+                if not GetTempCustomReportLayout(TempTenantReportLayout, TempReportSelections."Report ID") then
                     exit;
 
                 GetSelectedLayoutCode(TempReportSelections."Report ID", SelectedLayoutCode);
 
                 if SelectedLayoutCode = '' then
-                    AddDefaultLayoutToList(TempCustomReportLayout, TempReportSelections."Report ID");
+                    AddDefaultLayoutToList(TempTenantReportLayout, TempReportSelections."Report ID");
             end;
 
-        UsedLayoutCode := SelectLayout(TempCustomReportLayout);
+        UsedLayoutCode := SelectLayout(TempTenantReportLayout);
         RunReportWithSelectedLayout(TempReportSelections, IsGUI, RecordVariant, UsedLayoutCode);
     end;
 
-    local procedure GetLayoutsFromLayoutSelection(var TempCustomReportLayout: Record "Tenant Report Layout"; RecordVariant: Variant; ReportId: Integer; Usage: Enum "Report Selection Usage") Success: Boolean
+    local procedure GetLayoutsFromLayoutSelection(var TempTenantReportLayout: Record "Tenant Report Layout"; RecordVariant: Variant; ReportId: Integer; Usage: Enum "Report Selection Usage") Success: Boolean
     var
         RedReportLayoutSelection: Record "Red Report Layout Selection";
         RecRef: RecordRef;
@@ -69,11 +69,11 @@ codeunit 11310873 "Red Report Layout Selection"
 
         repeat
             if RedReportLayoutSelection.MatchRecordVariable(RecRef) then
-                Success := AddLayoutSelectionToTempCustomReportLayout(TempCustomReportLayout, RedReportLayoutSelection."Layout Name", ReportId);
+                Success := AddLayoutSelectionToTempCustomReportLayout(TempTenantReportLayout, RedReportLayoutSelection."Layout Name", ReportId);
         until RedReportLayoutSelection.Next() = 0;
     end;
 
-    local procedure GetDefaultLayoutForReport(var TempCustomReportLayout: Record "Tenant Report Layout"; ReportId: Integer; Usage: Enum "Report Selection Usage"): Boolean
+    local procedure GetDefaultLayoutForReport(var TempTenantReportLayout: Record "Tenant Report Layout"; ReportId: Integer; Usage: Enum "Report Selection Usage"): Boolean
     var
         RedReportLayoutSelection: Record "Red Report Layout Selection";
     begin
@@ -82,35 +82,35 @@ codeunit 11310873 "Red Report Layout Selection"
         RedReportLayoutSelection.SetFilter("Layout Name", '<>%1', '');
         RedReportLayoutSelection.SetRange("Report Selection Usage", Usage);
         if RedReportLayoutSelection.FindFirst() then
-            exit(AddLayoutSelectionToTempCustomReportLayout(TempCustomReportLayout, RedReportLayoutSelection."Layout Name", ReportId));
+            exit(AddLayoutSelectionToTempCustomReportLayout(TempTenantReportLayout, RedReportLayoutSelection."Layout Name", ReportId));
 
         RedReportLayoutSelection.SetRange("Report Selection Usage");
         if RedReportLayoutSelection.FindFirst() then
-            exit(AddLayoutSelectionToTempCustomReportLayout(TempCustomReportLayout, RedReportLayoutSelection."Layout Name", ReportId));
+            exit(AddLayoutSelectionToTempCustomReportLayout(TempTenantReportLayout, RedReportLayoutSelection."Layout Name", ReportId));
 
         RedReportLayoutSelection.SetRange("Layout Name");
         if not RedReportLayoutSelection.IsEmpty then
-            exit(AddEmptyLayoutToTempCustomReportLayout(TempCustomReportLayout, ReportId));
+            exit(AddEmptyLayoutToTempCustomReportLayout(TempTenantReportLayout, ReportId));
     end;
 
-    local procedure GetTempCustomReportLayout(var TempCustomReportLayout: Record "Tenant Report Layout"; ReportId: Integer): Boolean
+    local procedure GetTempCustomReportLayout(var TempTenantReportLayout: Record "Tenant Report Layout"; ReportId: Integer): Boolean
     var
-        CustomReportLayout: Record "Tenant Report Layout";
+        TenantReportLayout: Record "Tenant Report Layout";
     begin
-        CustomReportLayout.SetRange("Report ID", ReportId);
-        CustomReportLayout.SetFilter("Company Name", '%1|%2', CompanyName, '');
-        CustomReportLayout.SetFilter(Description, '<>ForNAV BC preview*');
-        CustomReportLayout.SetFilter(Name, '<>@*email*');
-        if CustomReportLayout.FindSet() then
+        TenantReportLayout.SetRange("Report ID", ReportId);
+        TenantReportLayout.SetFilter("Company Name", '%1|%2', CompanyName, '');
+        TenantReportLayout.SetFilter(Description, '<>ForNAV BC preview*');
+        TenantReportLayout.SetFilter(Name, '<>@*email*');
+        if TenantReportLayout.FindSet() then
             repeat
-                TempCustomReportLayout."Report ID" := CustomReportLayout."Report ID";
-                TempCustomReportLayout.Name := CustomReportLayout.Name;
-                TempCustomReportLayout.Description := CustomReportLayout.Description;
-                TempCustomReportLayout."Company Name" := CustomReportLayout."Company Name";
-                TempCustomReportLayout.Insert();
-            until CustomReportLayout.Next() = 0;
+                TempTenantReportLayout."Report ID" := TenantReportLayout."Report ID";
+                TempTenantReportLayout.Name := TenantReportLayout.Name;
+                TempTenantReportLayout.Description := TenantReportLayout.Description;
+                TempTenantReportLayout."Company Name" := TenantReportLayout."Company Name";
+                TempTenantReportLayout.Insert();
+            until TenantReportLayout.Next() = 0;
 
-        exit(not TempCustomReportLayout.IsEmpty());
+        exit(not TempTenantReportLayout.IsEmpty());
     end;
 
     local procedure GetSelectedLayoutCode(ReportId: Integer; var SelectedLayoutCode: Text)
@@ -122,55 +122,55 @@ codeunit 11310873 "Red Report Layout Selection"
             SelectedLayoutCode := TenantReportLayoutSelection."Layout Name";
     end;
 
-    local procedure AddDefaultLayoutToList(var TempCustomReportLayout: Record "Tenant Report Layout"; ReportId: Integer)
+    local procedure AddDefaultLayoutToList(var TempTenantReportLayout: Record "Tenant Report Layout"; ReportId: Integer)
     var
         DefaultLayoutMsg: Label 'Default Layout';
     begin
-        TempCustomReportLayout.Init();
-        TempCustomReportLayout."Report ID" := ReportId;
-        TempCustomReportLayout.Name := '';
-        TempCustomReportLayout.Description := DefaultLayoutMsg;
-        TempCustomReportLayout."Company Name" := CompanyName;
-        TempCustomReportLayout.Insert();
+        TempTenantReportLayout.Init();
+        TempTenantReportLayout."Report ID" := ReportId;
+        TempTenantReportLayout.Name := '';
+        TempTenantReportLayout.Description := DefaultLayoutMsg;
+        TempTenantReportLayout."Company Name" := CompanyName;
+        TempTenantReportLayout.Insert();
     end;
 
-    local procedure AddLayoutSelectionToTempCustomReportLayout(var TempCustomReportLayout: Record "Tenant Report Layout"; CustomReportLayoutCode: Text; ReportId: Integer): Boolean
+    local procedure AddLayoutSelectionToTempCustomReportLayout(var TempTenantReportLayout: Record "Tenant Report Layout"; ReportLayout: Text; ReportId: Integer): Boolean
     var
-        CustomReportLayout: Record "Tenant Report Layout";
+        TenantReportLayout: Record "Tenant Report Layout";
     begin
-        CustomReportLayout.Get(ReportId, CustomReportLayoutCode);
-        if not (CustomReportLayout."Company Name" in [CompanyName, '']) then
+        TenantReportLayout.Get(ReportId, ReportLayout);
+        if not (TenantReportLayout."Company Name" in [CompanyName, '']) then
             exit;
 
-        TempCustomReportLayout."Report ID" := CustomReportLayout."Report ID";
-        TempCustomReportLayout.Name := CustomReportLayout.Name;
-        TempCustomReportLayout.Description := CustomReportLayout.Description;
-        TempCustomReportLayout."Company Name" := CustomReportLayout."Company Name";
-        exit(TempCustomReportLayout.Insert());
+        TempTenantReportLayout."Report ID" := TenantReportLayout."Report ID";
+        TempTenantReportLayout.Name := TenantReportLayout.Name;
+        TempTenantReportLayout.Description := TenantReportLayout.Description;
+        TempTenantReportLayout."Company Name" := TenantReportLayout."Company Name";
+        exit(TempTenantReportLayout.Insert());
     end;
 
-    local procedure AddEmptyLayoutToTempCustomReportLayout(var TempCustomReportLayout: Record "Tenant Report Layout"; ReportID: Integer): Boolean
+    local procedure AddEmptyLayoutToTempCustomReportLayout(var TempTenantReportLayout: Record "Tenant Report Layout"; ReportID: Integer): Boolean
     begin
-        TempCustomReportLayout."Report ID" := ReportID;
-        exit(TempCustomReportLayout.Insert());
+        TempTenantReportLayout."Report ID" := ReportID;
+        exit(TempTenantReportLayout.Insert());
     end;
 
-    local procedure SelectLayout(var TempCustomReportLayout: Record "Tenant Report Layout"): Text
+    local procedure SelectLayout(var TempTenantReportLayout: Record "Tenant Report Layout"): Text
     var
         SelectLayoutErr: Label 'No report layout selected';
     begin
         if not GuiAllowed() then begin
-            if TempCustomReportLayout.FindFirst() then
-                exit(TempCustomReportLayout.Name);
+            if TempTenantReportLayout.FindFirst() then
+                exit(TempTenantReportLayout.Name);
             exit;
         end;
 
-        if TempCustomReportLayout.Count > 1 then
-            if not (Page.RunModal(Page::"Red Report Layouts", TempCustomReportLayout) = ACTION::LookupOK) then
+        if TempTenantReportLayout.Count > 1 then
+            if not (Page.RunModal(Page::"Red Report Layouts", TempTenantReportLayout) = ACTION::LookupOK) then
                 Error(SelectLayoutErr);
 
-        if TempCustomReportLayout.Find() then
-            exit(TempCustomReportLayout.Name);
+        if TempTenantReportLayout.Find() then
+            exit(TempTenantReportLayout.Name);
     end;
 
     local procedure RunReportWithSelectedLayout(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecordVariant: Variant; CustomLayout: Text)

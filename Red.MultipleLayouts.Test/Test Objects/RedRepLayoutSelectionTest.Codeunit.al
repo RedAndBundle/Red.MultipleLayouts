@@ -193,7 +193,39 @@ codeunit 80506 "Red Rep Layout Selection Test"
         SalesInvoiceHeader.FindFirst();
 
         // [Given] Custom layout is selected in Selection Table
-        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '1', 'Shortcut Dimension 1 Code');
+        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, 1, 'Shortcut Dimension 1 Code', Enum::"Report Selection Usage"::RedBlank, false);
+
+        // [WHEN] "Red Report Layout Selection".RunReportWithLayoutSelection is called 
+        TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader, Enum::"Report Selection Usage"::RedBlank);
+
+        // [THEN] Layout 1 is used
+        if TestResult <> '1' then
+            Error(UnexpectedResultErr);
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    // [HandlerFunctions('HandleReportSelectionPage')]
+    [HandlerFunctions('SalesInvoiceReportHandler')]
+    procedure TwoLayoutsOneLayoutInLayoutSelectionWithFilter()
+    var
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
+        ReportId: Integer;
+        TestResult: Code[20];
+    begin
+        // [FEATURE] Two custom layouts in system, one is in layout selection with a filter instead of a value
+        // [Given] Report Id to test
+        ReportId := RedRepLayoutSelTestSetup.GetTestSalesReportId();
+
+        // [Given] Two custom layouts in system
+        RedRepLayoutSelTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
+
+        // [Given] Get first Sales Invoice
+        SalesInvoiceHeader.FindFirst();
+
+        // [Given] Custom layout is selected in Selection Table
+        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, 1, 'Shortcut Dimension 1 Code', Enum::"Report Selection Usage"::RedBlank, true);
 
         // [WHEN] "Red Report Layout Selection".RunReportWithLayoutSelection is called 
         TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader, Enum::"Report Selection Usage"::RedBlank);
@@ -228,7 +260,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
         SalesInvoiceHeader.FindFirst();
 
         // [Given] Custom layout is selected in Selection Table
-        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '1', 'Shortcut Dimension 1 Code', Usage);
+        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, 1, 'Shortcut Dimension 1 Code', Usage, false);
 
         // [WHEN] "Red Report Layout Selection".RunReportWithLayoutSelection is called 
         TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader, Usage);
@@ -260,8 +292,8 @@ codeunit 80506 "Red Rep Layout Selection Test"
         SalesInvoiceHeader.FindFirst();
 
         // [Given] Custom layouts are selected in Selection Table
-        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '1', 'Shortcut Dimension 1 Code');
-        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '2', 'Shortcut Dimension 2 Code');
+        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, 1, 'Shortcut Dimension 1 Code', Enum::"Report Selection Usage"::RedBlank, false);
+        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, 2, 'Shortcut Dimension 2 Code', Enum::"Report Selection Usage"::RedBlank, false);
 
         // [WHEN] "Red Report Layout Selection".RunReportWithLayoutSelection is called 
         TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader, Enum::"Report Selection Usage"::RedBlank);
@@ -393,8 +425,8 @@ codeunit 80506 "Red Rep Layout Selection Test"
         SalesInvoiceHeader.FindFirst();
 
         // [Given] One Custom layout is selected in Selection Table
-        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '1', 'Shortcut Dimension 1 Code');
-        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '2', 'Shortcut Dimension 2 Code');
+        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, 1, 'Shortcut Dimension 1 Code', Enum::"Report Selection Usage"::RedBlank, false);
+        RedRepLayoutSelTestSetup.AddLayoutToSelectionTable(SalesInvoiceHeader, ReportId, 2, 'Shortcut Dimension 2 Code', Enum::"Report Selection Usage"::RedBlank, false);
 
         // [Given] One Custom layout is selected as default in Selection Table
         RedRepLayoutSelTestSetup.AddDefaultLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '3');

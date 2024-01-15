@@ -6,6 +6,7 @@ Page 11310865 "Red Report Layout Selection"
     UsageCategory = Administration;
     SourceTable = "Red Report Layout Selection";
     Extensible = false;
+    AutoSplitKey = true;
 
     layout
     {
@@ -26,6 +27,7 @@ Page 11310865 "Red Report Layout Selection"
                     trigger OnLookup(var Text: Text): Boolean
                     begin
                         Rec.LookupReportId();
+                        CurrPage.Update();
                     end;
                 }
                 field("Report Name"; Rec."Report Name")
@@ -281,6 +283,8 @@ Page 11310865 "Red Report Layout Selection"
         Field: Record Field;
     begin
         Field.SetRange(TableNo, Rec."Table No.");
+        Field.SetRange(ObsoleteState, Field.ObsoleteState::No);
+        Field.SetFilter(Type, '<>%1&<>%2&<>%3&<>%4', Field.Type::BLOB, Field.Type::MediaSet, Field.Type::Media, Field.Type::Binary);
 
         if Page.RunModal(Page::"Fields Lookup", Field) = Action::LookupOK then
             Rec.Validate(Rec."Field No.", Field."No.");
