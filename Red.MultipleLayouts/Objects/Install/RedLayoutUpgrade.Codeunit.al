@@ -8,8 +8,10 @@ codeunit 11310872 "Red Layout Upgrade"
     end;
 
     trigger OnUpgradePerCompany()
+    var
+        RedLayoutTelemetry: Codeunit "Red Layout Telemetry";
     begin
-        Upgrade3000();
+        RedLayoutTelemetry.LogInstall();
     end;
 
     trigger OnValidateUpgradePerCompany()
@@ -20,23 +22,23 @@ codeunit 11310872 "Red Layout Upgrade"
     begin
     end;
 
-    local procedure Upgrade3000()
-    var
-        UpgradeTag: Codeunit "Upgrade Tag";
-        UpgradeTagLbl: Label 'Red Layout 3.0.0.0';
-    begin
-        if UpgradeTag.HasUpgradeTag(UpgradeTagLbl, CompanyName) then
-            exit;
+    // local procedure Upgrade3000()
+    // var
+    //     UpgradeTag: Codeunit "Upgrade Tag";
+    //     UpgradeTagLbl: Label 'Red Layout 3.0.0.0';
+    // begin
+    //     if UpgradeTag.HasUpgradeTag(UpgradeTagLbl, CompanyName) then
+    //         exit;
 
-        UpgradeTag.SetUpgradeTag(UpgradeTagLbl);
-    end;
+    //     UpgradeTag.SetUpgradeTag(UpgradeTagLbl);
+    // end;
 
     procedure MigrateCustomReportLayouts(ReportId: Integer)
     var
         CustomReportLayout: Record "Custom Report Layout";
         TenantReportLayout: Record "Tenant Report Layout";
+        RedTenantReportLayout: CodeUnit "Red Tenant Report Layout";
         InStreamLayout: Instream;
-        CustomReportLayoutTok: Label 'CRL';
     begin
         if ReportId <> 0 then
             CustomReportLayout.SetRange("Report ID", ReportId);
@@ -49,7 +51,8 @@ codeunit 11310872 "Red Layout Upgrade"
                 TenantReportLayout.Layout.ImportStream(InStreamLayout, CustomReportLayout.Description);
 
                 TenantReportLayout."Report ID" := CustomReportLayout."Report ID";
-                TenantReportLayout.Name := CustomReportLayout.Code + '-' + CustomReportLayoutTok;
+
+                TenantReportLayout.Name := RedTenantReportLayout.GetLayoutNameFromCustomLayoutCode(CustomReportLayout.Code);
                 TenantReportLayout.Description := CustomReportLayout.Description;
                 TenantReportLayout."Company Name" := CustomReportLayout."Company Name";
 

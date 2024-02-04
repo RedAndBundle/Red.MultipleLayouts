@@ -8,6 +8,14 @@ codeunit 11310870 "Red Layout Telemetry"
         Session.LogMessage('Red001', 'Installed MultiLayout', Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::ExtensionPublisher, EventDis);
     end;
 
+    procedure LogUpgrade()
+    var
+        EventDis: Dictionary of [Text, Text];
+    begin
+        EventDis.Add('Install', 'LogUpgrade');
+        Session.LogMessage('Red001', 'Installed MultiLayout', Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::ExtensionPublisher, EventDis);
+    end;
+
     procedure EmitExtensionTableTraceTags()
     var
         RedLayoutSelection: Record "Red Layout Selection";

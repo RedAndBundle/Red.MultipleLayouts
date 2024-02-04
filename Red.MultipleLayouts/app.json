@@ -7,16 +7,16 @@
   "brief": "Multiple layout selection for ForNAV reports",
   "description": "Multiple layout selection for ForNAV reports. Automatically select your report layouts based on usage, dimensions, customer, or vendor.",
   "privacyStatement": "https://redandbundle.com/privacy/",
-  "EULA": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/EULA",
-  "help": "https://redandbundle.github.io/Red.MultipleLayouts.Doc",
-  "url": "https://redandbundle.com",
+  "EULA": "https://multilayout.redandbundle.com/eula",
+  "help": "https://multilayout.redandbundle.com/docs/00%20introduction",
+  "url": "https://multilayout.redandbundle.com/",
   "logo": "images/Appsource_logo_large_text.png",
   "dependencies": [
     {
       "id": "83326d6d-11f8-49fd-981a-6f266a7c8d81",
       "publisher": "ForNAV",
       "name": "Customizable Report Pack",
-      "version": "7.2.0.0"
+      "version": "7.3.0.0"
     }
   ],
   "internalsVisibleTo": [
@@ -35,7 +35,7 @@
       "to": 11310912
     }
   ],
-  "contextSensitiveHelpUrl": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/README",
+  "contextSensitiveHelpUrl": "https://multilayout.redandbundle.com/docs/00%20introduction",
   "resourceExposurePolicy": {
     "allowDebugging": false,
     "allowDownloadingSource": false,

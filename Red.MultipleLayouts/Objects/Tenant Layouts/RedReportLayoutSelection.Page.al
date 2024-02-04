@@ -17,7 +17,7 @@ Page 11310865 "Red Report Layout Selection"
                 field("Report Selection Usage"; Rec."Report Selection Usage")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the usage of the report selection.';
+                    ToolTip = 'Specifies the usage of the report selection. If it is left to Red Blank, the layout selection will be used for all usages.';
                 }
                 field("Report ID"; Rec."Report ID")
                 {

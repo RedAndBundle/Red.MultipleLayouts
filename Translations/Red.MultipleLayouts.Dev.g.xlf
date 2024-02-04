@@ -93,6 +93,11 @@
           <note from="Developer" annotates="general" priority="2">%1 = report name</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Red Report Layout Selection - NamedType OnlyOneDefaultErr</note>
         </trans-unit>
+        <trans-unit id="Table 1263699329 - Method 2231788278 - NamedType 3554703834" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cannot upgrade %1 %2 automatically</source>
+          <note from="Developer" annotates="general" priority="2">%1 = table %2 = layoutscode</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Red Report Layout Selection - Method CopyFromRedLayoutSelection - NamedType CannotUpgradeAutomaticallyLbl</note>
+        </trans-unit>
         <trans-unit id="Table 1263699329 - Method 4006696707 - NamedType 1973913633" size-unit="char" translate="yes" xml:space="preserve">
           <source>|%1</source>
           <note from="Developer" annotates="general" priority="2">%1 = report id</note>
@@ -243,16 +248,6 @@
           <note from="Developer" annotates="general" priority="2">%1 = tablename %2 = No Of Records</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Telemetry - Method EmitExtensionTableTraceTags - NamedType MessageTxt</note>
         </trans-unit>
-        <trans-unit id="Codeunit 1088382467 - Method 1882553015 - NamedType 3394335049" size-unit="char" translate="yes" xml:space="preserve">
-          <source>CRL</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Upgrade - Method MigrateCustomReportLayouts - NamedType CustomReportLayoutTok</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 1088382467 - Method 2882528701 - NamedType 1762618708" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Red Layout 3.0.0.0</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Layout Upgrade - Method Upgrade3000 - NamedType UpgradeTagLbl</note>
-        </trans-unit>
         <trans-unit id="Codeunit 3423794232 - NamedType 3366217384" size-unit="char" translate="yes" xml:space="preserve">
           <source>Import completed, %1 new records were created</source>
           <note from="Developer" annotates="general" priority="2">%1 = no of records created</note>
@@ -347,6 +342,11 @@
           <source>@*%1*</source>
           <note from="Developer" annotates="general" priority="2">%1 = text to filter</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Method ValidateCustomLayout - NamedType FilterLbl</note>
+        </trans-unit>
+        <trans-unit id="Page 3674677723 - Control 2563105438 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the Custom Report Layout to use.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Layout Selection - Control Custom Report Layout Code - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3674677723 - Control 4223263513 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the Custom Report Layout to use.</source>
@@ -534,7 +534,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Report Layout Selection - Control Report Name - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 1263699329 - Control 3528066925 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the usage of the report selection.</source>
+          <source>Specifies the usage of the report selection. If it is left to Red Blank, the layout selection will be used for all usages.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Report Layout Selection - Control Report Selection Usage - Property ToolTip</note>
         </trans-unit>

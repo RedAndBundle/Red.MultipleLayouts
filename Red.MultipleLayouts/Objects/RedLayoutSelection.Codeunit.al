@@ -1,5 +1,7 @@
 codeunit 11310865 "Red Layout Selection"
 {
+    Permissions = tabledata "red report layout selection" = rimd;
+
     procedure SetReportLayoutSelection(RecordVariant: Variant; ReportID: Integer): Boolean
     var
         TempCustomReportLayout: Record "Custom Report Layout" temporary;
@@ -176,23 +178,16 @@ codeunit 11310865 "Red Layout Selection"
     end;
 
     internal procedure MoveToTenantLayout(): Boolean
-    var
-        CustomReportLayout: Record "Custom Report Layout";
-        RedLayoutSelection: Record "Red Layout Selection";
-        RedReportLayoutSelection: Record "Red Report Layout Selection";
     begin
-        if RedLayoutSelection.FindSet() then
-            repeat
-                if not CustomReportLayout.Get(RedLayoutSelection."Custom Report Layout Code") then begin
-                    RedReportLayoutSelection.CopyFromRedLayoutSelection(RedLayoutSelection);
-                    RedLayoutSelection.Delete();
-                end;
-            until RedLayoutSelection.Next() = 0;
-
-        exit(true);
+        exit(MoveToTenantLayout(0, true));
     end;
 
     internal procedure MoveToTenantLayout(ReportId: Integer): Boolean
+    begin
+        exit(MoveToTenantLayout(ReportId, false));
+    end;
+
+    internal procedure MoveToTenantLayout(ReportId: Integer; SurpressCommit: Boolean): Boolean
     var
         CustomReportLayout: Record "Custom Report Layout";
         RedLayoutSelection: Record "Red Layout Selection";
@@ -202,15 +197,22 @@ codeunit 11310865 "Red Layout Selection"
         if not CustomReportLayout.IsEmpty() then
             exit(false);
 
-        RedLayoutSelection.SetRange("Report ID", ReportId);
+        if ReportId <> 0 then
+            RedLayoutSelection.SetRange("Report ID", ReportId);
+
         if RedLayoutSelection.IsEmpty() then
             exit(true);
 
+        RedReportLayoutSelection.LockTable();
         if RedLayoutSelection.FindSet() then
             repeat
-                RedReportLayoutSelection.CopyFromRedLayoutSelection(RedLayoutSelection);
-                RedLayoutSelection.Delete();
+                if not CustomReportLayout.Get(RedLayoutSelection."Custom Report Layout Code") then
+                    if RedReportLayoutSelection.CopyFromRedLayoutSelection(RedLayoutSelection) then
+                        RedLayoutSelection.Delete();
             until RedLayoutSelection.Next() = 0;
+
+        if not SurpressCommit and GuiAllowed() then
+            Commit();
 
         exit(true);
     end;

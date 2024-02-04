@@ -9,6 +9,7 @@ codeunit 80505 "Red Layout Conversion Test"
     procedure RedLayoutSelectionWithConvertedLayout()
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
+        RedLayoutSelection: Codeunit "Red Layout Selection";
         RedLayoutSelectTestSetup: Codeunit "Red Layout Select Test Setup";
         RedLayoutUpgrade: Codeunit "Red Layout Upgrade";
         ReportId: Integer;
@@ -29,6 +30,9 @@ codeunit 80505 "Red Layout Conversion Test"
 
         // [Given] Convert Custom Layout To Tenant Layout
         RedLayoutUpgrade.MigrateCustomReportLayouts(ReportId);
+
+        // [Given] Convert Red Layout Selection
+        RedLayoutSelection.MoveToTenantLayout(ReportId, true);
 
         // [WHEN] "Red Layout Selection".RunReportWithLayoutSelection is called 
         TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader);

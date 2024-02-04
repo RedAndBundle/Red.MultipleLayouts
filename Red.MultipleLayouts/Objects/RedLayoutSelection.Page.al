@@ -75,6 +75,12 @@ Page 11310862 "Red Layout Selection"
                         LookupFieldValue();
                     end;
                 }
+                field("Custom Report Layout Code"; Rec."Custom Report Layout Code")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the Custom Report Layout to use.';
+                    Editable = false;
+                }
                 field(CustomLayoutDescription; CustomLayoutDescription)
                 {
                     ApplicationArea = Basic, Suite;

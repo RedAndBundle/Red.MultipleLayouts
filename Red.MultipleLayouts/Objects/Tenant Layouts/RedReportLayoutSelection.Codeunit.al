@@ -62,7 +62,7 @@ codeunit 11310873 "Red Report Layout Selection"
         RedReportLayoutSelection.SetFilter("Layout Name", '<>%1', '');
         RedReportLayoutSelection.SetRange("Report Selection Usage", Usage);
         if not RedReportLayoutSelection.FindSet() then begin
-            RedReportLayoutSelection.SetRange("Report Selection Usage");
+            RedReportLayoutSelection.SetRange("Report Selection Usage", Usage::RedBlank);
             if not RedReportLayoutSelection.FindSet() then
                 exit;
         end;
@@ -84,7 +84,7 @@ codeunit 11310873 "Red Report Layout Selection"
         if RedReportLayoutSelection.FindFirst() then
             exit(AddLayoutSelectionToTempCustomReportLayout(TempTenantReportLayout, RedReportLayoutSelection."Layout Name", ReportId));
 
-        RedReportLayoutSelection.SetRange("Report Selection Usage");
+        RedReportLayoutSelection.SetRange("Report Selection Usage", Usage::RedBlank);
         if RedReportLayoutSelection.FindFirst() then
             exit(AddLayoutSelectionToTempCustomReportLayout(TempTenantReportLayout, RedReportLayoutSelection."Layout Name", ReportId));
 

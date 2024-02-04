@@ -1,6 +1,5 @@
 codeunit 11310879 "Red Actionable Error"
 {
-    // SingleInstance = true;
     Access = Internal;
 
     procedure SetDefaultTableFieldNotEmpty(ReportLayoutSelection: Record "Red Report Layout Selection")
