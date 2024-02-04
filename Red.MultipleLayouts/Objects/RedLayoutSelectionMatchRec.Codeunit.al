@@ -14,17 +14,12 @@ codeunit 11310864 "Red Layout Selection Match Rec"
 
     internal procedure MatchRecordVariable(RedReportLayoutSelection: Record "Red Report Layout Selection"; RecRef: RecordRef): Boolean
     var
-    // FldRef: FieldRef;
-    // TestValue: Code[256];
+        RecRef2: RecordRef;
     begin
-        RecRef.SetRecFilter();
-        RecRef.Field(RedReportLayoutSelection."Field No.").SetFilter(RedReportLayoutSelection.Value);
-        exit(not RecRef.IsEmpty());
-
-        // FldRef := RecRef.Field(RedReportLayoutSelection."Field No.");
-        // if FldRef.Class = FldRef.Class::FlowField then
-        //     FldRef.CalcField();
-        // Evaluate(TestValue, Format(FldRef.Value));
-        // exit(RedReportLayoutSelection.Value = TestValue);
+        RecRef2.Open(RecRef.Number);
+        RecRef2.Copy(RecRef);
+        RecRef2.SetRecFilter();
+        RecRef2.Field(RedReportLayoutSelection."Field No.").SetFilter(RedReportLayoutSelection.Value);
+        exit(not RecRef2.IsEmpty());
     end;
 }

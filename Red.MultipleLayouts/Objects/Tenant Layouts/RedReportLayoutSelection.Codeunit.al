@@ -60,17 +60,12 @@ codeunit 11310873 "Red Report Layout Selection"
         RedReportLayoutSelection.SetRange("Table No.", RecRef.Number);
         RedReportLayoutSelection.SetFilter("Field No.", '>0');
         RedReportLayoutSelection.SetFilter("Layout Name", '<>%1', '');
-        RedReportLayoutSelection.SetRange("Report Selection Usage", Usage);
-        if not RedReportLayoutSelection.FindSet() then begin
-            RedReportLayoutSelection.SetRange("Report Selection Usage", Usage::RedBlank);
-            if not RedReportLayoutSelection.FindSet() then
-                exit;
-        end;
-
-        repeat
-            if RedReportLayoutSelection.MatchRecordVariable(RecRef) then
-                Success := AddLayoutSelectionToTempCustomReportLayout(TempTenantReportLayout, RedReportLayoutSelection."Layout Name", ReportId);
-        until RedReportLayoutSelection.Next() = 0;
+        RedReportLayoutSelection.SetFilter("Report Selection Usage", '%1|%2', Usage, Usage::RedBlank);
+        if RedReportLayoutSelection.FindSet() then
+            repeat
+                if RedReportLayoutSelection.MatchRecordVariable(RecRef) then
+                    Success := AddLayoutSelectionToTempCustomReportLayout(TempTenantReportLayout, RedReportLayoutSelection."Layout Name", ReportId);
+            until RedReportLayoutSelection.Next() = 0;
     end;
 
     local procedure GetDefaultLayoutForReport(var TempTenantReportLayout: Record "Tenant Report Layout"; ReportId: Integer; Usage: Enum "Report Selection Usage"): Boolean
@@ -80,11 +75,7 @@ codeunit 11310873 "Red Report Layout Selection"
         RedReportLayoutSelection.SetRange("Report ID", ReportId);
         RedReportLayoutSelection.SetRange(Default, true);
         RedReportLayoutSelection.SetFilter("Layout Name", '<>%1', '');
-        RedReportLayoutSelection.SetRange("Report Selection Usage", Usage);
-        if RedReportLayoutSelection.FindFirst() then
-            exit(AddLayoutSelectionToTempCustomReportLayout(TempTenantReportLayout, RedReportLayoutSelection."Layout Name", ReportId));
-
-        RedReportLayoutSelection.SetRange("Report Selection Usage", Usage::RedBlank);
+        RedReportLayoutSelection.SetFilter("Report Selection Usage", '%1|%2', Usage, Usage::RedBlank);
         if RedReportLayoutSelection.FindFirst() then
             exit(AddLayoutSelectionToTempCustomReportLayout(TempTenantReportLayout, RedReportLayoutSelection."Layout Name", ReportId));
 
