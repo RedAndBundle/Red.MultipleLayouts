@@ -578,11 +578,6 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Report Layouts - Control Description - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 1013025984 - Control 4190768627 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the file type of the report layout. The following table includes the types that are available:</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Red Report Layouts - Control Layout Format - Property ToolTip</note>
-        </trans-unit>
         <trans-unit id="EnumExtension 2414535588 - EnumValue 2911514643 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Enum 3528066925">
           <source>Red Blank</source>
           <note from="Developer" annotates="general" priority="2"></note>
