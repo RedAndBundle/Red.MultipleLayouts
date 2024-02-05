@@ -21,13 +21,13 @@
       "id": "31e6154c-7bb5-4d51-a415-ccf39e06043f",
       "publisher": "Red and Bundle",
       "name": "Multiple Report Layout Selector",
-      "version": "2.0.0.0"
+      "version": "3.0.0.0"
     },
     {
       "id": "83326d6d-11f8-49fd-981a-6f266a7c8d81",
       "publisher": "ForNAV",
       "name": "Customizable Report Pack",
-      "version": "5.4.0.1"
+      "version": "7.3.0.0"
     }
   ],
   "screenshots": [],
@@ -35,8 +35,8 @@
   "application": "23.0.0.0",
   "idRanges": [
     {
-      "from": 80400,
-      "to": 80450
+      "from": 80500,
+      "to": 80550
     }
   ],
   "contextSensitiveHelpUrl": "https://Red.MultipleLayouts.Test.com/help/",

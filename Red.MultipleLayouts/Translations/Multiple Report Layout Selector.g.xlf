@@ -559,7 +559,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Report Layout Selection - Action RunReport - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1013025984 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Custom Report Layouts</source>
+          <source>Report Layouts</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Report Layouts - Property Caption</note>
         </trans-unit>
