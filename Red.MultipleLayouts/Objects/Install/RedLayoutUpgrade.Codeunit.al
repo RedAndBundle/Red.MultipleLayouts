@@ -10,8 +10,10 @@ codeunit 11310872 "Red Layout Upgrade"
     trigger OnUpgradePerCompany()
     var
         RedLayoutTelemetry: Codeunit "Red Layout Telemetry";
+        RedLayoutSelection: Codeunit "Red Layout Selection";
     begin
         RedLayoutTelemetry.LogInstall();
+        RedLayoutSelection.MoveToTenantLayout();
     end;
 
     trigger OnValidateUpgradePerCompany()

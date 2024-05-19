@@ -1,43 +1,10 @@
+
+#pragma warning disable AL0432
 codeunit 80501 "Red Layout Select Test Setup"
 {
     Permissions =
         tabledata "Red Layout Setup" = RIMD,
         tabledata "Red Layout Selection" = RIMD;
-    procedure CreateUnpostedInvoice(var PurchaseHeader: Record "Purchase Header")
-    var
-        Vendor: Record Vendor;
-        Item: Record Item;
-        PurchaseLine: Record "Purchase Line";
-    begin
-        Vendor.FindFirst();
-        Item.SetRange("Item Tracking Code", '');
-        Item.FindFirst();
-
-        PurchaseHeader.Init();
-        PurchaseHeader."Document Type" := PurchaseHeader."Document Type"::Invoice;
-        PurchaseHeader.Validate("Buy-from Vendor No.", Vendor."No.");
-        PurchaseHeader.Insert(true);
-        PurchaseHeader."Vendor Invoice No." := PurchaseHeader."No.";
-        PurchaseHeader.Modify(true);
-
-        PurchaseLine.Init();
-        PurchaseLine."Document No." := PurchaseHeader."No.";
-        PurchaseLine."Document Type" := PurchaseHeader."Document Type";
-        PurchaseLine."Line No." := 10000;
-        PurchaseLine.Type := PurchaseLine.Type::Item;
-        PurchaseLine.Validate("No.", Item."No.");
-        PurchaseLine.Validate(Quantity, 1);
-        PurchaseLine.Insert(true);
-    end;
-
-    procedure ActivateCommitonPost()
-    var
-        RedLayoutSetup: Record "Red Layout Setup";
-    begin
-        RedLayoutSetup.InitSetup();
-        RedLayoutSetup."Commit on Post" := true;
-        RedLayoutSetup.Modify();
-    end;
 
     procedure EnsureCustomLayoutsForReport(ReportId: Integer; NoOfLayouts: Integer)
     var
@@ -64,42 +31,6 @@ codeunit 80501 "Red Layout Select Test Setup"
         end;
     end;
 
-    procedure SelectFirstLayoutForReport(ReportId: Integer)
-    var
-        ReportLayoutSelection: Record "Report Layout Selection";
-        CustomReportLayout: Record "Custom Report Layout";
-    begin
-        CustomReportLayout.SetRange("Report ID", ReportId);
-        CustomReportLayout.FindFirst();
-
-        if not ReportLayoutSelection.Get(ReportId, CompanyName) then begin
-            ReportLayoutSelection.Validate("Report ID", ReportId);
-            ReportLayoutSelection.Validate("Company Name", CompanyName);
-            ReportLayoutSelection.Insert();
-        end;
-        ReportLayoutSelection.Validate(Type, ReportLayoutSelection.Type::"Custom Layout");
-        ReportLayoutSelection.Validate("Custom Report Layout Code", CustomReportLayout.Code);
-        ReportLayoutSelection.Modify();
-    end;
-
-    procedure DeSelectLayoutForReport(ReportId: Integer)
-    var
-        ReportLayoutSelection: Record "Report Layout Selection";
-    begin
-        if ReportLayoutSelection.Get(ReportId, CompanyName) then begin
-            ReportLayoutSelection.Validate(Type, ReportLayoutSelection.Type::"RDLC (built-in)");
-            ReportLayoutSelection.Modify();
-        end;
-    end;
-
-    procedure EnsureNoLayoutInSelectionTable(ReportId: Integer)
-    var
-        RedLayoutSelection: Record "Red Layout Selection";
-    begin
-        RedLayoutSelection.SetRange(RedLayoutSelection."Report ID", ReportId);
-        RedLayoutSelection.DeleteAll();
-    end;
-
     procedure AddLayoutToSelectionTable(RecVar: Variant; ReportId: Integer; CustomReportLayoutCode: Code[20]; SourceFieldName: Text)
     var
         RedLayoutSelection: Record "Red Layout Selection";
@@ -121,48 +52,8 @@ codeunit 80501 "Red Layout Select Test Setup"
         RedLayoutSelection.Insert();
     end;
 
-    procedure AddDefaultLayoutToSelectionTable(RecVar: Variant; ReportId: Integer; CustomReportLayoutCode: Code[20])
-    var
-        RedLayoutSelection: Record "Red Layout Selection";
-    begin
-        RedLayoutSelection.Validate("Report ID", ReportId);
-        RedLayoutSelection.Validate(Default, true);
-        if CustomReportLayoutCode <> '' then
-            RedLayoutSelection.Validate("Custom Report Layout Code", CustomReportLayoutCode);
-        RedLayoutSelection.Insert();
-    end;
-
     procedure GetTestSalesReportId(): Integer
     begin
         exit(Report::"Standard Sales - Invoice");
-    end;
-
-    procedure GetTestPurchaseReportId(): Integer
-    begin
-        exit(Report::"Purchase - Invoice");
-    end;
-
-    procedure GetAltTestReportId(): Integer
-    begin
-        exit(Report::"Standard Sales - Order Conf.");
-    end;
-
-    procedure CreateTempRedLayoutSelection(var TempRedLayoutSelection: Record "Red Layout Selection"; ReportId: Integer; TableId: Integer; SourceFieldName: Text; NoOfLayouts: Integer)
-    var
-        Field: Record Field;
-        i: Integer;
-    begin
-        Field.SetRange(TableNo, TableId);
-        Field.SetRange(FieldName, SourceFieldName);
-        Field.FindFirst();
-
-        for i := 1 to NoOfLayouts do begin
-            TempRedLayoutSelection.Init();
-            TempRedLayoutSelection.Validate("Report ID", ReportId);
-            TempRedLayoutSelection."Custom Report Layout Code" := Format(i);
-            TempRedLayoutSelection.Validate("Table No.", TableId);
-            TempRedLayoutSelection.Validate("Field No.", Field."No.");
-            TempRedLayoutSelection.Insert();
-        end;
     end;
 }

@@ -18,8 +18,7 @@ codeunit 11310862 "Red Report Selections Events"
         if IsHandled then
             exit;
 
-        if RedLayoutSelection.SetReportLayoutSelection(RecordVariant, ReportID) then
-            exit;
+        RedLayoutSelection.MoveToTenantLayout(ReportID);
 
         RedReportLayoutSelection.SetTenantReportLayoutSelection(RecordVariant, ReportID, ReportUsage);
     end;
@@ -39,9 +38,7 @@ codeunit 11310862 "Red Report Selections Events"
         if IsHandled then
             exit;
 
-        IsHandled := RedLayoutSelection.RunReportWithLayoutSelection(TempReportSelections, IsGUI, RecVarToPrint);
-        if IsHandled then
-            exit;
+        RedLayoutSelection.MoveToTenantLayout(TempReportSelections."Report ID");
 
         RedReportLayoutSelection.RunReportWithTenantLayoutSelection(TempReportSelections, IsGUI, RecVarToPrint, UsedLayout);
         IsHandled := UsedLayout <> '';

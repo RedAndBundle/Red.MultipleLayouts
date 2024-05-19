@@ -33,8 +33,8 @@ page 11310863 "Red Layout Setup"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                RunObject = Page "Red Layout Selection";
-                ToolTip = 'Opens the Layout Selection page whenre you can setup which report layout is used in which circumstance.';
+                RunObject = Page "Red Report Layout Selection";
+                ToolTip = 'Opens the Layout Selection page where you can setup which report layout is used in which circumstance.';
             }
         }
     }

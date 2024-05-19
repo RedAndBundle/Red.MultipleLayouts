@@ -75,10 +75,15 @@ codeunit 11310873 "Red Report Layout Selection"
         RedReportLayoutSelection.SetRange("Report ID", ReportId);
         RedReportLayoutSelection.SetRange(Default, true);
         RedReportLayoutSelection.SetFilter("Layout Name", '<>%1', '');
-        RedReportLayoutSelection.SetFilter("Report Selection Usage", '%1|%2', Usage, Usage::RedBlank);
+        RedReportLayoutSelection.SetRange("Report Selection Usage", Usage);
         if RedReportLayoutSelection.FindFirst() then
             exit(AddLayoutSelectionToTempCustomReportLayout(TempTenantReportLayout, RedReportLayoutSelection."Layout Name", ReportId));
 
+        RedReportLayoutSelection.SetRange("Report Selection Usage", Usage::RedBlank);
+        if RedReportLayoutSelection.FindFirst() then
+            exit(AddLayoutSelectionToTempCustomReportLayout(TempTenantReportLayout, RedReportLayoutSelection."Layout Name", ReportId));
+
+        RedReportLayoutSelection.SetFilter("Report Selection Usage", '%1|%2', Usage, Usage::RedBlank);
         RedReportLayoutSelection.SetRange("Layout Name");
         if not RedReportLayoutSelection.IsEmpty then
             exit(AddEmptyLayoutToTempCustomReportLayout(TempTenantReportLayout, ReportId));

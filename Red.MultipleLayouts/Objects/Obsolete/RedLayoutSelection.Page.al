@@ -5,6 +5,13 @@ Page 11310862 "Red Layout Selection"
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = "Red Layout Selection";
+    ObsoleteState = Pending;
+    ObsoleteReason = 'This page is no longer used because the custom report layouts are discontinued. It is replaced by the table Red Report Layout Selection.';
+    ObsoleteTag = '3.1.0.0';
+    Editable = false;
+    InsertAllowed = false;
+    ModifyAllowed = false;
+    DeleteAllowed = true;
 
     layout
     {

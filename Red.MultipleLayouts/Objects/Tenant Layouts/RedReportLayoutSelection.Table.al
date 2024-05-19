@@ -135,6 +135,7 @@ table 11310864 "Red Report Layout Selection"
         if not Default then
             exit;
 
+        RedReportLayoutSelection.SetRange("Report Selection Usage", "Report Selection Usage");
         RedReportLayoutSelection.SetRange("Report ID", "Report ID");
         RedReportLayoutSelection.SetRange(Default, true);
         if not RedReportLayoutSelection.IsEmpty() then
@@ -172,33 +173,7 @@ table 11310864 "Red Report Layout Selection"
         "Table No." := TenantReportLayout.GetDefaultTableForReport("Report ID");
     end;
 
-    internal procedure CopyFromRedLayoutSelection(RedLayoutSelection: Record "Red Layout Selection"): Boolean
-    var
-        TenantReportLayout: Record "Tenant Report Layout";
-        RedTenantReportLayout: Codeunit "Red Tenant Report Layout";
-        NullGuid: Guid;
-        CannotUpgradeAutomaticallyLbl: Label 'Cannot upgrade %1 %2 automatically', Comment = '%1 = table %2 = layoutscode';
-    begin
-        if RedLayoutSelection."Custom Report Layout Code" = '' then
-            exit(false);
-
-        Init();
-        "Report ID" := RedLayoutSelection."Report ID";
-        "Report Selection Usage" := "Report Selection Usage"::RedBlank;
-        "Table No." := RedLayoutSelection."Table No.";
-        "Field No." := RedLayoutSelection."Field No.";
-        "Value" := RedLayoutSelection."Value";
-        Default := RedLayoutSelection.Default;
-        "Line No." := GetNextLineNo("Report ID");
-        if not TenantReportLayout.Get("Report ID", RedTenantReportLayout.GetLayoutNameFromCustomLayoutCode(RedLayoutSelection."Custom Report Layout Code"), NullGuid) then
-            if not TenantReportLayout.Get("Report ID", RedLayoutSelection."Custom Report Layout Code", NullGuid) then
-                Error(CannotUpgradeAutomaticallyLbl, RedLayoutSelection.TableCaption, RedLayoutSelection."Custom Report Layout Code");
-
-        Validate("Layout Name", TenantReportLayout.Name);
-        exit(Insert());
-    end;
-
-    local procedure GetNextLineNo(ReportId: Integer): Integer
+    internal procedure GetNextLineNo(ReportId: Integer): Integer
     var
         RedReportLayoutSelection: Record "Red Report Layout Selection";
     begin

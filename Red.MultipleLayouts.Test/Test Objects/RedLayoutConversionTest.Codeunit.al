@@ -1,3 +1,5 @@
+
+#pragma warning disable AL0432
 codeunit 80505 "Red Layout Conversion Test"
 {
     Subtype = Test;

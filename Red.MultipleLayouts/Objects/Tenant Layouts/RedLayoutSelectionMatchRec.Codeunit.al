@@ -1,5 +1,7 @@
 codeunit 11310864 "Red Layout Selection Match Rec"
 {
+#pragma warning disable AL0432
+    [Obsolete('Use MatchRecordVariable(RedReportLayoutSelection: Record "Red Report Layout Selection"; RecRef: RecordRef) instead')]
     procedure MatchRecordVariable(RedLayoutSelection: Record "Red Layout Selection"; RecRef: RecordRef): Boolean
     var
         FldRef: FieldRef;
@@ -11,6 +13,7 @@ codeunit 11310864 "Red Layout Selection Match Rec"
         Evaluate(TestValue, Format(FldRef.Value));
         exit(RedLayoutSelection.Value = TestValue);
     end;
+#pragma warning restore AL0432
 
     internal procedure MatchRecordVariable(RedReportLayoutSelection: Record "Red Report Layout Selection"; RecRef: RecordRef): Boolean
     var
