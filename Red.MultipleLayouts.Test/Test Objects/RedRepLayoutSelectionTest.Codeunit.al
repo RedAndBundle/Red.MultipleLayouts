@@ -375,6 +375,45 @@ codeunit 80506 "Red Rep Layout Selection Test"
     [TransactionModel(TransactionModel::AutoRollback)]
     // [HandlerFunctions('HandleReportSelectionPage')]
     [HandlerFunctions('SalesInvoiceReportHandler')]
+    procedure TwoLayoutsSetAsDefaultWithUsage()
+    var
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
+        Usage: Enum "Report Selection Usage";
+        ReportId: Integer;
+        TestResult: Code[20];
+    begin
+        // [FEATURE] Two custom layouts in system, two are in layout selection
+        // [Given] Report Id to test
+        ReportId := RedRepLayoutSelTestSetup.GetTestSalesReportId();
+
+        // [Given] Report usage to test
+        Usage := Usage::"S.Invoice";
+
+        // [Given] Two custom layout in system
+        RedRepLayoutSelTestSetup.EnsureCustomLayoutsForReport(ReportId, 2);
+
+        // [Given] Get first Sales Invoice
+        SalesInvoiceHeader.FindFirst();
+
+        // [Given] One Custom layout is selected as default in Selection Table
+        RedRepLayoutSelTestSetup.AddDefaultLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '1');
+
+        // [Given] One Custom layout is selected as default with usage in Selection Table
+        RedRepLayoutSelTestSetup.AddDefaultLayoutToSelectionTable(SalesInvoiceHeader, ReportId, '2', Usage);
+
+        // [WHEN] "Red Report Layout Selection".RunReportWithLayoutSelection is called 
+        TestResult := RunReportWithLayoutSelection(ReportId, SalesInvoiceHeader, Usage);
+
+        // [THEN] Layout 2 is default and should be used
+        if TestResult <> '2' then
+            Error(UnexpectedResultErr);
+    end;
+
+    [Test]
+    [TransactionModel(TransactionModel::AutoRollback)]
+    // [HandlerFunctions('HandleReportSelectionPage')]
+    [HandlerFunctions('SalesInvoiceReportHandler')]
     procedure TwoLayoutsOneSetAsDefaultWithoutLayoutCode()
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
@@ -407,7 +446,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
     [TransactionModel(TransactionModel::AutoRollback)]
     // [HandlerFunctions('HandleReportSelectionPage')]
     [HandlerFunctions('CustomReportLayoutsSelectionPageHandlerSales,SalesInvoiceReportHandler')]
-    procedure TwoLayoutsTwoLayoutsInLayoutSelectionOneSetAsDefault()
+    procedure TwoLayoutsInLayoutSelectionOneSetAsDefault()
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";

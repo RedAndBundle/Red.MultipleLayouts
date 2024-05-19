@@ -42,11 +42,9 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
 
     procedure EnsureCustomLayoutsForReport(ReportId: Integer; NoOfLayouts: Integer)
     var
-        // TenantReportLayout: Record "Tenant Report Layout";
         TenantReportLayout: Record "Tenant Report Layout";
         TempBlob: Codeunit "Temp Blob";
         RedTenantReportLayout: Codeunit "Red Tenant Report Layout";
-        // TenantReportLayout: Record "Tenant Report Layout";
         i: Integer;
         is: InStream;
     begin
@@ -106,7 +104,6 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
         RecRef: RecordRef;
         FldRef: FieldRef;
     begin
-#pragma warning disable AA0217
         RecRef.GetTable(RecVar);
         Field.SetRange(TableNo, RecRef.Number);
         Field.SetRange(FieldName, SourceFieldName);
@@ -124,18 +121,11 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
         else
             RedReportLayoutSelection.Validate(Value, FldRef.Value);
         RedReportLayoutSelection.Insert();
-#pragma warning restore AA0217
     end;
 
     procedure AddDefaultLayoutToSelectionTable(RecVar: Variant; ReportId: Integer; TenantReportLayout: Text)
-    var
-        RedReportLayoutSelection: Record "Red Report Layout Selection";
     begin
-        RedReportLayoutSelection.Validate("Report ID", ReportId);
-        RedReportLayoutSelection.Validate(Default, true);
-        if TenantReportLayout <> '' then
-            RedReportLayoutSelection."Layout Name" := TenantReportLayout;
-        RedReportLayoutSelection.Insert();
+        AddDefaultLayoutToSelectionTable(RecVar, ReportId, TenantReportLayout, "Report Selection Usage"::RedBlank);
     end;
 
     procedure AddDefaultLayoutToSelectionTable(RecVar: Variant; ReportId: Integer; TenantReportLayout: Text; Usage: Enum "Report Selection Usage")
@@ -143,22 +133,13 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
         RedReportLayoutSelection: Record "Red Report Layout Selection";
     begin
         RedReportLayoutSelection.Validate("Report ID", ReportId);
-        RedReportLayoutSelection.Validate(Default, true);
+        if Evaluate(RedReportLayoutSelection."Line No.", TenantReportLayout) then;
         RedReportLayoutSelection.Validate("Report Selection Usage", Usage);
+        RedReportLayoutSelection.Validate(Default, true);
         if TenantReportLayout <> '' then
             RedReportLayoutSelection."Layout Name" := TenantReportLayout;
         RedReportLayoutSelection.Insert();
     end;
-
-    // procedure EnsureReportSelectedInReportSelection(ReportId: Integer; Usage: Enum "Report Selection Usage")
-    // var
-    //     ReportSelections: Record "Report Selections";
-    // begin
-    //     ReportSelections.SetRange(Usage, Usage);
-    //     ReportSelections.DeleteAll();
-    //     ReportSelections.Init();
-    //     ReportSelections.InsertRecord(Usage, '1', ReportId);
-    // end;
 
     procedure GetTestSalesReportId(): Integer
     begin
