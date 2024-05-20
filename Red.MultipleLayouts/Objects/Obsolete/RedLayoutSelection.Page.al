@@ -5,6 +5,13 @@ Page 11310862 "Red Layout Selection"
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = "Red Layout Selection";
+    ObsoleteState = Pending;
+    ObsoleteReason = 'This page is no longer used because the custom report layouts are discontinued. It is replaced by the table Red Report Layout Selection.';
+    ObsoleteTag = '3.1.0.0';
+    Editable = false;
+    InsertAllowed = false;
+    ModifyAllowed = false;
+    DeleteAllowed = true;
 
     layout
     {
@@ -16,6 +23,11 @@ Page 11310862 "Red Layout Selection"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the report number from the full list of installed reports.';
+
+                    trigger OnValidate()
+                    begin
+                        CurrPage.Update();
+                    end;
                 }
                 field("Report Name"; Rec."Report Name")
                 {
@@ -69,6 +81,12 @@ Page 11310862 "Red Layout Selection"
                     begin
                         LookupFieldValue();
                     end;
+                }
+                field("Custom Report Layout Code"; Rec."Custom Report Layout Code")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the Custom Report Layout to use.';
+                    Editable = false;
                 }
                 field(CustomLayoutDescription; CustomLayoutDescription)
                 {
@@ -153,7 +171,7 @@ Page 11310862 "Red Layout Selection"
                 PromotedCategory = Process;
                 PromotedIsBig = true;
                 ToolTip = 'Records the Report ID and Source Table No when running a report.';
-                Visible = not IsRecording;
+                Visible = IsRecording;
 
                 trigger OnAction()
                 begin
@@ -178,6 +196,24 @@ Page 11310862 "Red Layout Selection"
                     CurrPage.Update();
                 end;
             }
+            action(Convert)
+            {
+                ApplicationArea = All;
+                Caption = 'Convert to Tenant Layout';
+                Image = ChangeTo;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'This function will convert all records with custom layouts that have been converted to tenant layouts to the Red Report Layout Selection table.';
+
+                trigger OnAction()
+                var
+                    RedLayoutSelection: Codeunit "Red Layout Selection";
+                begin
+                    RedLayoutSelection.MoveToTenantLayout();
+                    CurrPage.Update();
+                end;
+            }
         }
     }
 
@@ -187,9 +223,15 @@ Page 11310862 "Red Layout Selection"
 
     trigger OnOpenPage()
     var
-        RedLayoutRecorder: Codeunit "Red Layout Recorder";
+        NotificationIDs: Codeunit "Red Layout Notification IDs";
+        ObsoleteNotification: Notification;
+        ObsoleteMsg: Label 'This page will obsoleted. All custom report layouts will be converted to tenant report layouts. After this happens affected records will automtaically be converted to the Report Layout Selection table.';
+        LeanrMoreMsg: Label 'Learn more.';
     begin
-        IsRecording := RedLayoutRecorder.IsRecording();
+        ObsoleteNotification.ID := NotificationIDs.ObsoleteCustomLayout();
+        ObsoleteNotification.Message := ObsoleteMsg;
+        ObsoleteNotification.AddAction(LeanrMoreMsg, Codeunit::"Red Layout Notification Action", 'ObsoleteCustomLayout');
+        ObsoleteNotification.Send();
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
@@ -308,11 +350,6 @@ Page 11310862 "Red Layout Selection"
     end;
 
     local procedure ToggleRecord()
-    var
-        RedLayoutRecorder: Codeunit "Red Layout Recorder";
     begin
-        IsRecording := RedLayoutRecorder.IsRecording();
-        IsRecording := not IsRecording;
-        RedLayoutRecorder.SetRecord(IsRecording);
     end;
 }

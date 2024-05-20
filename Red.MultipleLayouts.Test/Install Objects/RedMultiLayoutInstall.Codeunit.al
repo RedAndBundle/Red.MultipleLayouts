@@ -1,4 +1,4 @@
-codeunit 80403 "Red Multi Layout Install"
+codeunit 80503 "Red Multi Layout Install"
 {
     Subtype = Install;
 
@@ -15,6 +15,6 @@ codeunit 80403 "Red Multi Layout Install"
         end;
         TestSuiteMgt.CreateTestSuite(SuiteName);
         ALTestSuite.Get(SuiteName);
-        TestSuiteMgt.SelectTestMethodsByRange(ALTestSuite, '80400..80450');
+        TestSuiteMgt.SelectTestMethodsByRange(ALTestSuite, '80500..80550');
     end;
 }

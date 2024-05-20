@@ -29,7 +29,7 @@ param(
 $files = Get-ChildItem $buildFolder
 $fnRuntimeInstallFile = "";
 
-$cmd = "Remove-Item C:\{0} -Recurse -ErrorAction Ignore" -f $installFolder
+$cmd = "Remove-Item C:\$installFolder -Recurse -ErrorAction Ignore"
 docker exec $containerName powershell -command $cmd
 
 $tmpFolder = New-Item -Path $buildFolder -Name $installFolder -ItemType "directory"

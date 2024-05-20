@@ -7,34 +7,41 @@ codeunit 11310862 "Red Report Selections Events"
     local procedure OnBeforeEmailDocument(FilePath: Text[250]; RecordVariant: Variant; ReportUsage: Enum "Report Selection Usage"; SaveToBlob: Boolean; var IsHandled: Boolean; var LayoutCode: Code[20]; var ReportID: Integer; var TempBlob: Codeunit "Temp Blob")
     var
         RedLayoutSelection: Codeunit "Red Layout Selection";
+        RedReportLayoutSelection: Codeunit "Red Report Layout Selection";
         RedLayoutRecorder: Codeunit "Red Layout Recorder";
     begin
         if IsHandled then
             exit;
 
-        IsHandled := RedLayoutRecorder.RecordReportToLayoutSelection(ReportID, true, RecordVariant);
+        IsHandled := RedLayoutRecorder.RecordReportToLayoutSelection(ReportID, true, RecordVariant, ReportUsage);
 
         if IsHandled then
             exit;
 
-        RedLayoutSelection.SetReportLayoutSelection(RecordVariant, ReportID);
+        RedLayoutSelection.MoveToTenantLayout(ReportID);
+
+        RedReportLayoutSelection.SetTenantReportLayoutSelection(RecordVariant, ReportID, ReportUsage);
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Report Selections", 'OnBeforePrintDocument', '', false, false)]
     local procedure OnBeforePrintDocument(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecVarToPrint: Variant; var IsHandled: Boolean)
     var
         RedLayoutSelection: Codeunit "Red Layout Selection";
+        RedReportLayoutSelection: Codeunit "Red Report Layout Selection";
         RedLayoutRecorder: Codeunit "Red Layout Recorder";
+        UsedLayout: Text;
     begin
         if IsHandled then
             exit;
 
-        IsHandled := RedLayoutRecorder.RecordReportToLayoutSelection(TempReportSelections, IsGUI, RecVarToPrint);
-
+        IsHandled := RedLayoutRecorder.RecordReportToLayoutSelection(TempReportSelections."Report ID", IsGUI, RecVarToPrint, TempReportSelections.Usage);
         if IsHandled then
             exit;
 
-        IsHandled := RedLayoutSelection.RunReportWithLayoutSelection(TempReportSelections, IsGUI, RecVarToPrint);
+        RedLayoutSelection.MoveToTenantLayout(TempReportSelections."Report ID");
+
+        RedReportLayoutSelection.RunReportWithTenantLayoutSelection(TempReportSelections, IsGUI, RecVarToPrint, UsedLayout);
+        IsHandled := UsedLayout <> '';
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Telemetry Management", 'OnSendDailyTelemetry', '', true, true)]

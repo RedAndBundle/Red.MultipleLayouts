@@ -1,4 +1,4 @@
-codeunit 80404 "Red Layout Suppress Commit"
+codeunit 80504 "Red Layout Suppress Commit"
 {
     EventSubscriberInstance = Manual;
 

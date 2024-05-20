@@ -1,6 +1,9 @@
-codeunit 11310868 "Red Layout Recorder"
+codeunit 11310876 "Red Report Layout Recorder"
 {
     SingleInstance = true;
+    ObsoleteState = Pending;
+    ObsoleteReason = 'This codeunit is no longer used because the custom report layouts are discontinued. It is replaced by the table Red Report Layout Selection.';
+    ObsoleteTag = '3.1.0.0';
 
     procedure SetRecord(NewValue: Boolean)
     begin
@@ -14,7 +17,7 @@ codeunit 11310868 "Red Layout Recorder"
 
     procedure RecordReportToLayoutSelection(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecVarToPrint: Variant): Boolean
     begin
-        exit(RecordReportToLayoutSelection(TempReportSelections."Report ID", IsGUI, RecVarToPrint));
+        // exit(RecordReportToLayoutSelection(TempReportSelections."Report ID", IsGUI, RecVarToPrint));
     end;
 
     procedure RecordReportToLayoutSelection(ReportID: Integer; IsGUI: Boolean; RecordVariant: Variant): Boolean

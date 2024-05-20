@@ -1,6 +1,9 @@
 codeunit 11310866 "Red Layout Selection Export"
 {
     TableNo = "Red Layout Selection";
+    ObsoleteState = Pending;
+    ObsoleteReason = 'This codeunit is no longer used because the custom report layouts are discontinued. It is replaced by the table Red Report Layout Selection.';
+    ObsoleteTag = '3.1.0.0';
 
     trigger OnRun()
     var

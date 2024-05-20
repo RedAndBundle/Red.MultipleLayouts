@@ -1,17 +1,18 @@
-codeunit 11310867 "Red Layout Selection Import"
+codeunit 11310874 "Red Rep Layout Selection Imp."
 {
-    TableNo = "Red Layout Selection";
+    TableNo = "Red Report Layout Selection";
+    Access = Internal;
 
     trigger OnRun()
     var
-        TempRedLayoutSelection: Record "Red Layout Selection" temporary;
+        TempRedReportLayoutSelection: Record "Red Report Layout Selection" temporary;
         jArray: JsonArray;
         QtyImported: Integer;
     begin
         GetJsonFromFile(jArray);
-        CreateTempRedLayoutSelectionFromJson(TempRedLayoutSelection, jArray);
-        CreateCustomReportLayouts(TempRedLayoutSelection);
-        InsertRedLayoutSelection(TempRedLayoutSelection, QtyImported);
+        CreateTempRedReportLayoutSelectionFromJson(TempRedReportLayoutSelection, jArray);
+        CreateCustomReportLayouts(TempRedReportLayoutSelection);
+        InsertRedReportLayoutSelection(TempRedReportLayoutSelection, QtyImported);
         DisplayResultsMessage(QtyImported);
     end;
 
@@ -35,13 +36,13 @@ codeunit 11310867 "Red Layout Selection Import"
         jArray.ReadFrom(jText);
     end;
 
-    procedure CreateTempRedLayoutSelectionFromJson(var TempRedLayoutSelection: Record "Red Layout Selection"; var jArray: JsonArray)
+    procedure CreateTempRedReportLayoutSelectionFromJson(var TempRedReportLayoutSelection: Record "Red Report Layout Selection"; var jArray: JsonArray)
     var
         RecRef: RecordRef;
     begin
-        RecRef.GetTable(TempRedLayoutSelection);
+        RecRef.GetTable(TempRedReportLayoutSelection);
         CreateRecordsFromJson(RecRef, jArray);
-        RecRef.SetTable(TempRedLayoutSelection);
+        RecRef.SetTable(TempRedReportLayoutSelection);
     end;
 
     procedure CreateRecordsFromJson(var RecRef: RecordRef; var jArray: JsonArray)
@@ -68,39 +69,41 @@ codeunit 11310867 "Red Layout Selection Import"
         end;
     end;
 
-    procedure CreateCustomReportLayouts(var TempRedLayoutSelection: Record "Red Layout Selection")
+    procedure CreateCustomReportLayouts(var TempRedReportLayoutSelection: Record "Red Report Layout Selection")
     var
-        CustomReportLayout: Record "Custom Report Layout";
+        TenantReportLayout: Record "Tenant Report Layout";
+        // CustomReportLayout: Record "Custom Report Layout";
+        RedTenantReportLayout: Codeunit "Red Tenant Report Layout";
     begin
-        if TempRedLayoutSelection.FindSet() then
+        if TempRedReportLayoutSelection.FindSet() then
             repeat
-                if CustomReportLayout.Get(TempRedLayoutSelection."Custom Report Layout Code") then begin
-                    if CustomReportLayout."Report ID" <> TempRedLayoutSelection."Report ID" then
-                        Error(CustReportLayoutDoesNotMatchReportIdErr, TempRedLayoutSelection."Custom Report Layout Code");
+                if TenantReportLayout.Get(TempRedReportLayoutSelection."Report ID", TempRedReportLayoutSelection."Layout Name") then begin
+                    if TenantReportLayout."Report ID" <> TempRedReportLayoutSelection."Report ID" then
+                        Error(CustReportLayoutDoesNotMatchReportIdErr, TempRedReportLayoutSelection."Layout Name");
                 end else begin
-                    CustomReportLayout.Get(CustomReportLayout.InitBuiltInLayout(TempRedLayoutSelection."Report ID", CustomReportLayout.Type::Word.AsInteger()));
-                    CustomReportLayout.Rename(TempRedLayoutSelection."Custom Report Layout Code");
-                    CustomReportLayout.Description := CreatedFromImportMsg;
-                    CustomReportLayout.Modify();
+                    RedTenantReportLayout.InitBuiltInLayout(TenantReportLayout, TempRedReportLayoutSelection."Report ID", TempRedReportLayoutSelection."Layout Name");
+                    // TenantReportLayout.Rename(TempRedReportLayoutSelection."Layout Name");
+                    TenantReportLayout.Description := CreatedFromImportMsg;
+                    TenantReportLayout.Modify();
                 end;
-            until TempRedLayoutSelection.Next() = 0;
+            until TempRedReportLayoutSelection.Next() = 0;
     end;
 
-    procedure InsertRedLayoutSelection(var TempRedLayoutSelection: Record "Red Layout Selection"; var QtyImported: Integer)
+    procedure InsertRedReportLayoutSelection(var TempRedReportLayoutSelection: Record "Red Report Layout Selection"; var QtyImported: Integer)
     var
-        RedLayoutSelection: Record "Red Layout Selection";
+        RedReportLayoutSelection: Record "Red Report Layout Selection";
     begin
-        if TempRedLayoutSelection.FindSet() then
+        if TempRedReportLayoutSelection.FindSet() then
             repeat
-                RedLayoutSelection.Init();
-                RedLayoutSelection := TempRedLayoutSelection;
-                RedLayoutSelection.Validate("Report ID");
-                RedLayoutSelection.Validate("Custom Report Layout Code");
-                RedLayoutSelection.Validate("Table No.");
-                RedLayoutSelection.Validate("Field No.");
-                if RedLayoutSelection.Insert() then
+                RedReportLayoutSelection.Init();
+                RedReportLayoutSelection := TempRedReportLayoutSelection;
+                RedReportLayoutSelection.Validate("Report ID");
+                RedReportLayoutSelection.Validate("Layout Name");
+                RedReportLayoutSelection.Validate("Table No.");
+                RedReportLayoutSelection.Validate("Field No.");
+                if RedReportLayoutSelection.Insert() then
                     QtyImported += 1;
-            until TempRedLayoutSelection.Next() = 0;
+            until TempRedReportLayoutSelection.Next() = 0;
     end;
 
     local procedure DisplayResultsMessage(QtyImported: Integer)
@@ -114,7 +117,8 @@ codeunit 11310867 "Red Layout Selection Import"
         jToken: JsonToken;
     begin
         FldRef := RecRef.Field(Field."No.");
-        jObject.Get(Field.FieldName, jToken);
+        if not jObject.Get(Field.FieldName, jToken) then
+            exit;
 
         case FldRef.Type of
             FldRef.Type::Option:

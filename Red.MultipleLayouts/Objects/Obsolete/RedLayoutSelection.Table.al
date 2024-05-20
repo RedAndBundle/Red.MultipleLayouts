@@ -2,6 +2,10 @@
 table 11310862 "Red Layout Selection"
 {
     DataClassification = CustomerContent;
+    Caption = 'Red Layout Selection';
+    ObsoleteState = Pending;
+    ObsoleteReason = 'This table is no longer used because the custom report layouts are discontinued. It is replaced by the table Red Report Layout Selection.';
+    ObsoleteTag = '3.1.0.0';
 
     fields
     {
@@ -98,12 +102,14 @@ table 11310862 "Red Layout Selection"
         MustBeZeroErr: Label '%1 and %2 must be 0.', Comment = '%1 is table no caption %2 = field no caption';
         OnlyOneDefaultErr: Label 'Report %1 can only have one default layout', Comment = '%1 = report name';
 
+#pragma warning disable AL0432
     procedure MatchRecordVariable(RecRef: RecordRef): Boolean
     var
         RedLayoutSelectionMatchRec: Codeunit "Red Layout Selection Match Rec";
     begin
         exit(RedLayoutSelectionMatchRec.MatchRecordVariable(Rec, RecRef));
     end;
+#pragma warning restore AL0432
 
     procedure ImportFromFile()
     var
