@@ -2,8 +2,6 @@ Page 11310862 "Red Layout Selection"
 {
     Caption = 'Red Layout Selection';
     PageType = List;
-    ApplicationArea = All;
-    UsageCategory = Administration;
     SourceTable = "Red Layout Selection";
     ObsoleteState = Pending;
     ObsoleteReason = 'This page is no longer used because the custom report layouts are discontinued. It is replaced by the table Red Report Layout Selection.';

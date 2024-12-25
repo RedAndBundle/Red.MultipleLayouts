@@ -1,6 +1,7 @@
 Page 11310865 "Red Report Layout Selection"
 {
     Caption = 'Red Report Layout Selection';
+    AdditionalSearchTerms = 'Red Layout Selection';
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Administration;
