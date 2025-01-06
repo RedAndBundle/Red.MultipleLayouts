@@ -321,6 +321,8 @@ Page 11310865 "Red Report Layout Selection"
                 Rec.Value := LayoutValueSelection.SelectItem();
             Database::"Bank Account":
                 Rec.Value := LayoutValueSelection.SelectBankAccount();
+            Database::"Responsibility Center":
+                Rec.Value := LayoutValueSelection.SelectResponsibilityCenter();
         end;
     end;
 

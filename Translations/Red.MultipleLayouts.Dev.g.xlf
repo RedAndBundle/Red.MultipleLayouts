@@ -443,6 +443,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Report Layout Selection - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1263699329 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Red Layout Selection</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Red Report Layout Selection - Property AdditionalSearchTerms</note>
+        </trans-unit>
         <trans-unit id="Page 1263699329 - Method 736657160 - NamedType 2784494499" size-unit="char" translate="yes" xml:space="preserve">
           <source>You cannot select a layout that is specific to another company.</source>
           <note from="Developer" annotates="general" priority="2"></note>
