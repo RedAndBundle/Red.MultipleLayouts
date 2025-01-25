@@ -1,0 +1,53 @@
+{
+  "id": "6d10b43b-3a51-4b72-8332-c1b2a4c753fd",
+  "applicationInsightsConnectionString": "daf58898-4ae6-4687-8adf-9f241dd9f5b4",
+  "name": "Red.MultipleLayouts.Dev",
+  "publisher": "Red and Bundle",
+  "version": "3.0.0.0",
+  "brief": "Red Multiple Layouts development project",
+  "description": "Development project for Red.MultipleLayouts",
+  "privacyStatement": "https://redandbundle.com/privacy/",
+  "EULA": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/EULA",
+  "help": "https://redandbundle.github.io/Red.MultipleLayouts.Doc",
+  "url": "https://redandbundle.com",
+  "logo": "Red.MultipleLayouts/images/Appsource_logo_large_text.png",
+  "dependencies": [
+    {
+      "id": "23de40a6-dfe8-4f80-80db-d70f83ce8caf",
+      "publisher": "Microsoft",
+      "name": "Test Runner",
+      "version": "17.0.0.0"
+    },
+    {
+      "id": "d6978c22-4a2f-452a-8f12-efdcf158d7e4",
+      "publisher": "ForNAV",
+      "name": "ForNAV Core Development e4",
+      "version": "7.2.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "24.0.0.0",
+  "application": "24.0.0.0",
+  "idRanges": [
+    {
+      "from": 11310862,
+      "to": 11310912
+    },
+    {
+      "from": 80500,
+      "to": 80550
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://redandbundle.github.io/Red.MultipleLayouts.Doc/#/README",
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "13.0",
+  "features": [
+    "TranslationFile",
+    "GenerateCaptions",
+    "NoImplicitWith"
+  ]
+}

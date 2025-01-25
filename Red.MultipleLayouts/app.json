@@ -37,7 +37,7 @@
   ],
   "contextSensitiveHelpUrl": "https://multilayout.redandbundle.com/docs/00%20introduction",
   "resourceExposurePolicy": {
-    "allowDebugging": false,
+    "allowDebugging": true,
     "allowDownloadingSource": false,
     "includeSourceInSymbolFile": false
   },

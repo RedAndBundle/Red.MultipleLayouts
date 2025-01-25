@@ -153,7 +153,14 @@ codeunit 11310873 "Red Report Layout Selection"
 
     local procedure SelectLayout(var TempTenantReportLayout: Record "Tenant Report Layout"): Text
     var
+        Setup: Record "Red Layout Setup";
         SelectLayoutErr: Label 'No report layout selected';
+
+        Options: Text;
+        Selected: Integer;
+        Text000: Label 'Save,Delete,Exit,Find';
+        Text001: Label 'You selected option %1.';
+        Text002: Label 'Choose one of the following layouts:';
     begin
         if not GuiAllowed() then begin
             if TempTenantReportLayout.FindFirst() then
@@ -161,9 +168,31 @@ codeunit 11310873 "Red Report Layout Selection"
             exit;
         end;
 
-        if TempTenantReportLayout.Count > 1 then
-            if not (Page.RunModal(Page::"Red Report Layouts", TempTenantReportLayout) = ACTION::LookupOK) then
-                Error(SelectLayoutErr);
+        Setup.InitSetup();
+        Setup."Commit on Post" := not Setup."Commit on Post";
+        Setup.Modify();
+
+        if TempTenantReportLayout.IsEmpty() then
+            exit('');
+
+        if TempTenantReportLayout.Count = 1 then begin
+            TempTenantReportLayout.FindFirst();
+            exit(TempTenantReportLayout.Name);
+        end;
+
+        if IsInWriteTransaction() then begin
+            if TempTenantReportLayout.FindSet() then
+                repeat
+                    Options += TempTenantReportLayout.Description + ',';
+                until TempTenantReportLayout.Next() = 0;
+
+            Selected := Dialog.StrMenu(Options, 1, Text002);
+            Error(Text001, Selected);
+            // error(Selected);
+        end;
+
+        if not (Page.RunModal(Page::"Red Report Layouts", TempTenantReportLayout) = ACTION::LookupOK) then
+            Error(SelectLayoutErr);
 
         if TempTenantReportLayout.Find() then
             exit(TempTenantReportLayout.Name);

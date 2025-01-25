@@ -32,5 +32,6 @@ table 11310863 "Red Layout Setup"
 
         Init();
         Insert();
+        Commit();
     end;
 }
