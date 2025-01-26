@@ -89,15 +89,10 @@ Page 11310865 "Red Report Layout Selection"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Custom Layout Description';
                     ToolTip = 'Specifies the Custom Report Layout to use.';
-
-                    trigger OnLookup(var Text: Text): Boolean
+                    Editable = false;
+                    trigger OnDrillDown()
                     begin
                         LookupTenantLayout();
-                    end;
-
-                    trigger OnValidate()
-                    begin
-                        ValidateTenantLayout();
                     end;
                 }
 
@@ -213,8 +208,14 @@ Page 11310865 "Red Report Layout Selection"
 
     trigger OnAfterGetRecord()
     begin
-        Rec.CalcFields(Rec."Report Layout Description");
-        CustomLayoutDescription := Rec."Report Layout Description";
+        if Rec."Layout Description" = '' then begin
+#pragma warning disable AL0432
+            Rec.CalcFields("Report Layout Description");
+            Rec."Layout Description" := Rec."Report Layout Description";
+#pragma warning restore AL0432
+            Rec.Modify();
+        end;
+        CustomLayoutDescription := Rec."Layout Description";
     end;
 
     procedure RunCustomReport()
@@ -241,43 +242,60 @@ Page 11310865 "Red Report Layout Selection"
     local procedure LookupTenantLayout()
     var
         TenantReportLayout: Record "Tenant Report Layout";
+        TempTenantReportLayout: Record "Tenant Report Layout" temporary;
+#if CUSTOM
+        RedReportLayoutSelection: Codeunit "Red Report Layout Selection";
+#endif
         WrongCompanyErr: Label 'You cannot select a layout that is specific to another company.';
     begin
-        TenantReportLayout.FilterGroup(4);
         TenantReportLayout.SetRange("Report ID", Rec."Report ID");
-        TenantReportLayout.FilterGroup(0);
         TenantReportLayout.SetFilter("Company Name", '%1|%2', CompanyName, '');
-        if Page.RunModal(page::"Red Report Layouts", TenantReportLayout) = ACTION::LookupOK then begin
-            if not (TenantReportLayout."Company Name" in [CompanyName, '']) then
+        if TenantReportLayout.FindSet() then
+            repeat
+                TempTenantReportLayout := TenantReportLayout;
+                TempTenantReportLayout.Insert(true);
+            until TenantReportLayout.Next() = 0;
+
+#if CUSTOM
+// TODO enable for ForNAV with custom layouts
+        RedReportLayoutSelection.AddBuiltInLayoutToList(TempTenantReportLayout, Rec."Report ID");
+#endif
+
+        Commit();
+        if Page.RunModal(page::"Red Report Layouts", TempTenantReportLayout) = ACTION::LookupOK then begin
+            if not (TempTenantReportLayout."Company Name" in [CompanyName, '']) then
                 Error(WrongCompanyErr);
-            Rec."Layout Name" := TenantReportLayout.Name;
-            CustomLayoutDescription := TenantReportLayout.Description;
+            Rec."Layout Name" := TempTenantReportLayout.Name;
+            Rec."Runtime Package ID" := TempTenantReportLayout."App ID";
+            Rec."Layout Description" := TempTenantReportLayout.Description;
+            CustomLayoutDescription := TempTenantReportLayout.Description;
+            Rec.Modify();
         end
 
     end;
 
-    local procedure ValidateTenantLayout()
-    var
-        TenantReportLayout: Record "Tenant Report Layout";
-        CouldNotFindTenantReportLayoutErr: Label 'There is no custom report layout with %1 in the description.', Comment = '%1 = CustomLayoutDescription';
-        FilterLbl: Label '@*%1*', Comment = '%1 = text to filter';
-    begin
-        if CustomLayoutDescription = '' then begin
-            Rec."Layout Name" := '';
-            exit;
-        end;
+    // local procedure ValidateTenantLayout()
+    // var
+    //     TenantReportLayout: Record "Tenant Report Layout";
+    //     CouldNotFindTenantReportLayoutErr: Label 'There is no custom report layout with %1 in the description.', Comment = '%1 = CustomLayoutDescription';
+    //     FilterLbl: Label '@*%1*', Comment = '%1 = text to filter';
+    // begin
+    //     if CustomLayoutDescription = '' then begin
+    //         Rec."Layout Name" := '';
+    //         exit;
+    //     end;
 
-        TenantReportLayout.SetCurrentKey("Report ID", "Company Name", "Layout Format");
-        TenantReportLayout.SetRange("Report ID", Rec."Report ID");
-        TenantReportLayout.SetFilter("Company Name", '%1|%2', '', CompanyName);
-        TenantReportLayout.SetFilter(
-          Description, StrSubstNo(FilterLbl, CustomLayoutDescription));
-        if not TenantReportLayout.FindFirst() then
-            Error(CouldNotFindTenantReportLayoutErr, CustomLayoutDescription);
+    //     TenantReportLayout.SetCurrentKey("Report ID", "Company Name", "Layout Format");
+    //     TenantReportLayout.SetRange("Report ID", Rec."Report ID");
+    //     TenantReportLayout.SetFilter("Company Name", '%1|%2', '', CompanyName);
+    //     TenantReportLayout.SetFilter(
+    //       Description, StrSubstNo(FilterLbl, CustomLayoutDescription));
+    //     if not TenantReportLayout.FindFirst() then
+    //         Error(CouldNotFindTenantReportLayoutErr, CustomLayoutDescription);
 
-        if TenantReportLayout.Name <> Rec."Layout Name" then
-            Rec.Validate(Rec."Layout Name", TenantReportLayout.Name);
-    end;
+    //     if TenantReportLayout.Name <> Rec."Layout Name" then
+    //         Rec.Validate(Rec."Layout Name", TenantReportLayout.Name);
+    // end;
 
     local procedure LookupFieldNo();
     var

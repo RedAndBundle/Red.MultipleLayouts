@@ -97,9 +97,21 @@ table 11310864 "Red Report Layout Selection"
         field(12; "Report Layout Description"; Text[250])
         {
             CalcFormula = Lookup("Tenant Report Layout".Description where(Name = field("Layout Name")));
+            ObsoleteState = Pending;
+            ObsoleteReason = 'Use field "Layout Description" instead';
             Caption = 'Report Layout Description';
             FieldClass = FlowField;
             NotBlank = true;
+        }
+        field(13; "Layout Description"; Text[250])
+        {
+            Caption = 'Report Layout Description';
+            NotBlank = true;
+        }
+        field(14; "Runtime Package ID"; Guid)
+        {
+            Caption = 'Runtime Package ID';
+            DataClassification = SystemMetadata;
         }
 
     }
