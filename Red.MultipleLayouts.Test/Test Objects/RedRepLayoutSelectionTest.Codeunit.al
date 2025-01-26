@@ -10,7 +10,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] No custom layouts for the report to run
         // [Given] Report Id to test
@@ -41,7 +41,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] One selected custom layouts in system
         // [Given] Report Id to test
@@ -69,13 +69,13 @@ codeunit 80506 "Red Rep Layout Selection Test"
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    [HandlerFunctions('CustomReportLayoutsSelectionPageHandlerDefaultSales,SalesInvoiceReportHandler')]
+    [HandlerFunctions('CustomReportLayoutsSelectionStrMenuDefault,SalesInvoiceReportHandler')]
     procedure OneCustomLayoutNotSelected()
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] One custom layouts in system not selected
         // [Given] Report Id to test
@@ -104,13 +104,13 @@ codeunit 80506 "Red Rep Layout Selection Test"
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
     // [HandlerFunctions('HandleReportSelectionPage')]
-    [HandlerFunctions('CustomReportLayoutsSelectionPageHandlerSales,SalesInvoiceReportHandler')]
+    [HandlerFunctions('CustomReportLayoutsSelectionStrMenuDefault,SalesInvoiceReportHandler')]
     procedure TwoCustomLayoutSelected()
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] Two custom layouts in system, one is selected
         // [Given] Report Id to test
@@ -139,13 +139,13 @@ codeunit 80506 "Red Rep Layout Selection Test"
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
     // [HandlerFunctions('HandleReportSelectionPage')]
-    [HandlerFunctions('CustomReportLayoutsSelectionPageHandlerDefaultSales,SalesInvoiceReportHandler')]
+    [HandlerFunctions('CustomReportLayoutsSelectionStrMenuDefault,SalesInvoiceReportHandler')]
     procedure TwoCustomLayoutNotSelected()
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] Two custom layouts in system, none is selected
         // [Given] Report Id to test
@@ -180,7 +180,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] Two custom layouts in system, one is in layout selection
         // [Given] Report Id to test
@@ -212,7 +212,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] Two custom layouts in system, one is in layout selection with a filter instead of a value
         // [Given] Report Id to test
@@ -244,7 +244,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         Usage: Enum "Report Selection Usage";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] One selected custom layouts in system
         // [Given] Report Id to test
@@ -273,13 +273,13 @@ codeunit 80506 "Red Rep Layout Selection Test"
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
     // [HandlerFunctions('HandleReportSelectionPage')]
-    [HandlerFunctions('CustomReportLayoutsSelectionPageHandlerSales,SalesInvoiceReportHandler')]
+    [HandlerFunctions('CustomReportLayoutsSelectionStrMenuDefault,SalesInvoiceReportHandler')]
     procedure TwoLayoutsTwoLayoutsInLayoutSelection()
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] Two custom layouts in system, two are in layout selection
         // [Given] Report Id to test
@@ -312,7 +312,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] Two custom layouts in system, two are in layout selection
         // [Given] Report Id to test
@@ -345,7 +345,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         Usage: Enum "Report Selection Usage";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] Two custom layouts in system, two are in layout selection
         // [Given] Report Id to test
@@ -381,7 +381,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         Usage: Enum "Report Selection Usage";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] Two custom layouts in system, two are in layout selection
         // [Given] Report Id to test
@@ -419,7 +419,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] Two custom layouts in system, two are in layout selection
         // [Given] Report Id to test
@@ -445,13 +445,13 @@ codeunit 80506 "Red Rep Layout Selection Test"
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
     // [HandlerFunctions('HandleReportSelectionPage')]
-    [HandlerFunctions('CustomReportLayoutsSelectionPageHandlerSales,SalesInvoiceReportHandler')]
+    [HandlerFunctions('CustomReportLayoutsSelectionStrMenuDefault,SalesInvoiceReportHandler')]
     procedure TwoLayoutsInLayoutSelectionOneSetAsDefault()
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] Two custom layouts in system, two are in layout selection
         // [Given] Report Id to test
@@ -481,7 +481,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
 
     [Test]
     [TransactionModel(TransactionModel::AutoCommit)]
-    [HandlerFunctions('CustomReportLayoutsSelectionPageHandlerDefaultPurchase,PurchaseInvoiceReportHandler')]
+    [HandlerFunctions('CustomReportLayoutsSelectionStrMenuDefault,PurchaseInvoiceReportHandler')]
     procedure PurchasePostOneCustomLayoutNotSelected()
     var
         PurchaseHeader: Record "Purchase Header";
@@ -489,7 +489,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
         RedRepLayoutSelTestSetup: Codeunit "Red Rep Layout Sel. Test Setup";
         RedLayoutSuppressCommit: Codeunit "Red Layout Suppress Commit";
         ReportId: Integer;
-        TestResult: Code[20];
+        TestResult: Text;
     begin
         // [FEATURE] Run Sales Post with one custom layouts in system not selected
         // [Given] Report Id to test
@@ -595,6 +595,15 @@ codeunit 80506 "Red Rep Layout Selection Test"
         // ToDo test with cancel
         RedReportLayouts.GoToKey(RedRepLayoutSelTestSetup.GetTestSalesReportId(), '1', NullGuid);
         RedReportLayouts.OK().Invoke();
+    end;
+
+    [StrMenuHandler]
+    procedure CustomReportLayoutsSelectionStrMenuDefault(Options: Text[1024]; var Choice: Integer; Instruction: Text[1024])
+    var
+        OptionList: List of [Text];
+    begin
+        OptionList := options.Split(',');
+        Choice := OptionList.IndexOf('1');
     end;
 
     [ModalPageHandler]

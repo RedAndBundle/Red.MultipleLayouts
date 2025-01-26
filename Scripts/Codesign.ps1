@@ -1,7 +1,7 @@
-$BuildFolder = "X:\Sync\Red and Bundle\Development\Source Code\Red.MultipleLayouts\_Build"
+$BuildFolder = "X:\SourceCode\Red.MultipleLayouts\_Build"
 $files = Get-ChildItem $BuildFolder -Filter *.app
 
-Set-Location "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin"
+Set-Location "C:\Program Files (x86)\Microsoft SDKs\ClickOnce\SignTool"
 
 for ($i=0; $i -lt $files.Count; $i++) {
     $outfile = $files[$i].FullName

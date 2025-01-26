@@ -64,4 +64,12 @@ codeunit 11310863 "Red Layout Value Selection"
         if Page.RunModal(Page::"Bank Account List", BankAccount) = ACTION::LookupOK then
             exit(BankAccount."No.");
     end;
+
+    procedure SelectResponsibilityCenter(): Code[10]
+    var
+        ResponsibilityCenter: Record "Responsibility Center";
+    begin
+        if Page.RunModal(Page::"Responsibility Center List", ResponsibilityCenter) = Action::LookupOK then
+            exit(ResponsibilityCenter.Code);
+    end;
 }
