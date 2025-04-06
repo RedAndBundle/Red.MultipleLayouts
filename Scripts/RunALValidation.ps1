@@ -3,10 +3,10 @@
 # install-module bccontainerhelper -force -AllowClobber
 # uninstall-module navcontainerhelper -force
 
-$licenseFile = 'X:\OneDrive\Red And Bundle B.V\Development - Documents\Licenses\Business Central\BC25 On Prem ForNAV + Own Objects.bclicense'
-$fnLanguage = "X:\SourceCode\Cust.ForNAV\ForNAV Docker Installer\UniversalCodeApp 25\ForNAV Language Module 7.4.2500.8.app"
-$fnCore = "X:\SourceCode\Cust.ForNAV\ForNAV Docker Installer\UniversalCodeApp 25\ForNAV Core 7.4.2500.8.app"
-$fnReport ="X:\SourceCode\Cust.ForNAV\ForNAV Docker Installer\UniversalCodeApp 25\ForNAV Customizable Report Pack 7.4.2500.8.app"
+# $licenseFile = 'X:\OneDrive\Red And Bundle B.V\Development - Documents\Licenses\Business Central\BC25 On Prem ForNAV + Own Objects.bclicense'
+$fnLanguage = "X:\SourceCode\Cust.ForNAV\ForNAV Docker Installer\UniversalCodeApp 25\ForNAV Language Module 8.0.2500.3.app"
+$fnCore = "X:\SourceCode\Cust.ForNAV\ForNAV Docker Installer\UniversalCodeApp 25\ForNAV Core 8.0.2500.3.app"
+$fnReport = "X:\SourceCode\Cust.ForNAV\ForNAV Docker Installer\UniversalCodeApp 25\ForNAV Customizable Report Pack 8.0.2500.3.app"
 $app = "X:\SourceCode\Red.MultipleLayouts\_Build\Red and Bundle_Multiple Report Layout Selector_3.2.0.0.app"
 $prev = "X:\SourceCode\Red.MultipleLayouts\_Build Archive\Red and Bundle_Multiple Report Layout Selector_3.1.0.0.app"
 
