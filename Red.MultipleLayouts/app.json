@@ -16,7 +16,7 @@
       "id": "83326d6d-11f8-49fd-981a-6f266a7c8d81",
       "publisher": "ForNAV",
       "name": "Customizable Report Pack",
-      "version": "7.4.0.0"
+      "version": "8.0.0.0"
     }
   ],
   "internalsVisibleTo": [
@@ -27,8 +27,8 @@
     }
   ],
   "screenshots": [],
-  "platform": "24.0.0.0",
-  "application": "24.0.0.0",
+  "platform": "27.0.0.0",
+  "application": "27.0.0.0",
   "idRanges": [
     {
       "from": 11310862,
@@ -41,6 +41,6 @@
     "allowDownloadingSource": false,
     "includeSourceInSymbolFile": false
   },
-  "runtime": "13.0",
+  "runtime": "16.0",
   "features": ["TranslationFile", "GenerateCaptions", "NoImplicitWith"]
 }

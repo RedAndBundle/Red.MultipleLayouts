@@ -4,6 +4,11 @@
     "generalAction" : "Hidden",
     "rules": [
         {
+            "id": "AA0247",
+            "action": "None",
+            "justification": "Not using namespaces yet"
+        },
+        {
             "id": "AA0214",
             "action": "None",
             "justification": "Not possible to solve"
