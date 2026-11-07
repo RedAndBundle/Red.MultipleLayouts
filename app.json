@@ -3,7 +3,7 @@
   "applicationInsightsConnectionString": "daf58898-4ae6-4687-8adf-9f241dd9f5b4",
   "name": "Red.MultipleLayouts.Dev",
   "publisher": "Red and Bundle",
-  "version": "3.1.0.0",
+  "version": "3.3.0.0",
   "brief": "Red Multiple Layouts development project",
   "description": "Development project for Red.MultipleLayouts",
   "privacyStatement": "https://redandbundle.com/privacy/",
@@ -17,17 +17,11 @@
       "publisher": "Microsoft",
       "name": "Test Runner",
       "version": "17.0.0.0"
-    },
-    {
-      "id": "83326d6d-11f8-49fd-981a-6f266a7c8d81",
-      "publisher": "ForNAV",
-      "name": "Customizable Report Pack",
-      "version": "7.4.0.0"
     }
   ],
   "screenshots": [],
-  "platform": "25.0.0.0",
-  "application": "25.0.0.0",
+  "platform": "28.0.0.0",
+  "application": "28.0.0.0",
   "idRanges": [
     {
       "from": 11310862,
@@ -44,7 +38,7 @@
     "allowDownloadingSource": false,
     "includeSourceInSymbolFile": true
   },
-  "runtime": "14.0",
+  "runtime": "17.0",
   "features": [
     "TranslationFile",
     "GenerateCaptions",

@@ -5,41 +5,32 @@ codeunit 11310873 "Red Report Layout Selection"
     procedure SetTenantReportLayoutSelection(RecordVariant: Variant; ReportID: Integer; Usage: Enum "Report Selection Usage")
     var
         TempTenantReportLayout: Record "Tenant Report Layout" temporary;
-        SelectedLayoutCode: Text;
     begin
         if not GetLayoutsFromLayoutSelection(TempTenantReportLayout, RecordVariant, ReportID, Usage) then
-            if not GetDefaultLayoutForReport(TempTenantReportLayout, ReportID, Usage) then begin
+            if not GetDefaultLayoutForReport(TempTenantReportLayout, ReportID, Usage) then
                 if not GetTempCustomReportLayout(TempTenantReportLayout, ReportID) then
                     exit;
-
-                GetSelectedLayoutCode(ReportID, SelectedLayoutCode);
-
-                if SelectedLayoutCode = '' then
-                    AddBuiltInLayoutToList(TempTenantReportLayout, ReportID);
-            end;
 
         SetTempTenantLayoutSelected(SelectLayout(TempTenantReportLayout));
     end;
 
     procedure RunReportWithTenantLayoutSelection(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecordVariant: Variant; var UsedLayoutCode: Text)
+    begin
+        RunReportWithTenantLayoutSelection(TempReportSelections."Report ID", TempReportSelections.Usage, IsGUI, RecordVariant, UsedLayoutCode);
+    end;
+
+    procedure RunReportWithTenantLayoutSelection(ReportID: Integer; Usage: Enum "Report Selection Usage"; IsGUI: Boolean; RecordVariant: Variant; var UsedLayoutCode: Text)
     var
         TempTenantReportLayout: Record "Tenant Report Layout" temporary;
         TenantReportLayout: Record "Tenant Report Layout";
-        SelectedLayoutCode: Text;
     begin
-        if not GetLayoutsFromLayoutSelection(TempTenantReportLayout, RecordVariant, TempReportSelections."Report ID", TempReportSelections.Usage) then
-            if not GetDefaultLayoutForReport(TempTenantReportLayout, TempReportSelections."Report ID", TempReportSelections.Usage) then begin
-                if not GetTempCustomReportLayout(TempTenantReportLayout, TempReportSelections."Report ID") then
+        if not GetLayoutsFromLayoutSelection(TempTenantReportLayout, RecordVariant, ReportID, Usage) then
+            if not GetDefaultLayoutForReport(TempTenantReportLayout, ReportID, Usage) then
+                if not GetTempCustomReportLayout(TempTenantReportLayout, ReportID) then
                     exit;
 
-                GetSelectedLayoutCode(TempReportSelections."Report ID", SelectedLayoutCode);
-
-                if SelectedLayoutCode = '' then
-                    AddBuiltInLayoutToList(TempTenantReportLayout, TempReportSelections."Report ID");
-            end;
-
         TenantReportLayout := SelectLayout(TempTenantReportLayout);
-        RunReportWithSelectedLayout(TempReportSelections, IsGUI, RecordVariant, TenantReportLayout);
+        RunReportWithSelectedLayout(ReportID, IsGUI, RecordVariant, TenantReportLayout);
         UsedLayoutCode := TenantReportLayout.Name;
     end;
 
@@ -82,53 +73,37 @@ codeunit 11310873 "Red Report Layout Selection"
             exit(AddEmptyLayoutToTempCustomReportLayout(TempTenantReportLayout, ReportId));
     end;
 
-    local procedure GetTempCustomReportLayout(var TempTenantReportLayout: Record "Tenant Report Layout"; ReportId: Integer): Boolean
-    var
-        TenantReportLayout: Record "Tenant Report Layout";
-    begin
-        TenantReportLayout.SetRange("Report ID", ReportId);
-        TenantReportLayout.SetFilter("Company Name", '%1|%2', CompanyName, '');
-        TenantReportLayout.SetFilter(Description, '<>ForNAV BC preview*');
-        TenantReportLayout.SetFilter(Name, '<>@*email*');
-        if TenantReportLayout.FindSet() then
-            repeat
-                TempTenantReportLayout."Report ID" := TenantReportLayout."Report ID";
-                TempTenantReportLayout.Name := TenantReportLayout.Name;
-                TempTenantReportLayout.Description := TenantReportLayout.Description;
-                TempTenantReportLayout."Company Name" := TenantReportLayout."Company Name";
-                TenantReportLayout."App ID" := TenantReportLayout."App ID";
-                TempTenantReportLayout.Insert();
-            until TenantReportLayout.Next() = 0;
-
-        exit(not TempTenantReportLayout.IsEmpty());
-    end;
-
-    local procedure GetSelectedLayoutCode(ReportId: Integer; var SelectedLayoutCode: Text)
-    var
-        DesignTimeReportSelection: Record "Tenant Report Layout Selection";
-        NullGuid: Guid;
-    begin
-        if DesignTimeReportSelection.Get(ReportId, CompanyName, NullGuid) then
-            SelectedLayoutCode := DesignTimeReportSelection."Layout Name";
-    end;
-
-    procedure AddBuiltInLayoutToList(var TempTenantReportLayout: Record "Tenant Report Layout"; ReportId: Integer)
+    procedure GetTempCustomReportLayout(var TempTenantReportLayout: Record "Tenant Report Layout"; ReportId: Integer): Boolean
     var
         ReportLayoutList: Record "Report Layout List";
-        NullGuid: Guid;
+        TenantReportLayout: Record "Tenant Report Layout";
     begin
-        ReportLayoutList.SetFilter("Application ID", '<>%1', NullGuid);
         ReportLayoutList.SetRange("Report ID", ReportId);
+        ReportLayoutList.SetFilter(Description, '<>ForNAV BC preview*');
+        ReportLayoutList.SetFilter(Name, '<>@*email*');
         if ReportLayoutList.FindSet() then
             repeat
                 TempTenantReportLayout.Init();
                 TempTenantReportLayout."Report ID" := ReportLayoutList."Report ID";
                 TempTenantReportLayout.Name := ReportLayoutList.Name;
-                TempTenantReportLayout.Description := RemoveFilenamePath(ReportLayoutList.Description);
-                TempTenantReportLayout."App ID" := ReportLayoutList."Runtime Package ID";
-                TempTenantReportLayout."Company Name" := CompanyName;
-                TempTenantReportLayout.Insert();
+                if ReportLayoutList."User Defined" then begin
+                    TenantReportLayout.SetRange("Report ID", ReportLayoutList."Report ID");
+                    TenantReportLayout.SetRange(Name, ReportLayoutList.Name);
+                    if TenantReportLayout.FindFirst() then
+                        if TenantReportLayout."Company Name" in [CompanyName, ''] then begin
+                            TempTenantReportLayout.Description := TenantReportLayout.Description;
+                            TempTenantReportLayout."Company Name" := TenantReportLayout."Company Name";
+                            if TempTenantReportLayout.Insert() then;
+                        end;
+                end else begin
+                    TempTenantReportLayout.Description := RemoveFilenamePath(ReportLayoutList.Description);
+                    TempTenantReportLayout."App ID" := ReportLayoutList."Runtime Package ID";
+                    TempTenantReportLayout."Company Name" := CopyStr(CompanyName, 1, MaxStrLen(TempTenantReportLayout."Company Name"));
+                    if TempTenantReportLayout.Insert() then;
+                end;
             until ReportLayoutList.Next() = 0;
+
+        exit(not TempTenantReportLayout.IsEmpty());
     end;
 
     local procedure AddLayoutSelectionToTempCustomReportLayout(var TempTenantReportLayout: Record "Tenant Report Layout"; RedReportLayoutSelection: Record "Red Report Layout Selection"): Boolean
@@ -211,10 +186,10 @@ codeunit 11310873 "Red Report Layout Selection"
             exit(TempTenantReportLayout);
     end;
 
-    local procedure RunReportWithSelectedLayout(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecordVariant: Variant; TempTenantReportLayout: Record "Tenant Report Layout" temporary)
+    local procedure RunReportWithSelectedLayout(ReportID: Integer; IsGUI: Boolean; RecordVariant: Variant; TempTenantReportLayout: Record "Tenant Report Layout" temporary)
     begin
         SetTempTenantLayoutSelected(TempTenantReportLayout);
-        Report.RunModal(TempReportSelections."Report ID", IsGUI, false, RecordVariant);
+        Report.RunModal(ReportID, IsGUI, false, RecordVariant);
         SetTempTenantLayoutSelected('');
     end;
 

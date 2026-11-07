@@ -56,7 +56,8 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
             TenantReportLayout."Report ID" := ReportId;
             TenantReportLayout.Description := Format(i);
             TenantReportLayout."Layout Format" := TenantReportLayout."Layout Format"::RDLC;
-            RedTenantReportLayout.GetBuiltinLayout(ReportId, TempBlob);
+            if not RedTenantReportLayout.GetBuiltinLayout(ReportId, TempBlob) then
+                RedTenantReportLayout.GetEmptyRdlcLayout(TempBlob);
             TempBlob.CreateInStream(is);
             TenantReportLayout.Layout.ImportStream(is, TenantReportLayout.Description);
             TenantReportLayout.Insert();
@@ -146,6 +147,28 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
         exit(Report::"Standard Sales - Invoice");
     end;
 
+    procedure GetTestWhseReportId(): Integer
+    begin
+        exit(Report::"Red Test Whse. Shipment");
+    end;
+
+    procedure CreateWarehouseShipment(var WarehouseShipmentHeader: Record "Warehouse Shipment Header")
+    var
+        TestShipmentNoTok: Label 'REDTEST01', Locked = true;
+    begin
+        if WarehouseShipmentHeader.Get(TestShipmentNoTok) then
+            exit;
+
+        WarehouseShipmentHeader.Init();
+        WarehouseShipmentHeader."No." := TestShipmentNoTok;
+        WarehouseShipmentHeader.Insert(false);
+    end;
+
+    procedure GetTestNoBuiltInLayoutReportId(): Integer
+    begin
+        exit(Report::"Red Test Sales Invoice");
+    end;
+
     procedure GetTestPurchaseReportId(): Integer
     begin
         exit(Report::"Purchase - Invoice");
@@ -153,6 +176,8 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
 
     procedure GetAltTestReportId(): Integer
     begin
+        // BC29: the built-in RDLC of this report references GlobalLocationNumber columns that are missing
+        // from its dataset and cannot be copied to a tenant layout; the import creates a blank layout instead.
         exit(Report::"Standard Sales - Order Conf.");
     end;
 
