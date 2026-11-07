@@ -4,6 +4,8 @@
 # uninstall-module navcontainerhelper -force
 
 # $licenseFile = 'X:\OneDrive\Red And Bundle B.V\Development - Documents\Licenses\Business Central\BC25 On Prem ForNAV + Own Objects.bclicense'
+# ForNAV apps are only needed because the previous release ($prev) still depends on the ForNAV Customizable Report Pack.
+# The current app has no ForNAV dependency; drop these (and -installApps) once $prev is a ForNAV-free release.
 $fnLanguage = "X:\SourceCode\Cust.ForNAV\ForNAV Docker Installer\UniversalCodeApp 25\ForNAV Language Module 8.0.2500.3.app"
 $fnCore = "X:\SourceCode\Cust.ForNAV\ForNAV Docker Installer\UniversalCodeApp 25\ForNAV Core 8.0.2500.3.app"
 $fnReport = "X:\SourceCode\Cust.ForNAV\ForNAV Docker Installer\UniversalCodeApp 25\ForNAV Customizable Report Pack 8.0.2500.3.app"

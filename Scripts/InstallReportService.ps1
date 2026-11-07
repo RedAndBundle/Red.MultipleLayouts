@@ -1,1 +1,0 @@
-Start-Process -FilePath .\ReportsForNAV.exe -ArgumentList /COMPONENTS=”deployment\reportservice", /VERYSILENT, /NORESTART, /SUPPRESSMESSAGEBOXES, /LOG=".\fnlog.txt"

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-**Multiple Report Layout Selector** (Red and Bundle): a Business Central AL extension that picks a report layout at print/email time based on the record being printed (customer, vendor, dimension, item, etc.), on Report Selection Usage, or by prompting the user. It is built on top of the ForNAV **Customizable Report Pack**. End-user docs: https://multilayout.redandbundle.com/
+**Multiple Report Layout Selector** (Red and Bundle): a Business Central AL extension that picks a report layout at print/email time based on the record being printed (customer, vendor, dimension, item, etc.), on Report Selection Usage, or by prompting the user. It works with any report (Microsoft standard, ForNAV, or custom) and has no third-party dependencies; it requires BC 28 or later. End-user docs: https://multilayout.redandbundle.com/
 
 ## Project layout (three app.json files)
 
@@ -14,8 +14,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | `Red.MultipleLayouts.Test/` | Red.MultipleLayouts.Test | 80500–80550 | Test app; product exposes internals to it via `internalsVisibleTo` |
 | repo root `app.json` | Red.MultipleLayouts.Dev | both ranges | Dev workspace that compiles product + tests together as one app for local publish/debug |
 
-- Keep the `version`, `platform`/`application` (currently BC 27 / runtime 16.0) and ForNAV dependency versions in sync across all three `app.json` files. The test app's dependency on the product version must match the product version.
-- `app E4.json` is an alternate root manifest that depends on **ForNAV Core Development e4** instead of the Customizable Report Pack (ForNAV e4 development mode). Switching between the two is handled by the `red-al-tools:red-swap-deps` skill.
+- Keep the `version` and `platform`/`application` (currently BC 28 / runtime 17.0) in sync across all three `app.json` files. The test app's dependency on the product version must match the product version.
+- Do not add a dependency on ForNAV (or other third-party apps); the product depends only on Microsoft apps. The only ForNAV-aware code is the `<>ForNAV BC preview*` filter on Tenant Report Layouts, which is a harmless string filter.
 - New product objects go in the 11310862–11310912 range and must use the `Red` prefix (AppSourceCop `mandatoryAffixes`). Test objects go in 80500–80550.
 
 ## Build, test, validate
@@ -25,7 +25,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Code analysis: CodeCop with `_BC.ruleset.json` (disables AA0247, AA0214, AA0139, AA0210, AA0072).
 - Tests: the test app's install codeunit (`Red.MultipleLayouts.Test/Install Objects/RedMultiLayoutInstall.Codeunit.al`) creates test suite `REDMULTI` covering codeunits 80500..80550. In a container: `Run-TestsInNavContainer -containerName <name> -credential $cred -detailed -testSuite 'REDMULTI'` (see `Scripts/DockerRunTests.ps1`). To run a single test codeunit use `al_run_tests` or `Run-TestsInBcContainer -testCodeunit <id> [-testFunction <name>]`.
 - AppSource validation: `Scripts/RunALValidation.ps1` (BcContainerHelper `Run-AlValidation` against the previous release in `_Build Archive`, countries nl/de/dk/us). Update the `$app` / `$prev` paths when releasing.
-- Container setup: `Scripts/DockerSetupDev.ps1` installs ForNAV Language Module, Core, Customizable Report Pack and Service before this app.
+- Container setup: `Scripts/DockerSetupDev.ps1` creates a BC 28 container with the test toolkit (no ForNAV apps needed).
+- Building the test app needs the product's symbols: copy the built product `.app` into `.alpackages` (and restart the MCP server if `al_build` still reports product objects missing).
 - Translations: languages are da-DK, de-DE, en-US, nl-NL in `Red.MultipleLayouts/Translations/`. Use the `fornav-al-tools:fornav-translate` skill (or `Scripts/Translate.ps1`, ForNAV cmdlet Excel round-trip).
 - Release order (`red-al-tools:red-release-al`): docs → translations → build. README checklist: translation, permission sets, documentation, release notes, automated tests, functional tests, usage scenario.
 

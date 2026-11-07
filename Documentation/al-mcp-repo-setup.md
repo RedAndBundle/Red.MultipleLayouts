@@ -35,7 +35,7 @@ Replace `<YourUsername>` with your Windows username and `<repo-root>` with the a
 
 > **Note on paths** — `.mcp.json` is checked into git and shared with the team, but the absolute paths inside it are machine-specific. If the team uses different drive letters or user directories, each developer should keep a local override in `.mcp.json` and add `.mcp.json` to `.gitignore`, or use a shared convention (e.g. an environment variable wrapper script).
 
-### ForNAV ReportPack example (this repo)
+### Red.MultipleLayouts example (this repo)
 
 ```json
 {
@@ -44,18 +44,17 @@ Replace `<YourUsername>` with your Windows username and `<repo-root>` with the a
       "command": "C:\\Users\\RenéBrummel\\.dotnet\\tools\\al.exe",
       "args": [
         "launchmcpserver",
-        "X:\\SourceCode\\Cust.ForNAV.Own\\ForNav.ReportPack\\Core",
-        "X:\\SourceCode\\Cust.ForNAV.Own\\ForNav.ReportPack\\Language",
-        "X:\\SourceCode\\Cust.ForNAV.Own\\ForNav.ReportPack\\Service",
-        "X:\\SourceCode\\Cust.ForNAV.Own\\ForNav.ReportPack\\Report Pack",
-        "X:\\SourceCode\\Cust.ForNAV.Own\\ForNav.ReportPack\\ZugFerd",
+        "X:\\SourceCode\\Red.MultipleLayouts\\Red.MultipleLayouts",
+        "X:\\SourceCode\\Red.MultipleLayouts\\Red.MultipleLayouts.Test",
         "--packagecachepath",
-        "X:\\SourceCode\\Cust.ForNAV.Own\\ForNav.ReportPack\\.alpackages"
+        "X:\\SourceCode\\Red.MultipleLayouts\\.alpackages"
       ]
     }
   }
 }
 ```
+
+The test project depends on the product app. If `al_build` on the test project reports every product object as missing, copy the freshly built product `.app` into `.alpackages` and restart the MCP server (it caches symbol references at startup).
 
 ## Step 2 — enable the server in Claude Code settings
 
