@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "al-language": {
+      "command": "C:\\Users\\RenéBrummel\\.dotnet\\tools\\al.exe",
+      "args": [
+        "launchmcpserver",
+        "X:\\SourceCode\\Red.MultipleLayouts\\Red.MultipleLayouts",
+        "X:\\SourceCode\\Red.MultipleLayouts\\Red.MultipleLayouts.Test",
+        "--packagecachepath",
+        "X:\\SourceCode\\Red.MultipleLayouts\\.alpackages"
+      ]
+    }
+  }
+}
