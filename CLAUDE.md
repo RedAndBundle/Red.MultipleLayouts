@@ -33,7 +33,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
-**Entry point** — `Objects/Events/RedReportSelectionsEvents.Codeunit.al` subscribes to `Report Selections` `OnBeforePrintDocument` and `OnBeforeSaveReportAsPDF` (email/save). For each call it:
+**Entry point** — `Objects/Events/RedReportSelectionsEvents.Codeunit.al` subscribes to `Report Selections` `OnBeforePrintDocument` and `OnBeforeSaveReportAsPDF` (email/save), and `Report Selection Warehouse` `OnBeforePrintDocument` (warehouse print only; resolved with usage `RedBlank` because warehouse usages are a separate enum, so only "any usage" rows match). Both print subscribers share `HandlePrint`. For each call it:
 1. `Red Layout Recorder` (SingleInstance): if "recording" mode is on and in GUI, it inserts a `Red Report Layout Selection` row for the report+table instead of printing (sets IsHandled).
 2. `Red Layout Selection.MoveToTenantLayout(ReportID)`: lazily migrates legacy rows for that report (see below).
 3. `Red Report Layout Selection` codeunit resolves the layout and either sets it (PDF/email path) or runs the report itself with it (print path; IsHandled only if a layout was used).

@@ -283,6 +283,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Tenant Report Layout - Method GetLayoutNameFromCustomLayoutCode - NamedType CustomReportLayoutTokLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2433896376 - NamedType 3247696755" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unexpected result</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Whse. Layout Sel. Test - NamedType UnexpectedResultErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2433896376 - NamedType 3522656908" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Expected layout 1 to be selected, but the selected layout is '%1'.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = selected layout name</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Red Whse. Layout Sel. Test - NamedType UnexpectedSelectionErr</note>
+        </trans-unit>
         <trans-unit id="Page 3674677723 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Red Layout Selection</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -592,6 +602,11 @@
           <source>Red Test Sales Invoice</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report Red Test Sales Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3699446406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Red Test Whse. Shipment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Red Test Whse. Shipment - Property Caption</note>
         </trans-unit>
         <trans-unit id="EnumExtension 2414535588 - EnumValue 2911514643 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Enum 3528066925">
           <source>Red Blank</source>

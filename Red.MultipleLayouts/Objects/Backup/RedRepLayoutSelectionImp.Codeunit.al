@@ -81,7 +81,7 @@ codeunit 11310874 "Red Rep Layout Selection Imp."
                     if TenantReportLayout."Report ID" <> TempRedReportLayoutSelection."Report ID" then
                         Error(CustReportLayoutDoesNotMatchReportIdErr, TempRedReportLayoutSelection."Layout Name");
                 end else begin
-                    RedTenantReportLayout.InitBuiltInLayout(TenantReportLayout, TempRedReportLayoutSelection."Report ID", TempRedReportLayoutSelection."Layout Name");
+                    RedTenantReportLayout.InitBlankLayout(TenantReportLayout, TempRedReportLayoutSelection."Report ID", TempRedReportLayoutSelection."Layout Name");
                     // TenantReportLayout.Rename(TempRedReportLayoutSelection."Layout Name");
                     TenantReportLayout.Description := CreatedFromImportMsg;
                     TenantReportLayout.Modify();

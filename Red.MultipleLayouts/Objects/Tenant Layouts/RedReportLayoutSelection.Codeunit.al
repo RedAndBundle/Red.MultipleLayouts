@@ -15,17 +15,22 @@ codeunit 11310873 "Red Report Layout Selection"
     end;
 
     procedure RunReportWithTenantLayoutSelection(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecordVariant: Variant; var UsedLayoutCode: Text)
+    begin
+        RunReportWithTenantLayoutSelection(TempReportSelections."Report ID", TempReportSelections.Usage, IsGUI, RecordVariant, UsedLayoutCode);
+    end;
+
+    procedure RunReportWithTenantLayoutSelection(ReportID: Integer; Usage: Enum "Report Selection Usage"; IsGUI: Boolean; RecordVariant: Variant; var UsedLayoutCode: Text)
     var
         TempTenantReportLayout: Record "Tenant Report Layout" temporary;
         TenantReportLayout: Record "Tenant Report Layout";
     begin
-        if not GetLayoutsFromLayoutSelection(TempTenantReportLayout, RecordVariant, TempReportSelections."Report ID", TempReportSelections.Usage) then
-            if not GetDefaultLayoutForReport(TempTenantReportLayout, TempReportSelections."Report ID", TempReportSelections.Usage) then
-                if not GetTempCustomReportLayout(TempTenantReportLayout, TempReportSelections."Report ID") then
+        if not GetLayoutsFromLayoutSelection(TempTenantReportLayout, RecordVariant, ReportID, Usage) then
+            if not GetDefaultLayoutForReport(TempTenantReportLayout, ReportID, Usage) then
+                if not GetTempCustomReportLayout(TempTenantReportLayout, ReportID) then
                     exit;
 
         TenantReportLayout := SelectLayout(TempTenantReportLayout);
-        RunReportWithSelectedLayout(TempReportSelections, IsGUI, RecordVariant, TenantReportLayout);
+        RunReportWithSelectedLayout(ReportID, IsGUI, RecordVariant, TenantReportLayout);
         UsedLayoutCode := TenantReportLayout.Name;
     end;
 
@@ -181,10 +186,10 @@ codeunit 11310873 "Red Report Layout Selection"
             exit(TempTenantReportLayout);
     end;
 
-    local procedure RunReportWithSelectedLayout(TempReportSelections: Record "Report Selections" temporary; IsGUI: Boolean; RecordVariant: Variant; TempTenantReportLayout: Record "Tenant Report Layout" temporary)
+    local procedure RunReportWithSelectedLayout(ReportID: Integer; IsGUI: Boolean; RecordVariant: Variant; TempTenantReportLayout: Record "Tenant Report Layout" temporary)
     begin
         SetTempTenantLayoutSelected(TempTenantReportLayout);
-        Report.RunModal(TempReportSelections."Report ID", IsGUI, false, RecordVariant);
+        Report.RunModal(ReportID, IsGUI, false, RecordVariant);
         SetTempTenantLayoutSelected('');
     end;
 
