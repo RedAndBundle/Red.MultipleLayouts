@@ -34,7 +34,6 @@ codeunit 11310868 "Red Layout Recorder"
     begin
         if not IsGUI then
             exit;
-
         if not DoRecord then
             exit;
 

@@ -241,25 +241,11 @@ Page 11310865 "Red Report Layout Selection"
 
     local procedure LookupTenantLayout()
     var
-        TenantReportLayout: Record "Tenant Report Layout";
         TempTenantReportLayout: Record "Tenant Report Layout" temporary;
-#if CUSTOM
         RedReportLayoutSelection: Codeunit "Red Report Layout Selection";
-#endif
         WrongCompanyErr: Label 'You cannot select a layout that is specific to another company.';
     begin
-        TenantReportLayout.SetRange("Report ID", Rec."Report ID");
-        TenantReportLayout.SetFilter("Company Name", '%1|%2', CompanyName, '');
-        if TenantReportLayout.FindSet() then
-            repeat
-                TempTenantReportLayout := TenantReportLayout;
-                TempTenantReportLayout.Insert(true);
-            until TenantReportLayout.Next() = 0;
-
-#if CUSTOM
-// TODO enable for ForNAV with custom layouts
-        RedReportLayoutSelection.AddBuiltInLayoutToList(TempTenantReportLayout, Rec."Report ID");
-#endif
+        RedReportLayoutSelection.GetTempCustomReportLayout(TempTenantReportLayout, Rec."Report ID");
 
         Commit();
         if Page.RunModal(page::"Red Report Layouts", TempTenantReportLayout) = ACTION::LookupOK then begin

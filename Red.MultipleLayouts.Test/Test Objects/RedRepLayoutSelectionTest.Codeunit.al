@@ -13,8 +13,8 @@ codeunit 80506 "Red Rep Layout Selection Test"
         TestResult: Text;
     begin
         // [FEATURE] No custom layouts for the report to run
-        // [Given] Report Id to test
-        ReportId := RedRepLayoutSelTestSetup.GetTestSalesReportId();
+        // [Given] Report Id to test (a report without built-in layouts)
+        ReportId := RedRepLayoutSelTestSetup.GetTestNoBuiltInLayoutReportId();
 
         // [Given] No custom layouts in system
         RedRepLayoutSelTestSetup.EnsureCustomLayoutsForReport(ReportId, 0);
@@ -35,7 +35,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
 
     [Test]
     [TransactionModel(TransactionModel::AutoRollback)]
-    [HandlerFunctions('SalesInvoiceReportHandler')]
+    [HandlerFunctions('RedTestSalesInvoiceReportHandler')]
     procedure OneCustomLayoutSelected()
     var
         SalesInvoiceHeader: Record "Sales Invoice Header";
@@ -44,8 +44,8 @@ codeunit 80506 "Red Rep Layout Selection Test"
         TestResult: Text;
     begin
         // [FEATURE] One selected custom layouts in system
-        // [Given] Report Id to test
-        ReportId := RedRepLayoutSelTestSetup.GetTestSalesReportId();
+        // [Given] Report Id to test (a report without built-in layouts)
+        ReportId := RedRepLayoutSelTestSetup.GetTestNoBuiltInLayoutReportId();
 
         // [Given] One custom layout in system
         RedRepLayoutSelTestSetup.EnsureCustomLayoutsForReport(ReportId, 1);
@@ -560,19 +560,21 @@ codeunit 80506 "Red Rep Layout Selection Test"
     [RequestPageHandler]
     procedure SalesInvoiceRequestPageHandler(var SalesInvoiceRequestPage: TestRequestPage "Standard Sales - Invoice")
     begin
-
     end;
 
     [ReportHandler]
     procedure SalesInvoiceReportHandler(var SalesInvoice: Report "Standard Sales - Invoice")
     begin
+    end;
 
+    [ReportHandler]
+    procedure RedTestSalesInvoiceReportHandler(var RedTestSalesInvoice: Report "Red Test Sales Invoice")
+    begin
     end;
 
     [ReportHandler]
     procedure PurchaseInvoiceReportHandler(var PurchaseInvoice: Report "Purchase - Invoice")
     begin
-
     end;
 
     [ModalPageHandler]
@@ -602,7 +604,7 @@ codeunit 80506 "Red Rep Layout Selection Test"
     var
         OptionList: List of [Text];
     begin
-        OptionList := options.Split(',');
+        OptionList := Options.Split(',');
         Choice := OptionList.IndexOf('1');
     end;
 

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-**Multiple Report Layout Selector** (Red and Bundle): a Business Central AL extension that picks a report layout at print/email time based on the record being printed (customer, vendor, dimension, item, etc.), on Report Selection Usage, or by prompting the user. It works with any report (Microsoft standard, ForNAV, or custom) and has no third-party dependencies; it requires BC 28 or later. End-user docs: https://multilayout.redandbundle.com/
+**Multiple Report Layout Selector** (Red and Bundle): a Business Central AL extension that picks a report layout at print/email time based on the record being printed (customer, vendor, dimension, item, etc.), on Report Selection Usage, or by prompting the user. It works with any report (Microsoft standard, ForNAV, or custom) and has no third-party dependencies; it requires BC 28 or later. End-user docs: https://multilayout.redandbundle.com/, sourced from the separate documentation repo `X:\SourceCode\Red.MultipleLayouts.Documentation` (pages in its `documentation/` folder; update them there when behavior changes, and note that pushing its `main` deploys the live site).
 
 ## Project layout (three app.json files)
 
@@ -41,7 +41,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Layout resolution** (`Objects/Tenant Layouts/RedReportLayoutSelection.Codeunit.al`), first match wins:
 1. Rows in table `Red Report Layout Selection` for the report + the printed record's table with `Field No. > 0`, where the record matches the row's field filter (`MatchRecordVariable` applies `Value` as a filter on a copy of the RecordRef, so values are filter expressions). Usage must equal the actual usage or `RedBlank` (enum extension value meaning "any usage").
 2. A `Default` row for the report (specific usage first, then `RedBlank`); an empty-layout row means "built-in default".
-3. Otherwise all Tenant Report Layouts for the report (excluding ForNAV preview and `*email*` layouts), plus built-in layouts from `Report Layout List` if no design-time selection exists.
+3. Otherwise all layouts for the report from `Report Layout List` (`GetTempCustomReportLayout`: user-defined layouts limited to the current company or all companies, plus built-in/extension layouts; excluding ForNAV preview and `*email*` layouts). The selection page's layout lookup uses the same list.
 
 With several candidates the user picks one (page `Red Report Layouts`, or `StrMenu` if inside a write transaction since RunModal isn't allowed there); without GUI the first is taken. The choice is applied through `Design-time Report Selection.SetSelectedLayout` (by name, plus App ID for extension-provided layouts) and cleared after the report runs.
 

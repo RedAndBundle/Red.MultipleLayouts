@@ -588,6 +588,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Red Report Layouts - Control Description - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Report 2403071024 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Red Test Sales Invoice</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Red Test Sales Invoice - Property Caption</note>
+        </trans-unit>
         <trans-unit id="EnumExtension 2414535588 - EnumValue 2911514643 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Enum 3528066925">
           <source>Red Blank</source>
           <note from="Developer" annotates="general" priority="2"></note>

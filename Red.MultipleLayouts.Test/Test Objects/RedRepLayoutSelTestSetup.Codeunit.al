@@ -56,7 +56,8 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
             TenantReportLayout."Report ID" := ReportId;
             TenantReportLayout.Description := Format(i);
             TenantReportLayout."Layout Format" := TenantReportLayout."Layout Format"::RDLC;
-            RedTenantReportLayout.GetBuiltinLayout(ReportId, TempBlob);
+            if not RedTenantReportLayout.GetBuiltinLayout(ReportId, TempBlob) then
+                RedTenantReportLayout.GetEmptyRdlcLayout(TempBlob);
             TempBlob.CreateInStream(is);
             TenantReportLayout.Layout.ImportStream(is, TenantReportLayout.Description);
             TenantReportLayout.Insert();
@@ -146,6 +147,11 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
         exit(Report::"Standard Sales - Invoice");
     end;
 
+    procedure GetTestNoBuiltInLayoutReportId(): Integer
+    begin
+        exit(Report::"Red Test Sales Invoice");
+    end;
+
     procedure GetTestPurchaseReportId(): Integer
     begin
         exit(Report::"Purchase - Invoice");
@@ -153,6 +159,8 @@ codeunit 80507 "Red Rep Layout Sel. Test Setup"
 
     procedure GetAltTestReportId(): Integer
     begin
+        // BC29: the built-in RDLC of this report references GlobalLocationNumber columns that are missing
+        // from its dataset, so the import tests also cover the fallback to an empty RDLC layout.
         exit(Report::"Standard Sales - Order Conf.");
     end;
 
