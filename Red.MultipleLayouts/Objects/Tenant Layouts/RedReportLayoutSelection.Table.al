@@ -17,6 +17,8 @@ table 11310864 "Red Report Layout Selection"
             trigger OnValidate()
             begin
                 CalcFields("Report Name");
+                if ("Table No." = 0) or ("Report ID" <> xRec."Report ID") then
+                    SetDefaultTableForReport();
             end;
         }
         field(2; "Line No."; Integer)
@@ -147,6 +149,10 @@ table 11310864 "Red Report Layout Selection"
         if not Default then
             exit;
 
+        // A table filled in automatically from the report, without a field, means nothing on a default row
+        if "Field No." = 0 then
+            Validate("Table No.", 0);
+
         RedReportLayoutSelection.SetRange("Report Selection Usage", "Report Selection Usage");
         RedReportLayoutSelection.SetRange("Report ID", "Report ID");
         RedReportLayoutSelection.SetRange(Default, true);
@@ -160,7 +166,6 @@ table 11310864 "Red Report Layout Selection"
     var
         AllObjWithCaption: Record "AllObjWithCaption";
         ReportSelections: Record "Report Selections";
-        TenantReportLayout: Codeunit "Red Tenant Report Layout";
         ObjectFilter: Text;
         ObjectFilterLbl: Label '|%1', Comment = '%1 = report id';
     begin
@@ -181,8 +186,24 @@ table 11310864 "Red Report Layout Selection"
         if Page.RunModal(Page::"All Objects with Caption", AllObjWithCaption) <> ACTION::LookupOK then
             exit;
 
-        "Report ID" := AllObjWithCaption."Object ID";
-        "Table No." := TenantReportLayout.GetDefaultTableForReport("Report ID");
+        Validate("Report ID", AllObjWithCaption."Object ID");
+    end;
+
+    local procedure SetDefaultTableForReport()
+    var
+        TenantReportLayout: Codeunit "Red Tenant Report Layout";
+        TableNo: Integer;
+    begin
+        if Default then
+            exit;
+
+        TableNo := TenantReportLayout.GetDefaultTableForReport("Report ID");
+        if TableNo = "Table No." then
+            exit;
+
+        Validate("Table No.", TableNo);
+        "Field No." := 0;
+        Value := '';
     end;
 
     internal procedure GetNextLineNo(ReportId: Integer): Integer

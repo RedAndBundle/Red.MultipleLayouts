@@ -72,14 +72,11 @@ codeunit 11310871 "Red Tenant Report Layout"
         exit(CustomLayoutCode + '-' + CustomReportLayoutTokLbl);
     end;
 
-    procedure GetDefaultTableForReport(ReportId: Integer) TableNo: Integer
+    procedure GetDefaultTableForReport(ReportId: Integer): Integer
     var
-        ReportDataItems: Record "Report Data Items";
+        ReportMetadata: Record "Report Metadata";
     begin
-        ReportDataItems.SetRange("Report ID", ReportId);
-        ReportDataItems.SetRange("Indentation Level", 0);
-        ReportDataItems.SetFilter(Name, '<>@*args*');
-        if ReportDataItems.FindFirst() then
-            exit(ReportDataItems."Related Table ID");
+        if ReportMetadata.Get(ReportId) then
+            exit(ReportMetadata.FirstDataItemTableID);
     end;
 }
