@@ -3,7 +3,7 @@
   "applicationInsightsConnectionString": "daf58898-4ae6-4687-8adf-9f241dd9f5b4",
   "name": "Red.MultipleLayouts.Dev",
   "publisher": "Red and Bundle",
-  "version": "3.2.0.0",
+  "version": "3.3.0.0",
   "brief": "Red Multiple Layouts development project",
   "description": "Development project for Red.MultipleLayouts",
   "privacyStatement": "https://redandbundle.com/privacy/",

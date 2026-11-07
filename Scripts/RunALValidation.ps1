@@ -9,8 +9,8 @@
 $fnLanguage = "X:\SourceCode\Cust.ForNAV\ForNAV Docker Installer\UniversalCodeApp 25\ForNAV Language Module 8.0.2500.3.app"
 $fnCore = "X:\SourceCode\Cust.ForNAV\ForNAV Docker Installer\UniversalCodeApp 25\ForNAV Core 8.0.2500.3.app"
 $fnReport = "X:\SourceCode\Cust.ForNAV\ForNAV Docker Installer\UniversalCodeApp 25\ForNAV Customizable Report Pack 8.0.2500.3.app"
-$app = "X:\SourceCode\Red.MultipleLayouts\_Build\Red and Bundle_Multiple Report Layout Selector_3.2.0.0.app"
-$prev = "X:\SourceCode\Red.MultipleLayouts\_Build Archive\Red and Bundle_Multiple Report Layout Selector_3.1.0.0.app"
+$app = "X:\SourceCode\Red.MultipleLayouts\_Build\Red and Bundle_Multiple Report Layout Selector_3.3.0.0.app"
+$prev = "X:\SourceCode\Red.MultipleLayouts\_Build Archive\Red and Bundle_Multiple Report Layout Selector_3.2.0.0.app"
 
 
 # Run-AlValidation `

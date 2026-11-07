@@ -3,7 +3,7 @@
   "applicationInsightsConnectionString": "daf58898-4ae6-4687-8adf-9f241dd9f5b4",
   "name": "Multiple Report Layout Selector",
   "publisher": "Red and Bundle",
-  "version": "3.2.0.0",
+  "version": "3.3.0.0",
   "brief": "Multiple layout selection for Business Central reports",
   "description": "Multiple layout selection for Business Central reports. Automatically select your report layouts based on usage, dimensions, customer, or vendor.",
   "privacyStatement": "https://redandbundle.com/privacy/",
